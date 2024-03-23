@@ -19,6 +19,7 @@ public class AxeScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         axeGrabInteractable.onSelectEntered.AddListener(HandleAxeGrabbed);
         audioSource = gameObject.AddComponent<AudioSource>(); // Initialize the AudioSource
+        rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
     }
 
     void OnCollisionEnter(Collision other)

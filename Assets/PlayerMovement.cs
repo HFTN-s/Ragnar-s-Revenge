@@ -4,7 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private InputDevice leftHandController;
     private InputDevice rightHandController;
+    [SerializeField] private Camera camera;
+
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float rotationAmount = 15.0f;
     private Vector2 turnInput;
@@ -26,8 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void SetupLeftHandController()
     {
-        rightHandController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        if (!rightHandController.isValid)
+        leftHandController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        if (!leftHandController.isValid)
         {
             Debug.Log("Left hand controller not found. Retrying...");
             Invoke("SetupLeftHandController", 0.5f); // Retry after a delay
@@ -52,18 +55,30 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        if (!rightHandController.isValid) return; // Exit if controller is not valid
+    {   
+        //if (!leftHandController.isValid) return; // Exit if controller is not valid
+        //if (!rightHandController.isValid) return; // Exit if controller is not valid
         if (!canMove) return; // Exit if player is not allowed to move
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool isAPressed) && isAPressed)
+            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue) && joystickValue.y > 0.5f)
             {
                 Debug.Log("Moving Forward");
-                transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                // Move the player forward in relation to the camera forward direction
+                transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
+
             }
 
             if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue))
             {
                 RotatePlayer(joystickValue);
+            }
+
+            // if player moves right stick backwards, move player backwards
+            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 yJoystickValue))
+            {
+                if (yJoystickValue.y < -0.5f)
+                {
+                    transform.position -= Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
+                }
             }
     }   
 
