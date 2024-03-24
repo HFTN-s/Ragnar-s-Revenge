@@ -59,13 +59,6 @@ public class PlayerMovement : MonoBehaviour
         //if (!leftHandController.isValid) return; // Exit if controller is not valid
         //if (!rightHandController.isValid) return; // Exit if controller is not valid
         if (!canMove) return; // Exit if player is not allowed to move
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 upjoystickValue) && upjoystickValue.y > 0.5f)
-            {
-                Debug.Log("Moving Forward");
-                // Move the player forward in relation to the camera forward direction
-                transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
-
-            }
 
             if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue))
             {
@@ -78,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
                 if (yJoystickValue.y < -0.5f)
                 {
                     transform.position -= Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
+                }
+
+                if (yJoystickValue.y > 0.5f)
+                {
+                    transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
                 }
             }
     }   
