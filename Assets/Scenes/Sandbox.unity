@@ -7698,6 +7698,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1928631194690646873, guid: e7645dd7602eed54594d753b64e31eec,
         type: 3}
+      propertyPath: m_UseForceGrab
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194690646873, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
+      propertyPath: m_HitClosestOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194690646873, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
+      propertyPath: m_AllowAnchorControl
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194690646873, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1097672103}
@@ -7719,6 +7734,21 @@ PrefabInstance:
     - target: {fileID: 1928631194690646878, guid: e7645dd7602eed54594d753b64e31eec,
         type: 3}
       propertyPath: m_AnimateModel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194734039592, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
+      propertyPath: m_UseForceGrab
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194734039592, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
+      propertyPath: m_HitClosestOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928631194734039592, guid: e7645dd7602eed54594d753b64e31eec,
+        type: 3}
+      propertyPath: m_AllowAnchorControl
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1928631194734039592, guid: e7645dd7602eed54594d753b64e31eec,
