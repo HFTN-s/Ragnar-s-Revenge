@@ -17,14 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         SetupLeftHandController();
         SetupRightHandController();
-        if (SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            canMove = false;
-        }
-        else
-        {
-            canMove = true;
-        }
+        canMove = false;
     }
 
     void SetupLeftHandController()

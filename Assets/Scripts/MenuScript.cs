@@ -30,6 +30,8 @@ public class MenuScript : MonoBehaviour
     private Color hoverColor = Color.green;
     private bool canSelect = true;
 
+     private PlayerMovement playerMovement;
+
     [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,8 @@ public class MenuScript : MonoBehaviour
         sfxVolumeButton.SetActive(false);
         backButton.SetActive(false);
 
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        //playerMovement.canMove = false;
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args)
@@ -150,10 +154,9 @@ public class MenuScript : MonoBehaviour
             Debug.Log("New Game button selected");
             //Find Menu Object and make in active
             GameObject menu = GameObject.Find("Menu");
+            playerMovement.canMove = true;
             menu.SetActive(false);
             //get player movement script component from player object and set the movement to true
-            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-            playerMovement.canMove = true;
             // Load New Game Scene
         }
 

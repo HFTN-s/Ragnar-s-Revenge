@@ -5,24 +5,33 @@ using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 public class TutorialLevelTrigger : MonoBehaviour
 {
-[SerializeField] GameObject stoneStatue;
-[SerializeField] GameObject ghostStatue;
+    private AudioSource audioSource;
+    [SerializeField] GameObject fadeToBlackobject;
 
     private void Start()
     {
-        ghostStatue.SetActive(false);
+        fadeToBlackobject.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
-    async void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        Debug.Log("Triggered");
+        //disable trigger collider
+        if (other.gameObject.tag == "Player")
         {
-            await Task.Delay(3 * 1000); // 1 second delay
-            stoneStatue.SetActive(false);
-            ghostStatue.SetActive(true);
-            SceneManager.LoadScene("TutorialLevel");
+            audioSource.Play();
+            fadeToBlackobject.SetActive(true);
+            Invoke("DelayedAction", 5.0f);
+            // fade to black
         }
     }
 
+    void DelayedAction()
+    {
+        audioSource.Stop();
+        SceneManager.LoadScene("TutorialLevel");
+    }
+    
 
 }
