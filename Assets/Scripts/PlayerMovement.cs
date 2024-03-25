@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float rotationAmount = 15.0f;
     private Vector2 turnInput;
-    [SerializeField] private bool canMove = true;
+    public bool canMove = true;
 
     void Start()
     {

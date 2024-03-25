@@ -12,6 +12,8 @@ public class MenuScript : MonoBehaviour
     private GameObject quitButton;
     private GameObject storyButton;
     private GameObject sandboxButton;
+    private GameObject newGameButton;
+    private GameObject loadGameButton;
     private GameObject musicVolumeButton;
     private GameObject sfxVolumeButton;
     private GameObject backButton;
@@ -20,38 +22,52 @@ public class MenuScript : MonoBehaviour
     private TextMeshProUGUI quitText;
     private TextMeshProUGUI storyText;
     private TextMeshProUGUI sandboxText;
+    private TextMeshProUGUI newGameText;
+    private TextMeshProUGUI loadGameText;
     private TextMeshProUGUI musicVolumeText;
     private TextMeshProUGUI sfxVolumeText;
     private TextMeshProUGUI backText;
     private Color hoverColor = Color.green;
+    private bool canSelect = true;
+
+    [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        // Find all GameObjects for Menu
         startButton = GameObject.Find("StartButton");
         settingsButton = GameObject.Find("SettingsButton");
         quitButton = GameObject.Find("QuitButton");
         storyButton = GameObject.Find("StoryButton");
         sandboxButton = GameObject.Find("SandboxButton");
+        newGameButton = GameObject.Find("NewGameButton");
+        loadGameButton = GameObject.Find("LoadGameButton");
         musicVolumeButton = GameObject.Find("MusicButton");
         sfxVolumeButton = GameObject.Find("SFXButton");
         backButton = GameObject.Find("BackButton");
+
+        // Find all TextMeshProUGUI for Menu
         startText = startButton.GetComponentInChildren<TextMeshProUGUI>();
         settingsText = settingsButton.GetComponentInChildren<TextMeshProUGUI>();
         quitText = quitButton.GetComponentInChildren<TextMeshProUGUI>();
         storyText = storyButton.GetComponentInChildren<TextMeshProUGUI>();
         sandboxText = sandboxButton.GetComponentInChildren<TextMeshProUGUI>();
+        newGameText = newGameButton.GetComponentInChildren<TextMeshProUGUI>();
+        loadGameText = loadGameButton.GetComponentInChildren<TextMeshProUGUI>();
         musicVolumeText = musicVolumeButton.GetComponentInChildren<TextMeshProUGUI>();
         sfxVolumeText = sfxVolumeButton.GetComponentInChildren<TextMeshProUGUI>();
         backText = backButton.GetComponentInChildren<TextMeshProUGUI>();
         storyButton.SetActive(false);
         sandboxButton.SetActive(false);
+        newGameButton.SetActive(false);
+        loadGameButton.SetActive(false);
         musicVolumeButton.SetActive(false);
         sfxVolumeButton.SetActive(false);
         backButton.SetActive(false);
 
     }
 
-public void OnHoverEntered(HoverEnterEventArgs args)
+    public void OnHoverEntered(HoverEnterEventArgs args)
     {
         // Update from 'interactable' to 'interactableObject'
         TextMeshProUGUI text = args.interactableObject.transform.GetComponentInChildren<TextMeshProUGUI>();
@@ -75,33 +91,34 @@ public void OnHoverEntered(HoverEnterEventArgs args)
     public void ChangeTextColour(TextMeshProUGUI text, Color colour)
     {
         text.color = colour;
-        //ckise
     }
 
-    public void SelectEntered(SelectEnterEventArgs args)
+    public void OnActivated(ActivateEventArgs args)
     {
         if (args.interactableObject.transform.gameObject.name == "StartButton")
         {
             Debug.Log("Start button selected");
             // Show Story/Sandbox/Back Buttons, Hide Remaining Buttons
-            storyButton.SetActive(true);
-            sandboxButton.SetActive(true);
-            backButton.SetActive(true);
             startButton.SetActive(false);
             settingsButton.SetActive(false);
             quitButton.SetActive(false);
+            storyButton.SetActive(true);
+            sandboxButton.SetActive(true);
+            backButton.SetActive(true);
         }
+
 
         if (args.interactableObject.transform.gameObject.name == "SettingsButton")
         {
             Debug.Log("Settings button selected");
             // Show Music/SFX/Back Buttons, Hide Remaining Buttons
-            musicVolumeButton.SetActive(true);
-            sfxVolumeButton.SetActive(true);
-            backButton.SetActive(true);
             startButton.SetActive(false);
             settingsButton.SetActive(false);
             quitButton.SetActive(false);
+            musicVolumeButton.SetActive(true);
+            sfxVolumeButton.SetActive(true);
+            backButton.SetActive(true);
+
         }
 
         if (args.interactableObject.transform.gameObject.name == "QuitButton")
@@ -114,6 +131,11 @@ public void OnHoverEntered(HoverEnterEventArgs args)
         {
             Debug.Log("Story button selected");
             // Load Story Scene
+            storyButton.SetActive(false);
+            sandboxButton.SetActive(false);
+            newGameButton.SetActive(true);
+            loadGameButton.SetActive(true);
+            backButton.SetActive(true);
         }
 
         if (args.interactableObject.transform.gameObject.name == "SandboxButton")
@@ -121,6 +143,25 @@ public void OnHoverEntered(HoverEnterEventArgs args)
             Debug.Log("Sandbox button selected");
             // Load Sandbox Scene
             SceneManager.LoadScene("Sandbox");
+        }
+
+        if (args.interactableObject.transform.gameObject.name == "NewGameButton")
+        {
+            Debug.Log("New Game button selected");
+            //Find Menu Object and make in active
+            GameObject menu = GameObject.Find("Menu");
+            menu.SetActive(false);
+            //get player movement script component from player object and set the movement to true
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.canMove = true;
+            // Load New Game Scene
+        }
+
+        if (args.interactableObject.transform.gameObject.name == "LoadGameButton")
+        {
+            Debug.Log("Load Game button selected");
+            // Load Game Script (https://github.com/IntoTheDev/Save-System-for-Unity)
+            //Note: never used the save system, so I'm not sure how to implement it
         }
 
         if (args.interactableObject.transform.gameObject.name == "MusicButton")
@@ -144,11 +185,11 @@ public void OnHoverEntered(HoverEnterEventArgs args)
             quitButton.SetActive(true);
             storyButton.SetActive(false);
             sandboxButton.SetActive(false);
+            newGameButton.SetActive(false);
+            loadGameButton.SetActive(false);
             musicVolumeButton.SetActive(false);
             sfxVolumeButton.SetActive(false);
             backButton.SetActive(false);
         }
-
-
     }
 }

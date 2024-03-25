@@ -14,17 +14,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Head
-    second: {fileID: 2100000, guid: 3286ae408b0df1844b1e33742b7e7e87, type: 2}
+    second: {fileID: 2100000, guid: 965224637509ca24787fde060eea6f06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kit
+    second: {fileID: 2100000, guid: 965224637509ca24787fde060eea6f06, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Legs Hands
-    second: {fileID: 2100000, guid: 6d5a23364d74eee438c2f9a7d02f0f02, type: 2}
+    second: {fileID: 2100000, guid: 965224637509ca24787fde060eea6f06, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tunic
-    second: {fileID: 2100000, guid: 869d5691a2c0e9b4cb2a7d6b2dc4529c, type: 2}
+    second: {fileID: 2100000, guid: 965224637509ca24787fde060eea6f06, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
