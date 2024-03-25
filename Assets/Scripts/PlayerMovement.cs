@@ -8,16 +8,24 @@ public class PlayerMovement : MonoBehaviour
     private InputDevice rightHandController;
     [SerializeField] private Camera camera;
 
-    [SerializeField] private float speed = 1.0f;
-    [SerializeField] private float rotationAmount = 15.0f;
+    [SerializeField] private float speed = 2.0f;
+    [SerializeField] private float rotationAmount = 2.0f;
     private Vector2 turnInput;
-    public bool canMove = true;
+    public bool canMove = false;
 
     void Start()
     {
         SetupLeftHandController();
         SetupRightHandController();
-        canMove = false;
+        // if current scene is main menu scene, player is not allowed to move
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
+        }
     }
 
     void SetupLeftHandController()
@@ -53,22 +61,28 @@ public class PlayerMovement : MonoBehaviour
         //if (!rightHandController.isValid) return; // Exit if controller is not valid
         if (!canMove) return; // Exit if player is not allowed to move
 
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickValue))
+            //if player presses left stick to left or right rotate player once until stick is released
+            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 xJoystickValue))
             {
-                RotatePlayer(joystickValue);
+                Debug.Log("Attempting to rotate player");
+                if (xJoystickValue.x > 0.5f || xJoystickValue.x < -0.5f)
+                {
+                    Debug.Log("Rotating player");
+                    RotatePlayer(xJoystickValue);
+                }
             }
 
+            // if player presses primary button, move player forward
+            if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
+            {
+                transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
+            }
             // if player moves right stick backwards, move player backwards
             if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 yJoystickValue))
             {
                 if (yJoystickValue.y < -0.5f)
                 {
                     transform.position -= Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
-                }
-
-                if (yJoystickValue.y > 0.5f)
-                {
-                    transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
                 }
             }
     }   
