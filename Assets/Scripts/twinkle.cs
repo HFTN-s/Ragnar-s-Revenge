@@ -1,51 +1,66 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class twinkle : MonoBehaviour
 {
-    private float baseIntensity = 0.0f;
-    private Light torchLight = null;
-    private Renderer fire = null;
-	private Material fireSource = null;
+    [SerializeField] private string fireGameObjectName = "fx_fire";
+    [SerializeField] private string fireMaterialStartName = "mat_torch_01";
+    
+    private Light torchLight;
+    private Renderer fireRenderer;
+    private Material fireMaterial;
+    
+    private float baseIntensity = 1.0f;
+    private float flickerVariation = 0.5f;
+    private float emissionStrength = 2.3f;
+    private float noiseSeed; // Unique seed for Perlin noise
 
-    // Use this for initialization
     void Start()
     {
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-        foreach( Renderer curRenderer in renderers )
+        fireRenderer = GetComponentInChildren<Renderer>(true);
+        torchLight = GetComponentInChildren<Light>(true);
+
+        if (fireRenderer != null)
         {
-            if (curRenderer.gameObject.name == "fx_fire")
+            foreach (Material mat in fireRenderer.materials)
             {
-                fire = curRenderer;
-                break;
+                if (mat.name.StartsWith(fireMaterialStartName))
+                {
+                    fireMaterial = mat;
+                    break;
+                }
             }
-			foreach (Material mat in curRenderer.materials)
-			{
-				if(mat.name.StartsWith("mat_torch_01"))
-					fireSource = mat;
-			}
         }
 
-        torchLight = gameObject.GetComponentInChildren<Light>();
-
-        if (torchLight && fire)
+        if (torchLight != null)
         {
             baseIntensity = torchLight.intensity;
         }
+
+        // Initialize a unique seed for the Perlin noise based on the torch's position
+        noiseSeed = Random.Range(0f, 100f); // Alternatively, use gameObject.transform.position or any unique identifier
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (torchLight && fire)
+        if (torchLight != null && fireRenderer != null)
         {
-			torchLight.transform.position = (torchLight.transform.position*0.7f)+(fire.bounds.center*0.3f);
-            torchLight.intensity = baseIntensity + fire.bounds.size.magnitude;
+            SimulateFlickering();
         }
-		if(fireSource)
-		{
-			float val = 2.3f + fire.bounds.size.magnitude/3;
-			fireSource.SetVector("_EmissionColor", new Vector4(val, val,val, val));
-		}
-	}
+    }
+
+    void SimulateFlickering()
+    {
+        // Apply the noise seed for uniqueness
+        float noise = Mathf.PerlinNoise(noiseSeed, Time.time) * flickerVariation;
+        torchLight.intensity = baseIntensity + noise;
+        
+        if (fireMaterial != null)
+        {
+            float intensityMultiplier = 1.0f + noise;
+            Color emissionColor = new Color(emissionStrength * intensityMultiplier, 
+                                            emissionStrength * intensityMultiplier, 
+                                            emissionStrength * intensityMultiplier);
+            fireMaterial.SetColor("_EmissionColor", emissionColor);
+        }
+    }
 }
