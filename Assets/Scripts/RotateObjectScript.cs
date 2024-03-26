@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class RotateObjectScript : MonoBehaviour
@@ -14,32 +14,41 @@ public class RotateObjectScript : MonoBehaviour
     [SerializeField] private Vector3 otherObjectRotationLimit = new Vector3(0, 0, 0);
     [SerializeField] private bool isOtherObjectMoveable = false;
     [SerializeField] private bool isOtherObjectRotatable = false;
-    [SerializeField] private bool continuousInteractionUpdate = false; // Or true, based on your desired default behavior
+    private Vector3 lastGrabPosition;
+    public float grabMoveThreshold = 0.1f; // Adjust this value based on testing
+    private float controllerVerticalInput;
+    private float controllerHorizontalInput;
+
+    public bool upAndDown = false;
+    public float rotationSpeed = 1f;
+
 
     private XRBaseInteractor interactor;
     private Vector3 initialInteractorPosition;
     private Vector3 currentInteractorPosition;
     private bool isObjectSelected = false;
     private Quaternion initialRotation;
-    private Vector3 initialRotationEulerAngles;
+    private Vector3 initialRotationEulers;
 
     private void OnEnable()
     {
         interactable.selectEntered.AddListener(SelectEntered);
         interactable.selectExited.AddListener(SelectExited);
+        interactable.hoverExited.AddListener(OnHoverExited);
     }
 
     private void OnDisable()
     {
         interactable.selectEntered.RemoveListener(SelectEntered);
         interactable.selectExited.RemoveListener(SelectExited);
+        interactable.hoverExited.RemoveListener(OnHoverExited);
     }
 
     private void Start()
     {
         // Store the initial rotation
         initialRotation = transform.rotation;
-        initialRotationEulerAngles = initialRotation.eulerAngles;
+        initialRotationEulers = initialRotation.eulerAngles;
     }
 
     private void SelectEntered(SelectEnterEventArgs args)
@@ -47,46 +56,97 @@ public class RotateObjectScript : MonoBehaviour
         interactor = args.interactor;
         initialInteractorPosition = GetProjectedPoint(interactor.transform.position);
         isObjectSelected = true;
+        Debug.Log("Object grabbed");
+        lastGrabPosition = interactor.transform.position; // Store the position at the moment of grabbing
+        initialInteractorPosition = interactor.transform.position; // Store the initial position for comparison
+        initialRotation = transform.rotation; // Store the initial rotation for comparison
     }
+
+    private void OnHoverExited(HoverExitEventArgs args)
+    {
+        Debug.Log("Hover exited");
+        isObjectSelected = false;
+        interactor = null;
+     }
 
     private void SelectExited(SelectExitEventArgs args)
     {
+        if (interactor = null) return;
         isObjectSelected = false;
+        Debug.Log("Object released");
+        // Optionally update lastGrabPosition on release if you want to reset movement calculations upon next grab
+        // This depends on your intended behavior when re-grabbing after moving the controller without grabbing
+        lastGrabPosition = interactor.transform.position;
+        // You may also consider resetting other related variables here if it fits your interaction model
         interactor = null;
     }
+
+    // Add this at the class level
+    public float sensitivityThreshold = 0.1f; // Adjust this value as needed
 
     private void Update()
     {
         if (isObjectSelected && interactor != null)
         {
-            RotateObject();
-            MoveOtherObject(); // Call the method to move and rotate the other object
+            if (IsControllerMovedSinceLastGrab())
+            {
+                float inputDelta;
+                if (upAndDown)
+                {
+                    inputDelta = interactor.transform.position.y - initialInteractorPosition.y;
+                    controllerVerticalInput = inputDelta;
+                }
+                else
+                {
+                    inputDelta = interactor.transform.position.x - initialInteractorPosition.x;
+                    controllerHorizontalInput = inputDelta;
+                }
+
+                if (Mathf.Abs(inputDelta) > sensitivityThreshold)
+                {
+                    RotateObject(inputDelta);
+                }
+
+                MoveOtherObject(); // Call the method to move and rotate the other object
+            }
         }
     }
 
-    private void RotateObject()
+    private bool IsControllerMovedSinceLastGrab()
     {
-        currentInteractorPosition = GetProjectedPoint(interactor.transform.position);
+        // Calculate the current distance from the last grab position
+        float distanceMoved = Vector3.Distance(interactor.transform.position, lastGrabPosition);
 
-        // Calculate the relative position of the interactor before and after movement
-        Vector3 initialRelativePosition = initialInteractorPosition - transform.position;
-        Vector3 currentRelativePosition = currentInteractorPosition - transform.position;
-
-        // Calculate the rotation needed to align the initial relative position with the current one, around the rotation axis
-        Quaternion rotationNeeded = Quaternion.FromToRotation(initialRelativePosition, currentRelativePosition);
-
-        // Apply this rotation around the global rotation axis to the object
-        transform.rotation = initialRotation * Quaternion.AngleAxis(rotationNeeded.eulerAngles.magnitude, rotationAxis.normalized);
-
-        // Update the initial rotation if continuous interaction is enabled
-        if (continuousInteractionUpdate)
+        // Check if the movement exceeds the threshold
+        if (distanceMoved > grabMoveThreshold)
         {
-            initialRotation = transform.rotation;
+            // Update the last grab position to the current position for future checks
+            lastGrabPosition = interactor.transform.position;
+            return true;
         }
 
-        // Update the initial interactor position for the next frame
-        initialInteractorPosition = currentInteractorPosition;
+        return false;
     }
+
+    private void RotateObject(float inputDelta)
+    {
+        // Directly use inputDelta to calculate rotationAmount, which now correctly reflects direction
+        float rotationAmount = inputDelta * rotationSpeed;
+
+        // Choose the rotation axis based on the movement direction
+        Vector3 rotationAxis = Vector3.up; // Assuming Y-axis for left/right and changing to Vector3.forward if up/down
+
+        // Apply rotation direction based on inputDelta's sign
+        Quaternion rotationNeeded = Quaternion.AngleAxis(rotationAmount, rotationAxis.normalized);
+        transform.rotation = initialRotation * rotationNeeded;
+
+        // Conditional update to initialRotation can be here if you want the rotation to accumulate
+        initialRotation = transform.rotation;
+
+        // Update initialInteractorPosition to reflect the current frame's position for next frame comparison
+        initialInteractorPosition = interactor.transform.position;
+    }
+
 
     private Vector3 GetProjectedPoint(Vector3 interactorPosition)
     {
@@ -131,12 +191,13 @@ public class RotateObjectScript : MonoBehaviour
         // If the object is rotatable, adjust its rotation based on the rotation progress
         if (isOtherObjectRotatable)
         {
-            Vector3 targetRotationEulerAngles = Vector3.Scale(otherObjectRotationLimit, rotationProgress); // Apply rotation limits proportionally
-            Quaternion targetRotation = Quaternion.Euler(targetRotationEulerAngles);
+            Vector3 targetRotationEulers = Vector3.Scale(otherObjectRotationLimit, rotationProgress); // Apply rotation limits proportionally
+            Quaternion targetRotation = Quaternion.Euler(targetRotationEulers);
             otherObject.transform.rotation = Quaternion.Lerp(otherObject.transform.rotation, targetRotation, Time.deltaTime);
         }
     }
 
+    // Helper method to calculate rotation progress
     private float CalculateRotationProgress(float currentAngle, float minAngle, float maxAngle)
     {
         currentAngle = NormalizeAngle(currentAngle);
@@ -148,4 +209,5 @@ public class RotateObjectScript : MonoBehaviour
 
         return (currentAngle - minAngle) / (maxAngle - minAngle);
     }
+
 }
