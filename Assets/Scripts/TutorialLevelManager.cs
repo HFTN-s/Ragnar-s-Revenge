@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TutorialLevelManager : MonoBehaviour
 {
+    // *Controls all aspects of the tutorial level that are not controlled by other scripts*
     [SerializeField] private AudioClip[] tutorialClip;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private bool puzzle1Complete = false;
@@ -11,7 +12,6 @@ public class TutorialLevelManager : MonoBehaviour
     [SerializeField] private bool puzzle3Complete = false;
     [SerializeField] private bool levelComplete = false;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject[] eyelids;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +22,5 @@ public class TutorialLevelManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void BlinkingCameraEffect()
-    {
-        // Blinking camera effect
-
     }
 }
