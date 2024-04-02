@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private InputDevice Head;
     private InputDevice leftHandController;
     private InputDevice rightHandController;
     [SerializeField] private Camera camera;
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        SetupHead();
         SetupLeftHandController();
         SetupRightHandController();
         // if current scene is main menu scene, player is not allowed to move
@@ -28,13 +30,27 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void SetupHead()
+    {
+        Head = InputDevices.GetDeviceAtXRNode(XRNode.Head);
+        if (!Head.isValid)
+        {
+            Debug.Log("Head device not found. Retrying...");
+            Invoke("SetupHead", 0.7f); // Retry after a delay
+        }
+        else
+        {
+            Debug.Log("Head device found");
+        }
+    }
+
     void SetupLeftHandController()
     {
         leftHandController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         if (!leftHandController.isValid)
         {
             Debug.Log("Left hand controller not found. Retrying...");
-            Invoke("SetupLeftHandController", 0.5f); // Retry after a delay
+            Invoke("SetupLeftHandController", 0.7f); // Retry after a delay
         }
         else
         {
@@ -47,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (!rightHandController.isValid)
         {
             Debug.Log("Right hand controller not found. Retrying...");
-            Invoke("SetupRightHandController", 0.5f); // Retry after a delay
+            Invoke("SetupRightHandController", 0.7f); // Retry after a delay
         }
         else
         {
@@ -62,40 +78,32 @@ public class PlayerMovement : MonoBehaviour
         if (!canMove) return; // Exit if player is not allowed to move
 
             //if player presses left stick to left or right rotate player once until stick is released
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 xJoystickValue))
-            {
                 Debug.Log("Attempting to rotate player");
-                if (xJoystickValue.x > 0.5f || xJoystickValue.x < -0.5f)
-                {
-                    Debug.Log("Rotating player");
-                    RotatePlayer(xJoystickValue);
-                }
-            }
+                    RotatePlayer();
 
             // if player presses primary button, move player forward
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
+            if (rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButtonValue) && secondaryButtonValue)
             {
                 transform.position += Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
             }
             // if player moves right stick backwards, move player backwards
-            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 yJoystickValue))
+             if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
             {
-                if (yJoystickValue.y < -0.5f)
-                {
-                    transform.position -= Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
-                }
+                transform.position -= Vector3.ProjectOnPlane(camera.transform.forward, Vector3.up).normalized * speed * Time.deltaTime;
             }
     }   
 
-    void RotatePlayer(Vector2 joystickValue)
+   void RotatePlayer()
     {
-        if (joystickValue.x > 0.5f)
+        //Use right stick to rotate player
+        if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue) && primary2DAxisValue != Vector2.zero)
         {
-            transform.Rotate(Vector3.up, rotationAmount);
+            turnInput = primary2DAxisValue;
+            Vector3 turn = new Vector3(0,turnInput.x,0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation * Quaternion.Euler(turn * rotationAmount), Time.deltaTime * 10);
         }
-        else if (joystickValue.x < -0.5f)
-        {
-            transform.Rotate(Vector3.up, -rotationAmount);
-        }
+
+        
     }
+
 }

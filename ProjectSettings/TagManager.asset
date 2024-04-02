@@ -7,6 +7,7 @@ TagManager:
   - Wood
   - Torch
   - TorchHolder
+  - Arrow
   layers:
   - Default
   - TransparentFX
