@@ -1,41 +1,65 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//Fills mould with relevant prefab object by scaling all axis from 0.01 to 1
-// This script is attached to the mould object
-// The mouldFill prefab is the object that will be filled in the mould
-// The endPosition is the position where the mould will be filled
-// The speed is the speed at which the mould will be filled
 public class FillMould : MonoBehaviour
 {
-    public GameObject mouldFill;
     public float scaleIncrease = 0.01f;
     public bool isFilling = false;
-    public bool isActivated = false;
+    public GameObject MouldPlacement;
+    public bool isMouldPlaced = false;
+    public GameObject mould;
 
-    public void DoFillMould()
+    // Method to start filling a given mould with a given mouldFill object.
+    // This method is now public and expects specific mould and mouldFill objects as arguments.
+
+  // Assuming SetCurrentMould and RemoveCurrentMould manage state rather than set a mould object.
+public void SetCurrentMould(GameObject mould)
+{
+    if (isMouldPlaced) return;
+    isMouldPlaced = true;
+    // Additional logic to prepare the mould for filling (if necessary).
+}
+
+public void RemoveCurrentMould()
+{
+    if (!isMouldPlaced) return;
+    isMouldPlaced = false;
+    // Additional logic to reset or clean up the mould (if necessary).
+    PauseScaleMould(); // Consider pausing or stopping the filling process here.
+}
+
+
+    public void DoFillMould(GameObject mould)
     {
-        if (isFilling) return;
-        StartCoroutine(ScaleMould());
+        if (isFilling) return; // Prevents starting a new fill process if one is already ongoing.
+        StartCoroutine(ScaleMould(mould)); // Starts the coroutine to fill the mould.
     }
 
-    IEnumerator ScaleMould()
+    // Coroutine to scale the mouldFill object.
+    // It only requires the mouldFill GameObject to function.
+    IEnumerator ScaleMould(GameObject mould)
     {
-        // scales the mouldFill object from 0.01 to 1 on all axis smoothly
-        Debug.Log("Filling mould");
         isFilling = true;
+        Debug.Log("Filling mould");
+        GameObject mouldFill = mould.transform.GetChild(0).gameObject; // Gets the mouldFill object from the mould.
+        Vector3 scaleChange = new Vector3(scaleIncrease, scaleIncrease, scaleIncrease) * Time.deltaTime;
         while (mouldFill.transform.localScale.x < 1)
         {
-            mouldFill.transform.localScale += new Vector3(scaleIncrease, scaleIncrease, scaleIncrease);
-            yield return new WaitForSeconds(0.01f);
+            mouldFill.transform.localScale = Vector3.MoveTowards(mouldFill.transform.localScale, Vector3.one, scaleChange.magnitude);
+            yield return new WaitForSeconds(0.05f); // Waits for a short duration before continuing the loop.
         }
-        isFilling = false;
+        mouldFill.transform.localScale = Vector3.one; // Ensures the scale is set to exactly 1.
+
+        isFilling = false; // Marks the end of the filling process.
     }
 
+    // Method to pause the filling process of a mouldFill object.
+    // It should ideally reference the specific coroutine of the mouldFill being scaled,
+    // but since Unity doesn't allow stopping coroutines by passing a parameter directly to StopCoroutine,
+    // this method simply stops all coroutines, which is a limitation in this approach.
     public void PauseScaleMould()
     {
-        StopCoroutine(ScaleMould());
+        StopAllCoroutines(); // Stops all coroutines to pause the scaling.
         isFilling = false;
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Torch
   - TorchHolder
   - Arrow
+  - Fire
+  - Metal
   layers:
   - Default
   - TransparentFX

@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         if (!canMove) return; // Exit if player is not allowed to move
 
             //if player presses left stick to left or right rotate player once until stick is released
-                Debug.Log("Attempting to rotate player");
+               // Debug.Log("Attempting to rotate player");
                     RotatePlayer();
 
             // if player presses primary button, move player forward
