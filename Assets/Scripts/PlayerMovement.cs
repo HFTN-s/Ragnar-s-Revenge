@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         Head = InputDevices.GetDeviceAtXRNode(XRNode.Head);
         if (!Head.isValid)
         {
-            Debug.Log("Head device not found. Retrying...");
+           // Debug.Log("Head device not found. Retrying...");
             Invoke("SetupHead", 0.7f); // Retry after a delay
         }
         else
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         leftHandController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         if (!leftHandController.isValid)
         {
-            Debug.Log("Left hand controller not found. Retrying...");
+           // Debug.Log("Left hand controller not found. Retrying...");
             Invoke("SetupLeftHandController", 0.7f); // Retry after a delay
         }
         else
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         rightHandController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         if (!rightHandController.isValid)
         {
-            Debug.Log("Right hand controller not found. Retrying...");
+          //  Debug.Log("Right hand controller not found. Retrying...");
             Invoke("SetupRightHandController", 0.7f); // Retry after a delay
         }
         else
