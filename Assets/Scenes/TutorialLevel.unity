@@ -621,7 +621,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18620
+  m_Name: pb_Mesh18592
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -974,7 +974,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325544937}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.895709, y: 0.23959982, z: -1.0992442}
+  m_LocalPosition: {x: 1.895709, y: 0.23959982, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2459,7 +2459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097472572}
   m_LocalRotation: {x: -0, y: -0.08150372, z: -0, w: 0.99667305}
-  m_LocalPosition: {x: -0.0010001659, y: 0.191, z: 0.0007029772}
+  m_LocalPosition: {x: 0, y: 0.191, z: 0}
   m_LocalScale: {x: 0.41, y: 0.20129012, z: 0.41}
   m_Children: []
   m_Father: {fileID: 1982832859}
@@ -4960,17 +4960,17 @@ PrefabInstance:
     - target: {fileID: 3310824799491609081, guid: 20dc28af87dc5384c9b7342499616fcd,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.0047656186
+      value: -0.0047656507
       objectReference: {fileID: 0}
     - target: {fileID: 3310824799491609081, guid: 20dc28af87dc5384c9b7342499616fcd,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.00055549905
+      value: 0.0005763668
       objectReference: {fileID: 0}
     - target: {fileID: 3310824799491609081, guid: 20dc28af87dc5384c9b7342499616fcd,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.00009203
+      value: 0.00009202696
       objectReference: {fileID: 0}
     - target: {fileID: 3310824799491609082, guid: 20dc28af87dc5384c9b7342499616fcd,
         type: 3}
@@ -5389,8 +5389,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.34, y: 1, z: 11.83}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 10.636095, y: 1, z: 10.40527}
+  m_Center: {x: 0.024039984, y: 0, z: -0.05621338}
 --- !u!4 &2082330197 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 448680, guid: 08664425fe4b55a438efa73476965e3a,
