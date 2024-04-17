@@ -40,9 +40,15 @@ public class FinishMould : MonoBehaviour
                 {
                     bc = key.AddComponent<BoxCollider>();
                 }
-
+                // add xr grab interactable
+                XRGrabInteractable grabInteractable = key.AddComponent<XRGrabInteractable>();
+                //set to active
+                grabInteractable.enabled = true;
+                if (grabInteractable != null && grabInteractable.colliders.Count > 0)
+                {
+                    grabInteractable.colliders[0] = bc;
+                }
                 // Set collider for XRGrabInteractable
-                XRGrabInteractable grabInteractable = key.GetComponent<XRGrabInteractable>();
                 //set to active
                 grabInteractable.enabled = true;
                 if (grabInteractable != null && grabInteractable.colliders.Count > 0)
@@ -51,8 +57,8 @@ public class FinishMould : MonoBehaviour
                 }
 
                 // Optionally add small forces to the key
-                rb.AddForce(Vector3.up * 0.01f, ForceMode.Impulse);
-                rb.AddForce(Vector3.forward * 0.01f, ForceMode.Impulse);
+                //rb.AddForce(Vector3.up * 0.01f, ForceMode.Impulse);
+                //rb.AddForce(Vector3.forward * 0.01f, ForceMode.Impulse);
 
                 // Detach the key from its parent
 

@@ -23,6 +23,7 @@ public class ForgeMould : MonoBehaviour
         foreach (GameObject keyObject in keyObjects)
         {
             keyObject.GetComponent<XRGrabInteractable>().enabled = false;
+            keyObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
 
@@ -83,7 +84,11 @@ public class ForgeMould : MonoBehaviour
         Debug.Log("IncreaseScale coroutine started.");
         while (scale <= 1.05f)
         {
-            //set key texture to 
+            //set key texture to molten metal
+            mouldObject.GetComponent<Renderer>().material.mainTexture = moltenMetalMaterial;
+            //reset position and rotation of key
+            mouldObject.transform.position = currentMould.transform.position;
+            mouldObject.transform.rotation = currentMould.transform.rotation;
             mouldObject.transform.localScale = new Vector3(scale, scale, scale);
             scale += 0.05f;
             Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);

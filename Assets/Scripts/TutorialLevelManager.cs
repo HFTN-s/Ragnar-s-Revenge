@@ -4,6 +4,8 @@ using UnityEngine.Events;
 using System.Collections;
 public class TutorialLevelManager : MonoBehaviour
 {
+    public GameObject fire;
+    public Light[] lightSources;
     public AudioClip[] ragnarSpeech;
     public AudioSource ragnarAudioSource;
     public GameObject ragnarSpeechObject;
@@ -28,6 +30,9 @@ public class TutorialLevelManager : MonoBehaviour
 
     public float waitTime = 5.0f; // time to wait between events in seconds
 
+    public AudioClip jarlSpeech;
+    public AudioSource jarlAudioSource;
+
     private void Start()
     {
         // Subscribe to the events for each puzzle base item
@@ -38,6 +43,16 @@ public class TutorialLevelManager : MonoBehaviour
 
         //set ghost to inactive
         VikingGhostStatue.SetActive(false);
+
+        //set light intensity to 0 for all light objects in array
+        // Set light intensity to 0 for all light objects in array
+        foreach (Light lightSource in lightSources)
+        {
+            lightSource.intensity = 0;  // Directly modify the intensity of each light
+        }
+
+        fire.SetActive(false);
+
     }
 
     void Update()
@@ -97,7 +112,7 @@ public class TutorialLevelManager : MonoBehaviour
     }
 
     // Handles trigger events from child colliders
-   public void HandleTriggerEnter(int colliderID)
+    public void HandleTriggerEnter(int colliderID)
     {
         switch (colliderID)
         {
@@ -126,15 +141,19 @@ public class TutorialLevelManager : MonoBehaviour
         }
     }
 
-    private IEnumerator PlayRagnarsSpeechAndHandleStatue()
+  private IEnumerator PlayRagnarsSpeechAndHandleStatue()
 {
-    // Set the ghost statue to active
     VikingGhostStatue.SetActive(true);
-
-    // Play the assigned audio clip
+    fire.SetActive(true);
     Destroy(ragnarSpeechObject); // Destroy the speech trigger object
     ragnarAudioSource.clip = ragnarSpeech[0]; // Assign the first clip in the array
     ragnarAudioSource.Play(); // Play the audio
+
+    // Fade out lights
+    foreach (Light lightSource in lightSources)
+    {
+        StartCoroutine(LightFade(lightSource, 0, 2)); // Fade to 0 intensity over 2 seconds
+    }
 
     // Wait while the audio is playing
     while (ragnarAudioSource.isPlaying)
@@ -142,11 +161,39 @@ public class TutorialLevelManager : MonoBehaviour
         yield return null; // Wait until next frame
     }
 
-    // After the audio finishes playing, set the ghost statue to inactive
+    // Fade lights back in
+    foreach (Light lightSource in lightSources)
+    {
+        StartCoroutine(LightFade(lightSource, 1, 2)); // Fade back to full intensity over 2 seconds
+    }
     VikingGhostStatue.SetActive(false);
-
-    // Optionally destroy the speech trigger object if it's no longer needed
+    // Wait 10 seconds after Ragnar's speech before playing Jarl's speech
+    yield return new WaitForSeconds(10);
+    PlayJarlSpeech(); // Start playing Jarl's speech
 }
 
+private void PlayJarlSpeech()
+{
+    // Assuming jarlAudioSource and jarlSpeech are already assigned
+    jarlAudioSource.clip = jarlSpeech;
+    jarlAudioSource.Play();
 }
 
+
+private IEnumerator LightFade(Light light, float targetIntensity, float duration)
+{
+    float startIntensity = light.intensity;
+    float time = 0;
+
+    while (time < duration)
+    {
+        light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / duration);
+        time += Time.deltaTime;
+        yield return null;
+    }
+
+    light.intensity = targetIntensity;
+}
+
+
+}
