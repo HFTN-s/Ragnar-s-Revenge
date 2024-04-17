@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ForgeMould : MonoBehaviour
 {
@@ -10,12 +11,19 @@ public class ForgeMould : MonoBehaviour
     public ParticleSystem moltenMetal;
     public MouldTrigger mouldTrigger;
     private float scale = 0.01f;
+    public GameObject[] keyObjects;
+    public Texture moltenMetalMaterial;
 
     void Start()
     {
         forgeFuelScript = GetComponent<ForgeFuel>();
         moltenMetal.Stop();
         Debug.Log("Forge script initialized, fuel amount: " + forgeFuelScript.fuelAmount);
+
+        foreach (GameObject keyObject in keyObjects)
+        {
+            keyObject.GetComponent<XRGrabInteractable>().enabled = false;
+        }
     }
 
     public void StartForge()
@@ -75,6 +83,7 @@ public class ForgeMould : MonoBehaviour
         Debug.Log("IncreaseScale coroutine started.");
         while (scale <= 1.05f)
         {
+            //set key texture to 
             mouldObject.transform.localScale = new Vector3(scale, scale, scale);
             scale += 0.05f;
             Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);

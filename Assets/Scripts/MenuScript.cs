@@ -29,6 +29,7 @@ public class MenuScript : MonoBehaviour
     private TextMeshProUGUI backText;
     private Color hoverColor = Color.green;
     private bool canSelect = true;
+    public GameObject menu;
 
      private PlayerMovement playerMovement;
 
@@ -67,7 +68,7 @@ public class MenuScript : MonoBehaviour
         sfxVolumeButton.SetActive(false);
         backButton.SetActive(false);
 
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerMovement = player.GetComponent<PlayerMovement>();
         //playerMovement.canMove = false;
     }
 
@@ -153,9 +154,8 @@ public class MenuScript : MonoBehaviour
         {
             Debug.Log("New Game button selected");
             //Find Menu Object and make in active
-            GameObject menu = GameObject.Find("Menu");
             playerMovement.canMove = true;
-            menu.SetActive(false);
+            this.gameObject.SetActive(false);
             //get player movement script component from player object and set the movement to true
             // Load New Game Scene
         }

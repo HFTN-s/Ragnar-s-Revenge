@@ -43,6 +43,8 @@ public class FinishMould : MonoBehaviour
 
                 // Set collider for XRGrabInteractable
                 XRGrabInteractable grabInteractable = key.GetComponent<XRGrabInteractable>();
+                //set to active
+                grabInteractable.enabled = true;
                 if (grabInteractable != null && grabInteractable.colliders.Count > 0)
                 {
                     grabInteractable.colliders[0] = bc;
