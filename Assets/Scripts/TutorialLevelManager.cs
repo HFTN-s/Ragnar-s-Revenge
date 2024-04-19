@@ -25,6 +25,9 @@ public class TutorialLevelManager : MonoBehaviour
     [SerializeField] private GameObject puzzle2Trigger;
     [SerializeField] private GameObject puzzle3Trigger;
 
+    public Timer timer;
+    public PlayerPrefs_SaveAndLoad saveAndLoad;
+
     public GameObject VikingStatue;
     public GameObject VikingGhostStatue;
 
@@ -35,6 +38,7 @@ public class TutorialLevelManager : MonoBehaviour
 
     private void Start()
     {
+        Invoke("Puzzle1Complete", waitTime);
         // Subscribe to the events for each puzzle base item
         // When event is triggered i.e when the puzzle is completed
         // set the puzzle check to true (Done in puzzle scripts)
@@ -93,6 +97,7 @@ public class TutorialLevelManager : MonoBehaviour
     void Puzzle1Complete()
     {
         // What to do when Puzzle 1 is complete
+        saveAndLoad.CompleteLevel(1);
     }
 
     void Puzzle2Complete()
