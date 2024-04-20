@@ -6,13 +6,11 @@ public class Timer : MonoBehaviour
 {
     public bool isRunning = false;
     private float time = 0.0f;
-    private int minutes = 0;
-    private float seconds = 0;
+
     private string lastFormattedTime = "";
 
     void Start()
     {
-        isRunning = true;
     }
 
     void Update()
@@ -20,15 +18,30 @@ public class Timer : MonoBehaviour
         if (isRunning)
         {
             time += Time.deltaTime;
-            minutes = (int)time / 60;
-            seconds = time % 60;
-
-            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-            if (formattedTime != lastFormattedTime)
-            {
-                Debug.Log(formattedTime);
-                lastFormattedTime = formattedTime;
-            }
+            //Debug.Log("Time: " + time);
         }
+    }
+
+    public int GetSeconds()
+    {
+        //convert to int
+        int seconds = Mathf.RoundToInt(time);
+        Debug.Log("Seconds: " + seconds);
+        return seconds;
+    }
+
+    public void StopTimer()
+    {
+        isRunning = false;
+    }
+
+    public void ResetTimer()
+    {
+        time = 0.0f;
+    }
+
+    public void StartTimer()
+    {
+        isRunning = true;
     }
 }

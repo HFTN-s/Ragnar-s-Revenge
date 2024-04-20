@@ -7,69 +7,63 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    private GameObject startButton;
-    private GameObject settingsButton;
-    private GameObject quitButton;
-    private GameObject storyButton;
-    private GameObject sandboxButton;
-    private GameObject newGameButton;
-    private GameObject loadGameButton;
-    private GameObject musicVolumeButton;
-    private GameObject sfxVolumeButton;
+    private GameObject button1;
+    private GameObject button2;
+    private GameObject button3;
+    private GameObject button4;
     private GameObject backButton;
-    private TextMeshProUGUI startText;
-    private TextMeshProUGUI settingsText;
-    private TextMeshProUGUI quitText;
-    private TextMeshProUGUI storyText;
-    private TextMeshProUGUI sandboxText;
-    private TextMeshProUGUI newGameText;
-    private TextMeshProUGUI loadGameText;
-    private TextMeshProUGUI musicVolumeText;
-    private TextMeshProUGUI sfxVolumeText;
-    private TextMeshProUGUI backText;
-    private Color hoverColor = Color.green;
+    private GameObject highScoresButton;
+    [SerializeField] private Color hoverColor = Color.green;
     private bool canSelect = true;
     public GameObject menu;
+    private TextMeshProUGUI text1;
+    private TextMeshProUGUI text2;
+    private TextMeshProUGUI text3;
+    private TextMeshProUGUI text4;
+    private GameObject musicSlider;
+    private GameObject voiceSlider;
+    private GameObject sFXSlider;
 
-     private PlayerMovement playerMovement;
-
+    private PlayerMovement playerMovement;
+    private int playerProgress;
     [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
         // Find all GameObjects for Menu
-        startButton = GameObject.Find("StartButton");
-        settingsButton = GameObject.Find("SettingsButton");
-        quitButton = GameObject.Find("QuitButton");
-        storyButton = GameObject.Find("StoryButton");
-        sandboxButton = GameObject.Find("SandboxButton");
-        newGameButton = GameObject.Find("NewGameButton");
-        loadGameButton = GameObject.Find("LoadGameButton");
-        musicVolumeButton = GameObject.Find("MusicButton");
-        sfxVolumeButton = GameObject.Find("SFXButton");
+        button1 = GameObject.Find("Button1");
+        button2 = GameObject.Find("Button2");
+        button3 = GameObject.Find("Button3");
+        button4 = GameObject.Find("Button4");
         backButton = GameObject.Find("BackButton");
+        highScoresButton = GameObject.Find("HighScoresButton");
+        musicSlider = GameObject.Find("MusicSlider");
+        voiceSlider = GameObject.Find("VoiceSlider");
+        sFXSlider = GameObject.Find("SFXSlider");
+
 
         // Find all TextMeshProUGUI for Menu
-        startText = startButton.GetComponentInChildren<TextMeshProUGUI>();
-        settingsText = settingsButton.GetComponentInChildren<TextMeshProUGUI>();
-        quitText = quitButton.GetComponentInChildren<TextMeshProUGUI>();
-        storyText = storyButton.GetComponentInChildren<TextMeshProUGUI>();
-        sandboxText = sandboxButton.GetComponentInChildren<TextMeshProUGUI>();
-        newGameText = newGameButton.GetComponentInChildren<TextMeshProUGUI>();
-        loadGameText = loadGameButton.GetComponentInChildren<TextMeshProUGUI>();
-        musicVolumeText = musicVolumeButton.GetComponentInChildren<TextMeshProUGUI>();
-        sfxVolumeText = sfxVolumeButton.GetComponentInChildren<TextMeshProUGUI>();
-        backText = backButton.GetComponentInChildren<TextMeshProUGUI>();
-        storyButton.SetActive(false);
-        sandboxButton.SetActive(false);
-        newGameButton.SetActive(false);
-        loadGameButton.SetActive(false);
-        musicVolumeButton.SetActive(false);
-        sfxVolumeButton.SetActive(false);
-        backButton.SetActive(false);
-
+        TextMeshProUGUI text1 = button1.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text2 = button2.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text3 = button3.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI text4 = backButton.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI highScoreText = highScoresButton.GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI backButtonText = backButton.GetComponent<TextMeshProUGUI>();
         playerMovement = player.GetComponent<PlayerMovement>();
         //playerMovement.canMove = false;
+
+        // if player progress is 0, grey out and disable the colliders of Load Game and High Scores
+        playerProgress = DataPersistenceManager.instance.GameData.playerProgress;
+        Debug.Log("Player Progress: " + playerProgress);
+        if (playerProgress == 0)
+        {
+            text2.color = Color.grey;
+            button2.GetComponent<BoxCollider>().enabled = false;
+            backButton.SetActive(false);
+            highScoresButton.SetActive(false);
+        }
+
+        backButton.SetActive(false);
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args)
@@ -100,99 +94,125 @@ public class MenuScript : MonoBehaviour
 
     public void OnActivated(ActivateEventArgs args)
     {
-        if (args.interactableObject.transform.gameObject.name == "StartButton")
         {
-            Debug.Log("Start button selected");
-            // Show Story/Sandbox/Back Buttons, Hide Remaining Buttons
-            startButton.SetActive(false);
-            settingsButton.SetActive(false);
-            quitButton.SetActive(false);
-            storyButton.SetActive(true);
-            sandboxButton.SetActive(true);
             backButton.SetActive(true);
-        }
+            string buttonPressed = args.interactable.gameObject.GetComponent<TextMeshProUGUI>().text;
+            Debug.Log("Button Pressed: " + buttonPressed);
 
+            switch (buttonPressed)
+            {
+                case "New Game":
+                    Debug.Log("New Game");
+                    playerMovement.canMove = true;
+                    menu.SetActive(false);
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "SettingsButton")
-        {
-            Debug.Log("Settings button selected");
-            // Show Music/SFX/Back Buttons, Hide Remaining Buttons
-            startButton.SetActive(false);
-            settingsButton.SetActive(false);
-            quitButton.SetActive(false);
-            musicVolumeButton.SetActive(true);
-            sfxVolumeButton.SetActive(true);
-            backButton.SetActive(true);
+                case "Load Level":
+                    button2.GetComponent<BoxCollider>().enabled = true;
+                    button1.GetComponent<TextMeshProUGUI>().text = "Load Tutorial";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Load Level 1";
+                    button3.GetComponent<TextMeshProUGUI>().text = "Load Level 2";
+                    button4.GetComponent<TextMeshProUGUI>().text = "Load Level 3";
+                    break;
 
-        }
+                case "Settings":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Music Volume";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Voice Volume";
+                    button3.GetComponent<TextMeshProUGUI>().text = "SFX Volume";
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "QuitButton")
-        {
-            Debug.Log("Quit button selected");
-            Application.Quit();
-        }
+                case "Quit":
+                    Application.Quit();
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "StoryButton")
-        {
-            Debug.Log("Story button selected");
-            // Load Story Scene
-            storyButton.SetActive(false);
-            sandboxButton.SetActive(false);
-            newGameButton.SetActive(true);
-            loadGameButton.SetActive(true);
-            backButton.SetActive(true);
-        }
+                case "High\nScores":
+                button2.GetComponent<BoxCollider>().enabled = true;
+                    button1.GetComponent<TextMeshProUGUI>().text = "Tutorial";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Level 1";
+                    button3.GetComponent<TextMeshProUGUI>().text = "Level 2";
+                    button4.GetComponent<TextMeshProUGUI>().text = "Level 3";
 
-        if (args.interactableObject.transform.gameObject.name == "SandboxButton")
-        {
-            Debug.Log("Sandbox button selected");
-            // Load Sandbox Scene
-            SceneManager.LoadScene("Sandbox");
-        }
+                    //grey out and disable the colliders of levels the player has not completed
+                    if (playerProgress < 1)
+                    {
+                        button2.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button2.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    if (playerProgress < 2)
+                    {
+                        button3.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button3.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    if (playerProgress < 3)
+                    {
+                        button4.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button4.GetComponent<BoxCollider>().enabled = false;
+                    }
 
-        if (args.interactableObject.transform.gameObject.name == "NewGameButton")
-        {
-            Debug.Log("New Game button selected");
-            //Find Menu Object and make in active
-            playerMovement.canMove = true;
-            this.gameObject.SetActive(false);
-            //get player movement script component from player object and set the movement to true
-            // Load New Game Scene
-        }
+                    
 
-        if (args.interactableObject.transform.gameObject.name == "LoadGameButton")
-        {
-            Debug.Log("Load Game button selected");
-            // Load Game Script (https://github.com/IntoTheDev/Save-System-for-Unity)
-            //Note: never used the save system, so I'm not sure how to implement it
-        }
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "MusicButton")
-        {
-            Debug.Log("Music button selected");
-            // Adjust Music Volume
-        }
+                case "Back\n<-":
+                    backButton.SetActive(false);
+                    button1.GetComponent<BoxCollider>().enabled = true;
+                    button2.GetComponent<BoxCollider>().enabled = true;
+                    button3.GetComponent<BoxCollider>().enabled = true;
+                    button4.GetComponent<BoxCollider>().enabled = true;
+                    button1.GetComponent<TextMeshProUGUI>().text = "New Game";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Load Level";
+                    button3.GetComponent<TextMeshProUGUI>().text = "Settings";
+                    button4.GetComponent<TextMeshProUGUI>().text = "Quit";
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "SFXButton")
-        {
-            Debug.Log("SFX button selected");
-            // Adjust SFX Volume
-        }
+                case "Tutorial":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Tutorial Top 3 Times:";
+                    button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level1Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score1Seconds.ToString("D2");
+                    button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level1Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score2Seconds.ToString("D2");
+                    button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level1Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score3Seconds.ToString("D2");
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
 
-        if (args.interactableObject.transform.gameObject.name == "BackButton")
-        {
-            Debug.Log("Back button selected");
-            // Show Start/Settings/Quit Buttons, Hide Remaining Buttons
-            startButton.SetActive(true);
-            settingsButton.SetActive(true);
-            quitButton.SetActive(true);
-            storyButton.SetActive(false);
-            sandboxButton.SetActive(false);
-            newGameButton.SetActive(false);
-            loadGameButton.SetActive(false);
-            musicVolumeButton.SetActive(false);
-            sfxVolumeButton.SetActive(false);
-            backButton.SetActive(false);
+                case "Level 1":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 1 Top 3 Times:";
+                    button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level2Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score1Seconds.ToString("D2");
+                    button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level2Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score2Seconds.ToString("D2");
+                    button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level2Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score3Seconds.ToString("D2");
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                case "Level 2":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 2 Top 3 Times:";
+                    button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level3Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score1Seconds.ToString("D2");
+                    button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level3Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score2Seconds.ToString("D2");
+                    button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level3Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score3Seconds.ToString("D2");
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                case "Level 3":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 3 Top 3 Times:";
+                    button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level4Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score1Seconds.ToString("D2");
+                    button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level4Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score2Seconds.ToString("D2");
+                    button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level4Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score3Seconds.ToString("D2");
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                default:
+                    Debug.LogError("Button pressed action not recognized.");
+                    break;
+            }
         }
     }
 }

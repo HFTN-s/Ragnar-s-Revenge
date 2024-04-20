@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2878cfdc83c916468c1e21a9c2689db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRunning: 0
+  isRunning: 1
 --- !u!4 &110297757
 Transform:
   m_ObjectHideFlags: 0
@@ -962,7 +962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 226716748}
-  - component: {fileID: 226716747}
+  - component: {fileID: 226716750}
   m_Layer: 0
   m_Name: SavingAndLoading
   m_TagString: Untagged
@@ -970,18 +970,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &226716747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226716746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b3839c75f6be14680eabab21ef9cec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &226716748
 Transform:
   m_ObjectHideFlags: 0
@@ -996,6 +984,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &226716750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226716746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763d2aabf17c5c34d955e3f0e94247c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    playerProgress: 1
+    level1Score1Minutes: 0
+    level1Score2Minutes: 0
+    level1Score3Minutes: 0
+    level2Score1Minutes: 0
+    level2Score2Minutes: 0
+    level2Score3Minutes: 0
+    level3Score1Minutes: 0
+    level3Score2Minutes: 0
+    level3Score3Minutes: 0
+    level4Score1Minutes: 0
+    level4Score2Minutes: 0
+    level4Score3Minutes: 0
+    level1Score1Seconds: 0
+    level1Score2Seconds: 0
+    level1Score3Seconds: 0
+    level2Score1Seconds: 0
+    level2Score2Seconds: 0
+    level2Score3Seconds: 0
+    level3Score1Seconds: 0
+    level3Score2Seconds: 0
+    level3Score3Seconds: 0
+    level4Score1Seconds: 0
+    level4Score2Seconds: 0
+    level4Score3Seconds: 0
 --- !u!4 &227183747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 416160, guid: 23942876fd996034c89ed1b82cc8516f,
@@ -7641,7 +7667,6 @@ MonoBehaviour:
   puzzle2Trigger: {fileID: 0}
   puzzle3Trigger: {fileID: 0}
   timer: {fileID: 110297756}
-  saveAndLoad: {fileID: 226716747}
   VikingStatue: {fileID: 1807329273}
   VikingGhostStatue: {fileID: 1369152639}
   waitTime: 5

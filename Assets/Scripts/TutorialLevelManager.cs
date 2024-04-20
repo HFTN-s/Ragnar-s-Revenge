@@ -26,7 +26,6 @@ public class TutorialLevelManager : MonoBehaviour
     [SerializeField] private GameObject puzzle3Trigger;
 
     public Timer timer;
-    public PlayerPrefs_SaveAndLoad saveAndLoad;
 
     public GameObject VikingStatue;
     public GameObject VikingGhostStatue;
@@ -61,7 +60,7 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Update()
     {
-        if (puzzle1Check)
+        if (puzzle1Check && !puzzle1Complete)
         // if puzzle 1 is Solved , then run event , set puzzle complete to true
         // and set puzzle Check back to false so it doesn't run again
         {
@@ -70,7 +69,7 @@ public class TutorialLevelManager : MonoBehaviour
             puzzle1Check = false;
         }
 
-        if (puzzle2Complete)
+        if (puzzle2Check && !puzzle2Complete)
         // if puzzle 2 is Solved , then run event , set puzzle complete to true
         {
             TLPuzzle2Complete.Invoke();
@@ -78,7 +77,7 @@ public class TutorialLevelManager : MonoBehaviour
             puzzle2Check = false;
         }
 
-        if (puzzle3Complete)
+        if (puzzle3Check && !puzzle3Complete)
         // if puzzle 3 is Solved , then run event , set puzzle complete to true
         {
             TLPuzzle3Complete.Invoke();
@@ -96,17 +95,20 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Puzzle1Complete()
     {
+        IncrementProgress(1);
+        DataPersistenceManager.instance.SaveHighScore(timer.GetSeconds());
         // What to do when Puzzle 1 is complete
-        saveAndLoad.CompleteLevel(1);
     }
 
     void Puzzle2Complete()
     {
+        IncrementProgress(2);
         // What to do when Puzzle 2 is complete
     }
 
     void Puzzle3Complete()
     {
+        IncrementProgress(3);
         // What to do when Puzzle 3 is complete
     }
 
@@ -116,89 +118,112 @@ public class TutorialLevelManager : MonoBehaviour
         // Load next scene
     }
 
-    // Handles trigger events from child colliders
-    public void HandleTriggerEnter(int colliderID)
+    private void IncrementProgress(int puzzlesCompleted)
     {
-        switch (colliderID)
+        if (DataPersistenceManager.instance == null)
         {
-            case 1: // ID for puzzle 1 collider
-                Debug.Log("Ragnars Speech Triggered");
-
-                if (ragnarAudioSource != null)
-                {
-                    StartCoroutine(PlayRagnarsSpeechAndHandleStatue());
-
-                }
-                else
-                {
-                    Debug.LogWarning("AudioSource or Clip not properly assigned.");
-                }
-                // Handle Puzzle 1 trigger
-                break;
-            case 2: // ID for puzzle 2 collider
-                Debug.Log("Puzzle 2 Triggered");
-                // Handle Puzzle 2 trigger
-                break;
-            // Add more cases as needed
-            default:
-                Debug.LogWarning("Unknown collider triggered");
-                break;
+            Debug.LogError("DataPersistenceManager instance is null!");
         }
+        else if (DataPersistenceManager.instance.GameData == null)
+        {
+            Debug.LogError("GameData on DataPersistenceManager instance is null!");
+        }
+        else
+        {
+            if (DataPersistenceManager.instance.GameData.playerProgress < puzzlesCompleted)
+            // if player has completed more puzzles than the current progress , save progress
+            {
+                DataPersistenceManager.instance.GameData.playerProgress++;
+                DataPersistenceManager.instance.SaveGame();
+                Debug.Log("Progress incremented to: " + DataPersistenceManager.instance.GameData.playerProgress);
+            }
+        }
+
     }
 
-  private IEnumerator PlayRagnarsSpeechAndHandleStatue()
-{
-    VikingGhostStatue.SetActive(true);
-    fire.SetActive(true);
-    Destroy(ragnarSpeechObject); // Destroy the speech trigger object
-    ragnarAudioSource.clip = ragnarSpeech[0]; // Assign the first clip in the array
-    ragnarAudioSource.Play(); // Play the audio
+        // Handles trigger events from child colliders
+        public void HandleTriggerEnter(int colliderID)
+        {
+            switch (colliderID)
+            {
+                case 1: // ID for puzzle 1 collider
+                    Debug.Log("Ragnars Speech Triggered");
 
-    // Fade out lights
-    foreach (Light lightSource in lightSources)
-    {
-        StartCoroutine(LightFade(lightSource, 0, 2)); // Fade to 0 intensity over 2 seconds
+                    if (ragnarAudioSource != null)
+                    {
+                        StartCoroutine(PlayRagnarsSpeechAndHandleStatue());
+
+                    }
+                    else
+                    {
+                        Debug.LogWarning("AudioSource or Clip not properly assigned.");
+                    }
+                    // Handle Puzzle 1 trigger
+                    break;
+                case 2: // ID for puzzle 2 collider
+                    Debug.Log("Puzzle 2 Triggered");
+                    // Handle Puzzle 2 trigger
+                    break;
+                // Add more cases as needed
+                default:
+                    Debug.LogWarning("Unknown collider triggered");
+                    break;
+            }
+        }
+
+        private IEnumerator PlayRagnarsSpeechAndHandleStatue()
+        {
+            VikingGhostStatue.SetActive(true);
+            fire.SetActive(true);
+            Destroy(ragnarSpeechObject); // Destroy the speech trigger object
+            ragnarAudioSource.clip = ragnarSpeech[0]; // Assign the first clip in the array
+            ragnarAudioSource.Play(); // Play the audio
+
+            // Fade out lights
+            foreach (Light lightSource in lightSources)
+            {
+                StartCoroutine(LightFade(lightSource, 0, 2)); // Fade to 0 intensity over 2 seconds
+            }
+
+            // Wait while the audio is playing
+            while (ragnarAudioSource.isPlaying)
+            {
+                yield return null; // Wait until next frame
+            }
+
+            // Fade lights back in
+            foreach (Light lightSource in lightSources)
+            {
+                StartCoroutine(LightFade(lightSource, 1, 2)); // Fade back to full intensity over 2 seconds
+            }
+            VikingGhostStatue.SetActive(false);
+            // Wait 10 seconds after Ragnar's speech before playing Jarl's speech
+            yield return new WaitForSeconds(10);
+            PlayJarlSpeech(); // Start playing Jarl's speech
+        }
+
+        private void PlayJarlSpeech()
+        {
+            // Assuming jarlAudioSource and jarlSpeech are already assigned
+            jarlAudioSource.clip = jarlSpeech;
+            jarlAudioSource.Play();
+        }
+
+
+        private IEnumerator LightFade(Light light, float targetIntensity, float duration)
+        {
+            float startIntensity = light.intensity;
+            float time = 0;
+
+            while (time < duration)
+            {
+                light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            light.intensity = targetIntensity;
+        }
+
+
     }
-
-    // Wait while the audio is playing
-    while (ragnarAudioSource.isPlaying)
-    {
-        yield return null; // Wait until next frame
-    }
-
-    // Fade lights back in
-    foreach (Light lightSource in lightSources)
-    {
-        StartCoroutine(LightFade(lightSource, 1, 2)); // Fade back to full intensity over 2 seconds
-    }
-    VikingGhostStatue.SetActive(false);
-    // Wait 10 seconds after Ragnar's speech before playing Jarl's speech
-    yield return new WaitForSeconds(10);
-    PlayJarlSpeech(); // Start playing Jarl's speech
-}
-
-private void PlayJarlSpeech()
-{
-    // Assuming jarlAudioSource and jarlSpeech are already assigned
-    jarlAudioSource.clip = jarlSpeech;
-    jarlAudioSource.Play();
-}
-
-
-private IEnumerator LightFade(Light light, float targetIntensity, float duration)
-{
-    float startIntensity = light.intensity;
-    float time = 0;
-
-    while (time < duration)
-    {
-        light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / duration);
-        time += Time.deltaTime;
-        yield return null;
-    }
-
-    light.intensity = targetIntensity;
-}
-
-
-}
