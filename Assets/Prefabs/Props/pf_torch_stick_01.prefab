@@ -224,6 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419224decbb78594ead8ee5022494d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireGameObjectName: fx_fire
+  fireMaterialStartName: mat_torch_01
 --- !u!205 &20500000
 LODGroup:
   m_ObjectHideFlags: 0
@@ -243,7 +245,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2300000}
     - renderer: {fileID: 2300002}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!1 &147432
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,9 @@ public class MenuScript : MonoBehaviour
     private TextMeshProUGUI text2;
     private TextMeshProUGUI text3;
     private TextMeshProUGUI text4;
+    private GameObject masterSlider;
     private GameObject musicSlider;
-    private GameObject voiceSlider;
+    private GameObject speechSlider;
     private GameObject sFXSlider;
 
     private PlayerMovement playerMovement;
@@ -37,9 +38,14 @@ public class MenuScript : MonoBehaviour
         button4 = GameObject.Find("Button4");
         backButton = GameObject.Find("BackButton");
         highScoresButton = GameObject.Find("HighScoresButton");
+        masterSlider = GameObject.Find("MasterSlider");
         musicSlider = GameObject.Find("MusicSlider");
-        voiceSlider = GameObject.Find("VoiceSlider");
+        speechSlider = GameObject.Find("SpeechSlider");
         sFXSlider = GameObject.Find("SFXSlider");
+        masterSlider.SetActive(false);
+        musicSlider.SetActive(false);
+        speechSlider.SetActive(false);
+        sFXSlider.SetActive(false);
 
 
         // Find all TextMeshProUGUI for Menu
@@ -116,9 +122,18 @@ public class MenuScript : MonoBehaviour
                     break;
 
                 case "Settings":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Music Volume";
-                    button2.GetComponent<TextMeshProUGUI>().text = "Voice Volume";
-                    button3.GetComponent<TextMeshProUGUI>().text = "SFX Volume";
+                    button1.GetComponent<TextMeshProUGUI>().text = "Master Volume";
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<TextMeshProUGUI>().text = "SFX Volume";
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<TextMeshProUGUI>().text = "Music Volume";
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<TextMeshProUGUI>().text = "Speech Volume";
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    masterSlider.SetActive(true);
+                    musicSlider.SetActive(true);
+                    speechSlider.SetActive(true);
+                    sFXSlider.SetActive(true);
                     break;
 
                 case "Quit":
@@ -131,6 +146,10 @@ public class MenuScript : MonoBehaviour
                     button2.GetComponent<TextMeshProUGUI>().text = "Level 1";
                     button3.GetComponent<TextMeshProUGUI>().text = "Level 2";
                     button4.GetComponent<TextMeshProUGUI>().text = "Level 3";
+                    masterSlider.SetActive(false);
+                    musicSlider.SetActive(false);
+                    speechSlider.SetActive(false);
+                    sFXSlider.SetActive(false);
 
                     //grey out and disable the colliders of levels the player has not completed
                     if (playerProgress < 1)
@@ -163,6 +182,10 @@ public class MenuScript : MonoBehaviour
                     button2.GetComponent<TextMeshProUGUI>().text = "Load Level";
                     button3.GetComponent<TextMeshProUGUI>().text = "Settings";
                     button4.GetComponent<TextMeshProUGUI>().text = "Quit";
+                    masterSlider.SetActive(false);
+                    musicSlider.SetActive(false);
+                    speechSlider.SetActive(false);
+                    sFXSlider.SetActive(false);
                     break;
 
                 case "Tutorial":

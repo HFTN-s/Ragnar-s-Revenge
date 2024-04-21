@@ -30,6 +30,10 @@ public class GameData
     public int level4Score1Seconds;
     public int level4Score2Seconds;
     public int level4Score3Seconds;
+    public float masterVolume;
+    public float sfxVolume;
+    public float speechVolume;
+    public float musicVolume;
 
     public GameData()
     {
@@ -58,6 +62,10 @@ public class GameData
         this.level4Score1Seconds = 0;
         this.level4Score2Seconds = 0;
         this.level4Score3Seconds = 0;
+        this.masterVolume = 1;
+        this.sfxVolume = 1;
+        this.speechVolume = 1;
+        this.musicVolume = 1;
         
     }
 }
