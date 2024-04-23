@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.Events;
 
 public class UnlockPadlock : MonoBehaviour
 {
     public GameObject correctKey;
-    public GameObject keyLockPosition;
+    public UnityEvent OnUnlock;
     
     void OnTriggerEnter(Collider other)
     {
@@ -19,7 +20,10 @@ public class UnlockPadlock : MonoBehaviour
                 if (key == correctKey)
                 {
                     Destroy(key);
-                    Destroy(gameObject);
+                    //destroy parent object
+                    //run unlock event
+                    OnUnlock.Invoke();
+                    Destroy(transform.parent.gameObject);
                 }
                 else
                 {

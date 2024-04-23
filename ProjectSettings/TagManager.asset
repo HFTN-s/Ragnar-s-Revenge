@@ -12,6 +12,7 @@ TagManager:
   - Metal
   - Mould
   - Key
+  - PlayerHand
   layers:
   - Default
   - TransparentFX
@@ -30,8 +31,8 @@ TagManager:
   - sky
   - InteractionObjects
   - InteractionColliders
-  - 
-  - 
+  - IgnorePlayer
+  - Player
   - 
   - 
   - 
