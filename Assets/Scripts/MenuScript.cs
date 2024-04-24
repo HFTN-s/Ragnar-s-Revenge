@@ -13,6 +13,8 @@ public class MenuScript : MonoBehaviour
     private GameObject button4;
     private GameObject backButton;
     private GameObject highScoresButton;
+    private GameObject creditsButton;
+    private GameObject howToPlayButton;
     [SerializeField] private Color hoverColor = Color.green;
     private bool canSelect = true;
     public GameObject menu;
@@ -42,6 +44,8 @@ public class MenuScript : MonoBehaviour
         musicSlider = GameObject.Find("MusicSlider");
         speechSlider = GameObject.Find("SpeechSlider");
         sFXSlider = GameObject.Find("SFXSlider");
+        creditsButton = GameObject.Find("CreditsButton");
+        howToPlayButton = GameObject.Find("HowToPlayButton");
         masterSlider.SetActive(false);
         musicSlider.SetActive(false);
         speechSlider.SetActive(false);
@@ -141,7 +145,7 @@ public class MenuScript : MonoBehaviour
                     break;
 
                 case "High\nScores":
-                button2.GetComponent<BoxCollider>().enabled = true;
+                    button2.GetComponent<BoxCollider>().enabled = true;
                     button1.GetComponent<TextMeshProUGUI>().text = "Tutorial";
                     button2.GetComponent<TextMeshProUGUI>().text = "Level 1";
                     button3.GetComponent<TextMeshProUGUI>().text = "Level 2";
@@ -150,6 +154,7 @@ public class MenuScript : MonoBehaviour
                     musicSlider.SetActive(false);
                     speechSlider.SetActive(false);
                     sFXSlider.SetActive(false);
+
 
                     //grey out and disable the colliders of levels the player has not completed
                     if (playerProgress < 1)
@@ -168,7 +173,7 @@ public class MenuScript : MonoBehaviour
                         button4.GetComponent<BoxCollider>().enabled = false;
                     }
 
-                    
+
 
                     break;
 
@@ -226,6 +231,28 @@ public class MenuScript : MonoBehaviour
                     button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level4Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score1Seconds.ToString("D2");
                     button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level4Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score2Seconds.ToString("D2");
                     button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level4Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score3Seconds.ToString("D2");
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                case "Credits:":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Can be found in a readme file in the games folder";
+                    button2.GetComponent<TextMeshProUGUI>().text = "";
+                    button3.GetComponent<TextMeshProUGUI>().text = "";
+                    button4.GetComponent<TextMeshProUGUI>().text = "";
+                    button1.GetComponent<BoxCollider>().enabled = false;
+                    button2.GetComponent<BoxCollider>().enabled = false;
+                    button3.GetComponent<BoxCollider>().enabled = false;
+                    button4.GetComponent<BoxCollider>().enabled = false;
+                    break;
+
+                case "How To Play":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Use the left stick to move";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Use the right stick to look around";
+                    button3.GetComponent<TextMeshProUGUI>().text = "Grip to pick up objects";
+                    button4.GetComponent<TextMeshProUGUI>().text = "Trigger to interact with the menu";
                     button1.GetComponent<BoxCollider>().enabled = false;
                     button2.GetComponent<BoxCollider>().enabled = false;
                     button3.GetComponent<BoxCollider>().enabled = false;

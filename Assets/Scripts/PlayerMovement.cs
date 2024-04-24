@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,9 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationAmount = 2.0f;
     private Vector2 turnInput;
     public bool canMove = false;
+    public AudioSource playerSFX;
+    public Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
         SetupHead();
         SetupLeftHandController();
         SetupRightHandController();
@@ -75,11 +79,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!canMove) return;
 
-        Rigidbody rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
-
         // if player presses left stick forward or backward, move player along the camera's forward vector
         if (leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
         {
+            // if SFX is not playing,            play the footstep sound
             // Determine the direction and magnitude of the movement
             Vector3 moveDirection = camera.transform.forward * primary2DAxisValue.y * speed * Time.fixedDeltaTime;
             // Ensure we are not moving vertically if the Y axis is locked
@@ -87,6 +90,23 @@ public class PlayerMovement : MonoBehaviour
 
             // Apply the movement to the Rigidbody
             rb.MovePosition(rb.position + moveDirection);
+            Debug.Log("Player is moving");
+            Debug.Log("Player is moving at: " + rb.velocity.magnitude + " m/s");
+            Debug.Log("playerSFX.isPlaying: " + playerSFX.isPlaying);
+            if (!playerSFX.isPlaying && moveDirection != Vector3.zero)
+            {
+                Debug.Log("Playing footstep sound");
+                playerSFX.Play(); // play footstep sound if player is moving
+            }
+            else if (playerSFX.isPlaying && moveDirection == Vector3.zero)
+            {
+                Debug.Log("Stopping footstep sound");
+                playerSFX.Stop(); // stop playing footstep sound if player is not moving
+            }
+            else
+            {
+                Debug.Log("Footstep sound is already playing");
+            }
         }
 
         // Rotate player

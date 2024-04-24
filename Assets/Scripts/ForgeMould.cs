@@ -82,21 +82,60 @@ public class ForgeMould : MonoBehaviour
     {
         forgeRunning = true;
         Debug.Log("IncreaseScale coroutine started.");
-        while (scale <= 1.05f)
+        if (mouldObject.gameObject.name == "KeyMould1")
         {
-            //set key texture to molten metal
-            mouldObject.GetComponent<Renderer>().material.mainTexture = moltenMetalMaterial;
-            //reset position and rotation of key
-            mouldObject.transform.position = currentMould.transform.position;
-            mouldObject.transform.rotation = currentMould.transform.rotation;
-            mouldObject.transform.localScale = new Vector3(scale, scale, scale);
-            scale += 0.05f;
-            Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);
-            yield return new WaitForSeconds(0.1f); // You might want to slow down the scaling over time
+            while (scale <= 1.05f)
+            {
+                //set key texture to molten metal
+                mouldObject.GetComponent<Renderer>().material.mainTexture = moltenMetalMaterial;
+                //reset position and rotation of key
+                mouldObject.transform.position = currentMould.transform.position;
+                mouldObject.transform.rotation = currentMould.transform.rotation;
+                mouldObject.transform.localScale = new Vector3(scale, scale, scale);
+                scale += 0.05f;
+                Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);
+                yield return new WaitForSeconds(0.1f); // You might want to slow down the scaling over time
+            }
         }
-        moltenMetal.Stop();
-        forgeRunning = false;
-        scale = 0.01f;
-        Debug.Log("Scale increase completed, stopping moltenMetal particle system and resetting scale.");
+
+        else if (mouldObject.gameObject.name == "KeyMould2")
+        {
+            while (scale <= 2.05f)
+            {
+                //set key texture to molten metal
+                mouldObject.GetComponent<Renderer>().material.mainTexture = moltenMetalMaterial;
+                //reset position and rotation of key
+                mouldObject.transform.position = currentMould.transform.position;
+                mouldObject.transform.rotation = currentMould.transform.rotation;
+                mouldObject.transform.localScale = new Vector3(scale, scale, scale);
+                scale += 0.1f;
+                Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);
+                yield return new WaitForSeconds(0.1f); // You might want to slow down the scaling over time
+            }
+        }
+
+        else if (mouldObject.gameObject.name == "KeyMould3")
+        {
+            while (scale <= 3.05f)
+            {
+                //set key texture to molten metal
+                mouldObject.GetComponent<Renderer>().material.mainTexture = moltenMetalMaterial;
+                //reset position and rotation of key
+                mouldObject.transform.position = currentMould.transform.position;
+                mouldObject.transform.rotation = currentMould.transform.rotation;
+                mouldObject.transform.localScale = new Vector3(scale, scale, scale);
+                scale += 0.15f;
+                Debug.Log("Increasing scale of " + mouldObject.name + " to: " + scale);
+                yield return new WaitForSeconds(0.1f); // You might want to slow down the scaling over time
+            }
+        }
+
+        else if (mouldObject.gameObject.name == "KeyMould4")
+        {
+            moltenMetal.Stop();
+            forgeRunning = false;
+            scale = 0.01f;
+            Debug.Log("Scale increase completed, stopping moltenMetal particle system and resetting scale.");
+        }
     }
 }
