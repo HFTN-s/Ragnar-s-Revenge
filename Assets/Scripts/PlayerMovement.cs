@@ -39,12 +39,12 @@ public class PlayerMovement : MonoBehaviour
         Head = InputDevices.GetDeviceAtXRNode(XRNode.Head);
         if (!Head.isValid)
         {
-            // Debug.Log("Head device not found. Retrying...");
+            // //Debug.Log("Head device not found. Retrying...");
             Invoke("SetupHead", 0.7f); // Retry after a delay
         }
         else
         {
-            Debug.Log("Head device found");
+            //Debug.Log("Head device found");
         }
     }
 
@@ -53,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
         leftHandController = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
         if (!leftHandController.isValid)
         {
-            // Debug.Log("Left hand controller not found. Retrying...");
+            // //Debug.Log("Left hand controller not found. Retrying...");
             Invoke("SetupLeftHandController", 0.7f); // Retry after a delay
         }
         else
         {
-            Debug.Log("Left hand controller found");
+            //Debug.Log("Left hand controller found");
         }
     }
     void SetupRightHandController()
@@ -66,22 +66,22 @@ public class PlayerMovement : MonoBehaviour
         rightHandController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
         if (!rightHandController.isValid)
         {
-            //  Debug.Log("Right hand controller not found. Retrying...");
+            //  //Debug.Log("Right hand controller not found. Retrying...");
             Invoke("SetupRightHandController", 0.7f); // Retry after a delay
         }
         else
         {
-            Debug.Log("Right hand controller found");
+            //Debug.Log("Right hand controller found");
         }
     }
 
     void FixedUpdate()
     {
-        if (!canMove) return;
-
+        RotatePlayer(rb);
         // if player presses left stick forward or backward, move player along the camera's forward vector
         if (leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
         {
+            if (!canMove)   {return;}
             // if SFX is not playing,            play the footstep sound
             // Determine the direction and magnitude of the movement
             Vector3 moveDirection = camera.transform.forward * primary2DAxisValue.y * speed * Time.fixedDeltaTime;
@@ -90,22 +90,22 @@ public class PlayerMovement : MonoBehaviour
 
             // Apply the movement to the Rigidbody
             rb.MovePosition(rb.position + moveDirection);
-            Debug.Log("Player is moving");
-            Debug.Log("Player is moving at: " + rb.velocity.magnitude + " m/s");
-            Debug.Log("playerSFX.isPlaying: " + playerSFX.isPlaying);
+            //Debug.Log("Player is moving");
+            //Debug.Log("Player is moving at: " + rb.velocity.magnitude + " m/s");
+            //Debug.Log("playerSFX.isPlaying: " + playerSFX.isPlaying);
             if (!playerSFX.isPlaying && moveDirection != Vector3.zero)
             {
-                Debug.Log("Playing footstep sound");
+                //Debug.Log("Playing footstep sound");
                 playerSFX.Play(); // play footstep sound if player is moving
             }
             else if (playerSFX.isPlaying && moveDirection == Vector3.zero)
             {
-                Debug.Log("Stopping footstep sound");
+                //Debug.Log("Stopping footstep sound");
                 playerSFX.Stop(); // stop playing footstep sound if player is not moving
             }
             else
             {
-                Debug.Log("Footstep sound is already playing");
+                //Debug.Log("Footstep sound is already playing");
             }
         }
 
