@@ -81,7 +81,11 @@ public class PlayerMovement : MonoBehaviour
         // if player presses left stick forward or backward, move player along the camera's forward vector
         if (leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
         {
-            if (!canMove)   {return;}
+            if (!canMove)
+            {
+                playerSFX.Stop();
+                return;
+            }
             // if SFX is not playing,            play the footstep sound
             // Determine the direction and magnitude of the movement
             Vector3 moveDirection = camera.transform.forward * primary2DAxisValue.y * speed * Time.fixedDeltaTime;
@@ -103,14 +107,12 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log("Stopping footstep sound");
                 playerSFX.Stop(); // stop playing footstep sound if player is not moving
             }
+
             else
             {
                 //Debug.Log("Footstep sound is already playing");
             }
         }
-
-        // Rotate player
-        RotatePlayer(rb);
     }
 
     void RotatePlayer(Rigidbody rb)

@@ -7,7 +7,16 @@ using UnityEngine.Events;
 public class UnlockPadlock : MonoBehaviour
 {
     public GameObject correctKey;
+    public GameObject ring;
     public UnityEvent OnUnlock;
+    private AudioSource audioSource;
+    public AudioClip unlockSound;
+    public AudioClip wrongKeySound;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +28,14 @@ public class UnlockPadlock : MonoBehaviour
             {
                 if (key == correctKey)
                 {
+                    //attach ring script to ring if not already added
+                    if (ring.GetComponent<RingScript>() == null)
+                    {
+                        ring.AddComponent<RingScript>();
+                    }
+                    //play unlock sound
+                    audioSource.PlayOneShot(unlockSound);
+                    //wait for sound to finish then destroy key 
                     Destroy(key);
                     //destroy parent object
                     //run unlock event
@@ -28,6 +45,8 @@ public class UnlockPadlock : MonoBehaviour
                 else
                 {
                     Debug.Log("Key is incorrect");
+                    if (audioSource.isPlaying) {return;}
+                    audioSource.PlayOneShot(wrongKeySound);
                 }
             }
         }

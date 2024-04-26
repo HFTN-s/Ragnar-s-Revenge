@@ -191,6 +191,21 @@ public class MenuScript : MonoBehaviour
                     musicSlider.SetActive(false);
                     speechSlider.SetActive(false);
                     sFXSlider.SetActive(false);
+                    // set all text to white
+                    button1.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    button2.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    button3.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    button4.GetComponent<TextMeshProUGUI>().color = Color.white;
+                    highScoresButton.GetComponent<TextMeshProUGUI>().color = Color.white;
+
+                    if (playerProgress == 0)
+                    {
+                        button2.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button2.GetComponent<BoxCollider>().enabled = false;
+                        highScoresButton.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        highScoresButton.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    
                     break;
 
                 case "Tutorial":
@@ -237,7 +252,7 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
-                case "Credits:":
+                case "Credits":
                     button1.GetComponent<TextMeshProUGUI>().text = "Can be found in a readme file in the games folder";
                     button2.GetComponent<TextMeshProUGUI>().text = "";
                     button3.GetComponent<TextMeshProUGUI>().text = "";

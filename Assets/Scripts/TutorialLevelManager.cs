@@ -9,10 +9,6 @@ public class TutorialLevelManager : MonoBehaviour
     public AudioClip[] ragnarSpeech;
     public AudioSource ragnarAudioSource;
     public GameObject ragnarSpeechObject;
-    public UnityEvent TLPuzzle1Complete;
-    public UnityEvent TLPuzzle2Complete;
-    public UnityEvent TLPuzzle3Complete;
-    public UnityEvent TLRoomComplete;
     public bool puzzle1Check = false;
     public bool puzzle2Check = false;
     public bool puzzle3Check = false;
@@ -36,6 +32,11 @@ public class TutorialLevelManager : MonoBehaviour
     public AudioClip[] jarlVoiceLines;
     public AudioSource jarlAudioSource;
     public PlayerMovement playerMovement;
+    public bool hasRing;
+    public bool needsMetal;
+    public bool usedWrongKey;
+    public GameObject[] fireObjects;
+    public Material torchMaterial;
 
     private void Start()
     {
@@ -48,15 +49,12 @@ public class TutorialLevelManager : MonoBehaviour
         //set ghost to inactive
         VikingGhostStatue.SetActive(false);
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        playerMovement.canMove = true;
 
         //set light intensity to 0 for all light objects in array
         // Set light intensity to 0 for all light objects in array
-        foreach (Light lightSource in lightSources)
-        {
-            lightSource.intensity = 0;  // Directly modify the intensity of each light
-        }
 
-        fire.SetActive(false);
+        fire.SetActive(true);
 
     }
 
@@ -119,7 +117,7 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Puzzle3Completed()
     {
-        
+
         // What to do when Puzzle 3 is complete
         puzzle3Complete = true;
         puzzle3Check = false;
@@ -155,102 +153,148 @@ public class TutorialLevelManager : MonoBehaviour
 
     }
 
-        // Handles trigger events from child colliders
-        public void HandleTriggerEnter(int colliderID)
+    // Handles trigger events from child colliders
+    public void HandleTriggerEnter(int colliderID)
+    {
+        switch (colliderID)
         {
-            switch (colliderID)
-            {
-                case 1: // ID for puzzle 1 collider
-                    Debug.Log("Ragnars Speech Triggered");
+            case 1: // ID for puzzle 1 collider
+                Debug.Log("Ragnars Speech Triggered");
 
-                    if (ragnarAudioSource != null)
-                    {
-                        StartCoroutine(PlayRagnarsSpeechAndHandleStatue());
+                if (ragnarAudioSource != null)
+                {
+                    StartCoroutine(PlayRagnarsSpeechAndHandleStatue());
 
-                    }
-                    else
-                    {
-                        Debug.LogWarning("AudioSource or Clip not properly assigned.");
-                    }
-                    // Handle Puzzle 1 trigger
-                    break;
-                case 2: // ID for puzzle 2 collider
-                    Debug.Log("Puzzle 2 Triggered");
-                    // Handle Puzzle 2 trigger
-                    break;
-                // Add more cases as needed
-                default:
-                    Debug.LogWarning("Unknown collider triggered");
-                    break;
-            }
+                }
+                else
+                {
+                    Debug.LogWarning("AudioSource or Clip not properly assigned.");
+                }
+                // Handle Puzzle 1 trigger
+                break;
+            case 2: // ID for puzzle 2 collider
+                Debug.Log("Puzzle 2 Triggered");
+                // Handle Puzzle 2 trigger
+                break;
+            // Add more cases as needed
+            default:
+                Debug.LogWarning("Unknown collider triggered");
+                break;
+        }
+    }
+
+    private IEnumerator PlayRagnarsSpeechAndHandleStatue()
+    {
+        playerMovement.canMove = false; // Stop player movement
+        VikingGhostStatue.SetActive(true);
+        fire.SetActive(true);
+        Destroy(ragnarSpeechObject); // Destroy the speech trigger object
+        ragnarAudioSource.clip = ragnarSpeech[0]; // Assign the first clip in the array
+        ragnarAudioSource.Play(); // Play the audio
+
+        // Fade out lights
+        foreach (Light lightSource in lightSources)
+        {
+            StartCoroutine(LightFade(lightSource, 0, 2)); // Fade to 0 intensity over 2 seconds
+            SetFireObjectsInactive();
         }
 
-        private IEnumerator PlayRagnarsSpeechAndHandleStatue()
+        // Wait while the audio is playing
+        while (ragnarAudioSource.isPlaying)
         {
-            playerMovement.canMove = false; // Stop player movement
-            VikingGhostStatue.SetActive(true);
-            fire.SetActive(true);
-            Destroy(ragnarSpeechObject); // Destroy the speech trigger object
-            ragnarAudioSource.clip = ragnarSpeech[0]; // Assign the first clip in the array
-            ragnarAudioSource.Play(); // Play the audio
-
-            // Fade out lights
-            foreach (Light lightSource in lightSources)
-            {
-                StartCoroutine(LightFade(lightSource, 0, 2)); // Fade to 0 intensity over 2 seconds
-            }
-
-            // Wait while the audio is playing
-            while (ragnarAudioSource.isPlaying)
-            {
-                yield return null; // Wait until next frame
-            }
-
-            // Fade lights back in
-            foreach (Light lightSource in lightSources)
-            {
-                StartCoroutine(LightFade(lightSource, 1, 2)); // Fade back to full intensity over 2 seconds
-            }
-            VikingGhostStatue.SetActive(false);
-            playerMovement.canMove = true; // Allow player movement again
-            // Wait 10 seconds after Ragnar's speech before playing Jarl's speech
-            yield return new WaitForSeconds(10);
-            PlayJarlSpeech(); // Start playing Jarl's speech
+            yield return null; // Wait until next frame
         }
 
-        private void PlayJarlSpeech()
+        // Fade lights back in
+        foreach (Light lightSource in lightSources)
         {
-            // Assuming jarlAudioSource and jarlSpeech are already assigned
-            jarlAudioSource.clip = jarlSpeech;
-            jarlAudioSource.Play();
+            StartCoroutine(LightFade(lightSource, 1, 2)); // Fade back to full intensity over 2 seconds
+            SetFireObjectsActive();
+        }
+        VikingGhostStatue.SetActive(false);
+        playerMovement.canMove = true; // Allow player movement again
+                                       // Wait 10 seconds after Ragnar's speech before playing Jarl's speech
+        yield return new WaitForSeconds(10);
+        PlayJarlSpeech(); // Start playing Jarl's speech
+    }
+
+    private void PlayJarlSpeech()
+    {
+        // Assuming jarlAudioSource and jarlSpeech are already assigned
+        jarlAudioSource.clip = jarlSpeech;
+        jarlAudioSource.Play();
+    }
+
+
+    private IEnumerator LightFade(Light light, float targetIntensity, float duration)
+    {
+        float startIntensity = light.intensity;
+        float time = 0;
+
+        while (time < duration)
+        {
+            Debug.Log("Fading light");
+            light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / duration);
+            time += Time.deltaTime;
+            yield return null;
         }
 
+        light.intensity = targetIntensity;
+    }
 
-        private IEnumerator LightFade(Light light, float targetIntensity, float duration)
+    private IEnumerator WaitForJarlSpeech()
+    {
+        //stall until jarl speech is done, once finished , wait 3 seconds
+        while (jarlAudioSource.isPlaying)
         {
-            float startIntensity = light.intensity;
-            float time = 0;
+            yield return null;
+        }
+        Debug.Log("Jarl has finished speaking, waiting 3 seconds");
+        yield return new WaitForSeconds(3);
+    }
 
-            while (time < duration)
+    //set fire objects to active
+    public void SetFireObjectsActive()
+    {
+        foreach (GameObject fireObject in fireObjects)
+        {
+            GameObject parent = fireObject.transform.parent.gameObject;
+            // loop through all children of the parent object and set twinkle component on each to active if present and not already active
+            foreach (Transform child in parent.transform)
             {
-                light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / duration);
-                time += Time.deltaTime;
-                yield return null;
+                if (child.GetComponent<twinkle>() != null && !child.GetComponent<twinkle>().enabled)
+                {
+                    torchMaterial.EnableKeyword("_EMISSION");
+                    child.GetComponent<twinkle>().enabled = true;
+                }
             }
 
-            light.intensity = targetIntensity;
-        }
 
-        private IEnumerator WaitForJarlSpeech()
+            fireObject.SetActive(true);
+        }
+    }
+    //set fire objects to inactive
+    public void SetFireObjectsInactive()
+    {
+        foreach (GameObject fireObject in fireObjects)
         {
-            //stall until jarl speech is done, once finished , wait 3 seconds
-            while (jarlAudioSource.isPlaying)
+            GameObject parent = fireObject.transform.parent.gameObject;
+            Debug.Log("Parent: " + parent.name);
+            if (parent.GetComponent<twinkle>() != null)
             {
-                yield return null;
+                parent.GetComponent<twinkle>().enabled = false;
             }
-            Debug.Log("Jarl has finished speaking, waiting 3 seconds");
-            yield return new WaitForSeconds(3);
+            foreach (Transform child in parent.transform)
+            {
+                if (child.GetComponent<Renderer>() != null)
+                {
+                    Debug.Log("Child: " + child.name);
+                    //set emission to 0
+                    child.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+                }
+                fireObject.SetActive(false);
+            }
         }
-
 
     }
+}

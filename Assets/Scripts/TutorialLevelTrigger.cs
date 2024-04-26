@@ -9,9 +9,11 @@ public class TutorialLevelTrigger : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] GameObject fadeToBlackobject;
     public AudioSource mainMenuMusic;
+    public PlayerMovement playerMovement;
 
     private void Start()
     {
+        playerMovement = GameObject.Find("MainMenuPlayer").GetComponent<PlayerMovement>();
         fadeToBlackobject.SetActive(false);
         audioSource = GetComponent<AudioSource>();
     }
@@ -25,6 +27,8 @@ public class TutorialLevelTrigger : MonoBehaviour
             mainMenuMusic.Stop();
             audioSource.Play();
             fadeToBlackobject.SetActive(true);
+            playerMovement.canMove = false;
+
             Invoke("DelayedAction", 5.0f);
             // fade to black
         }
