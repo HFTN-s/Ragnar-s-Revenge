@@ -1014,7 +1014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2648964962810275723}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: RingHandTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,11 +1028,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5088988360723401393}
-  m_LocalRotation: {x: -0.00000005721411, y: -0.00000007272646, z: 0.00000007450579,
-    w: 1}
-  m_LocalPosition: {x: 5.4663706, y: 1.8218936, z: 0.7841783}
+  m_LocalRotation: {x: 0.5768784, y: -0.23952428, z: -0.576686, w: 0.52656686}
+  m_LocalPosition: {x: -0.018635172, y: 0.000061530445, z: -0.0000422867}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 109434732395451497}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 19.346, y: -76.537, z: -110.518005}

@@ -16,7 +16,11 @@ public class InteractableObject : MonoBehaviour
     {
         // Initialize components
         _renderer = GetComponent<Renderer>();
-        _defaultMaterial = _renderer.material;
+        if (_renderer != null)
+        {
+            _defaultMaterial = _renderer.material;
+        }
+        
         _rigidbody = GetComponent<Rigidbody>();
         InitGlowMaterial();
 

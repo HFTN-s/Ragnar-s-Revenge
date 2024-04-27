@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PuzzleTrigger : MonoBehaviour
 {
     [SerializeField] private BoxCollider puzzleTrigger;
     [SerializeField] private TutorialLevelManager levelManager;
     public string variableName;  // The name of the variable to set in levelManager
+    public UnityEvent onTrigger; // The event to trigger when the player enters the trigger
 
     void OnTriggerEnter(Collider other)
     {
@@ -30,6 +32,7 @@ public class PuzzleTrigger : MonoBehaviour
                 Debug.LogError("Boolean variable '" + variableName + "' not found in TutorialLevelManager.");
             }
             GetComponent<BoxCollider>().enabled = false; // Disable the trigger
+            onTrigger.Invoke(); // Trigger the event
         }
         
         TriggerWait();

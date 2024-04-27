@@ -9,6 +9,11 @@ public class ForgeFuel : MonoBehaviour
     private Vector3 startPosition;
     public GameObject resetPosition;
     public GameObject[] forgeLights;
+    public AudioSource forgeAudio;
+    public AudioClip forgeStart;
+    public AudioClip forgeStop;
+    public AudioClip forgeBurning;
+    public AudioClip forgeMetalInput;
     // Start is called before the first frame update
 
     void Start()
@@ -39,6 +44,11 @@ public class ForgeFuel : MonoBehaviour
     {
         if (other.gameObject.tag == "Metal" && !isBurning)
         {
+            forgeAudio.clip = forgeMetalInput;
+            forgeAudio.Play();
+            StartCoroutine(FuelWait());
+            forgeAudio.clip = forgeStart;
+            forgeAudio.Play();
             isBurning = true;
             Debug.Log("Fuel added to forge. Current fuel amount: " + fuelAmount);
             // wait .5 seconds
@@ -47,13 +57,32 @@ public class ForgeFuel : MonoBehaviour
             other.transform.position = startPosition;
             isBurning = false;
             Debug.Log("Forge is now burning.");
+            //check if forgeAudio is playing, if playing wait for it to finish
+            if (forgeAudio.isPlaying)
+            {
+                StartCoroutine(WaitForForgeAudio());
+            }
+            else
+            {
+                forgeAudio.clip = forgeBurning;
+                // set audio to loop
+                forgeAudio.loop = true;
+                forgeAudio.Play();
+            }
 
         }
     }
 
+    private IEnumerator WaitForForgeAudio()
+    {
+        yield return new WaitForSeconds(forgeAudio.clip.length);
+        forgeAudio.clip = forgeBurning;
+        forgeAudio.Play();
+    }
+
     IEnumerator FuelWait()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
     }
 
     void FadeInLight()
@@ -69,6 +98,9 @@ public class ForgeFuel : MonoBehaviour
         foreach (GameObject light in forgeLights)
         {
             StartCoroutine(LightFade(light.GetComponent<Light>(), 0, 2));
+            forgeAudio.clip = forgeStop;
+            forgeAudio.loop = false;
+            forgeAudio.Play();
         }
     }
 

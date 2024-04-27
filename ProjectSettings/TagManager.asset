@@ -13,6 +13,8 @@ TagManager:
   - Mould
   - Key
   - PlayerHand
+  - Door
+  - Axe
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - InteractionColliders
   - IgnorePlayer
   - Player
-  - 
+  - Boundaries
   - 
   - 
   - 

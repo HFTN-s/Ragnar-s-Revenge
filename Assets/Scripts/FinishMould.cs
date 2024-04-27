@@ -10,8 +10,12 @@ public class FinishMould : MonoBehaviour
     private AudioSource jarlVoice;
     public AudioClip boxKeyAudio;
     private bool hasMadeBoxKey = false;
+    public AudioClip mediumKeyAudio;
+    private bool hasMadeMediumKey = false;
     public AudioClip doorKeyAudio;
     private bool hasMadeDoorKey = false;
+    public AudioClip sizzleAudio;
+    public AudioSource splashSource;
 
     void Start()
     {
@@ -34,7 +38,7 @@ public class FinishMould : MonoBehaviour
                 Debug.Log("Key is correct scale");
                 Debug.Log("Key Object: " + key.name);
                 keySubmerged = true;
-                StartCoroutine(KeyCooldownTimer(keySubmerged));
+                splashSource.Play();
                 key.transform.SetParent(null);
 
                 // Enable the Rigidbody and add a MeshCollider
@@ -89,15 +93,6 @@ public class FinishMould : MonoBehaviour
             key = null;
         }
     }
-    IEnumerator KeyCooldownTimer(bool keySubmerged)
-    {
-        while (keySubmerged)
-        {
-            Debug.Log("Starting cooldown timer");
-            yield return new WaitForSeconds(5);
-            Debug.Log("Cooldown timer finished");
-        }
-    }
 
     void PlayJarlVoice()
     {
@@ -108,6 +103,13 @@ public class FinishMould : MonoBehaviour
             jarlVoice.clip = boxKeyAudio;
             jarlVoice.Play();
             hasMadeBoxKey = true;
+        }
+        else if (key.name == "Key2" && !hasMadeDoorKey && !hasMadeMediumKey)
+        {
+            WaitForJarlVoice();
+            jarlVoice.clip = mediumKeyAudio;
+            jarlVoice.Play();
+            hasMadeMediumKey = true;
         }
         else if (key.name == "Key3" && !hasMadeDoorKey)
         {

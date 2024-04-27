@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -263,7 +263,7 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
-                case "How To Play":
+                case "How to Play":
                     button1.GetComponent<TextMeshProUGUI>().text = "Use the left stick to move";
                     button2.GetComponent<TextMeshProUGUI>().text = "Use the right stick to look around";
                     button3.GetComponent<TextMeshProUGUI>().text = "Grip to pick up objects";

@@ -25,6 +25,7 @@ public class TutorialLevelManager : MonoBehaviour
 
     public GameObject VikingStatue;
     public GameObject VikingGhostStatue;
+    public GameObject endOfLevelText;
 
     public float waitTime = 5.0f; // time to wait between events in seconds
 
@@ -37,6 +38,9 @@ public class TutorialLevelManager : MonoBehaviour
     public bool usedWrongKey;
     public GameObject[] fireObjects;
     public Material torchMaterial;
+    public bool defeatedSkeleton;
+    public bool unlockedDoor;
+    public bool openedDoor;
 
     private void Start()
     {
@@ -53,8 +57,10 @@ public class TutorialLevelManager : MonoBehaviour
 
         //set light intensity to 0 for all light objects in array
         // Set light intensity to 0 for all light objects in array
+        puzzle2Trigger.SetActive(false);
 
         fire.SetActive(true);
+        endOfLevelText.SetActive(false);
 
     }
 
@@ -85,6 +91,12 @@ public class TutorialLevelManager : MonoBehaviour
             // if all puzzles are solved, then run event
             RoomCompleted();
         }
+
+        if (hasRing)
+        {
+            puzzle2Trigger.SetActive(true);
+
+        }
     }
 
     void Puzzle1Completed()
@@ -100,7 +112,7 @@ public class TutorialLevelManager : MonoBehaviour
         else
         {
             Debug.Log("Jarl is not speaking, playing audio");
-            jarlAudioSource.clip = jarlVoiceLines[8];
+            jarlAudioSource.clip = jarlVoiceLines[9];
             jarlAudioSource.Play();
             //when jarl is done speaking set variables
             puzzle1Complete = true;
@@ -110,9 +122,26 @@ public class TutorialLevelManager : MonoBehaviour
 
     void Puzzle2Completed()
     {
-        // What to do when Puzzle 2 is complete
-        puzzle2Complete = true;
-        puzzle2Check = false;
+        if (hasRing && puzzle2Check == true)
+        {
+            Debug.Log("Puzzle 2 Complete");
+            //play jarl voice line 14 unless already playing then wait
+            if (jarlAudioSource.isPlaying)
+            {
+                StartCoroutine(WaitForJarlSpeech());
+            }
+            jarlAudioSource.clip = jarlVoiceLines[14];
+            jarlAudioSource.Play();
+            // What to do when Puzzle 2 is complete
+            puzzle2Complete = true;
+            puzzle2Check = false;}
+            if (jarlAudioSource.isPlaying)
+            {
+                StartCoroutine(WaitForJarlSpeech());
+            }
+            //GameObject.Find("Skeleton").SendMessage("ActivateSkeleton");
+            jarlAudioSource.clip = jarlVoiceLines[15];
+            jarlAudioSource.Play();
     }
 
     void Puzzle3Completed()
@@ -121,13 +150,38 @@ public class TutorialLevelManager : MonoBehaviour
         // What to do when Puzzle 3 is complete
         puzzle3Complete = true;
         puzzle3Check = false;
+        //play jarl voice line 1 unless already playing then wait
+        if (jarlAudioSource.isPlaying)
+        {
+            StartCoroutine(WaitForJarlSpeech());
+        }
+        jarlAudioSource.clip = jarlVoiceLines[1];
     }
 
     void RoomCompleted()
     {
         // What to do when Room is complete
         IncrementProgress(1);
+        playerMovement.canMove = false;
+        //play jarl voice line 2 unless already playing then wait
+        if (jarlAudioSource.isPlaying)
+        {
+            StartCoroutine(WaitForJarlSpeech());
+        }
+        jarlAudioSource.clip = jarlVoiceLines[5];
+        jarlAudioSource.Play();
+        if (jarlAudioSource.isPlaying)
+        {
+            StartCoroutine(WaitForJarlSpeech());
+        }
+        //Display end of level text
+        endOfLevelText.SetActive(true);
+        //if player presses primary button, load MainMenu
+        if (Input.GetButtonDown("PrimaryButton"))
+        {
+            SceneManager.LoadScene("MainMenu");
         // Load next scene
+        }
     }
 
     private void IncrementProgress(int puzzlesCompleted)
@@ -225,6 +279,15 @@ public class TutorialLevelManager : MonoBehaviour
         jarlAudioSource.Play();
     }
 
+    public void PlayJarlVoiceLine(int lineIndex)
+    {
+        if (jarlAudioSource.isPlaying)
+        {
+            StartCoroutine(WaitForJarlSpeech());
+        }
+        jarlAudioSource.clip = jarlVoiceLines[lineIndex];
+        jarlAudioSource.Play();
+    }
 
     private IEnumerator LightFade(Light light, float targetIntensity, float duration)
     {
@@ -250,7 +313,7 @@ public class TutorialLevelManager : MonoBehaviour
             yield return null;
         }
         Debug.Log("Jarl has finished speaking, waiting 3 seconds");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
     }
 
     //set fire objects to active

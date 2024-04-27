@@ -1,26 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections;
+
 
 public class ExitDoorScript : MonoBehaviour
 {
     public bool isUnlocked;
-    public bool axeContact;
+    public GameObject hammer;
+    public float doorForce = 1000f;
+    public AudioSource doorAudio;
+    public AudioClip doorHit;
+    private TutorialLevelManager levelManager;
 
-    public PlayerMovement playerMovement;
-
-    void Start()
+    private void Awake()
     {
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        hammer = GameObject.Find("Hammer");
     }
 
-    void Update()
+    private void Start()
     {
-        //if door is unlocked and axe is in contact with the door
-        if (isUnlocked && axeContact)
+        levelManager = GameObject.Find("TutorialLevelManager").GetComponent<TutorialLevelManager>();
+        isUnlocked = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Hammer")
         {
-            //Stick axe in door and create joint at contact point
-            
+            Rigidbody hammerRigidbody = other.GetComponent<Rigidbody>();
+            bool hammerIsMovingFast = hammerRigidbody.velocity.magnitude > 2;
+
+
+            if (isUnlocked && hammerIsMovingFast)
+            {
+                Debug.Log("Hammer has touched the door and it is unlocked.");
+                doorAudio.clip = doorHit;
+                doorAudio.Play();
+                HingeJoint hinge = GetComponent<HingeJoint>();
+                if (hinge != null)
+                {
+                    doorAudio.Play();
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+
+
+                    JointSpring spring = new JointSpring { spring = 10, damper = 1, targetPosition = -90 };
+                    hinge.spring = spring;
+                    hinge.useSpring = true;
+                }
+                else
+                {
+                    Debug.LogError("No HingeJoint component found on the door.");
+                }
+            }
+            else if (!isUnlocked)
+            {
+                Debug.Log("The door is locked. The hammer cannot open it.");
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+                hammer.GetComponent<XRGrabInteractable>().enabled = false;
+                StartCoroutine(Wait());
+
+            }
         }
+    }
+
+    void OnUnlock()
+    {
+        levelManager.PlayJarlVoiceLine(4);
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1);
+        hammer.GetComponent<XRGrabInteractable>().enabled = true;
     }
 }
