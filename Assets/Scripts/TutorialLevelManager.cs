@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.XR;
 public class TutorialLevelManager : MonoBehaviour
 {
     public GameObject fire;
@@ -41,6 +42,7 @@ public class TutorialLevelManager : MonoBehaviour
     public bool defeatedSkeleton;
     public bool unlockedDoor;
     public bool openedDoor;
+    private InputDevice rightHandController;
 
     private void Start()
     {
@@ -176,12 +178,12 @@ public class TutorialLevelManager : MonoBehaviour
         }
         //Display end of level text
         endOfLevelText.SetActive(true);
-        //if player presses primary button, load MainMenu
-        if (Input.GetButtonDown("PrimaryButton"))
+        /*if player presses primary button using new input system, load MainMenu
+        rightHandController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
         {
             SceneManager.LoadScene("MainMenu");
-        // Load next scene
-        }
+        }*/
     }
 
     private void IncrementProgress(int puzzlesCompleted)

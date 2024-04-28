@@ -7,12 +7,6 @@ public class FloorDetection : MonoBehaviour
     public GameObject[] interactableObjects;
     [SerializeField] private AudioSource audioSource;
 
-    void Start()
-    {
-        interactableObjects = GameObject.FindGameObjectsWithTag("IgnorePlayer");
-    }
-    
-
     private void OnCollisionEnter(Collision collision)
     {
         foreach (GameObject item in interactableObjects)
