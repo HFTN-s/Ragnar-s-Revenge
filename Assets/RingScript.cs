@@ -7,6 +7,7 @@ public class RingScript : MonoBehaviour
     private TutorialLevelManager tutorialLevelManager;
     public AudioClip jarlRingOn;
     public AudioSource ringAudioSource;
+    public BoxCollider puzzle2Trigger;
 
     void Start()
     {
@@ -44,6 +45,8 @@ public class RingScript : MonoBehaviour
         // Set the ring's parent to the ring finger's transform
         if (ringFinger != null)
         {
+            puzzle2Trigger.enabled = true;
+
             transform.SetParent(ringFinger);
 
             // Set the local position to zero as specified
@@ -57,8 +60,7 @@ public class RingScript : MonoBehaviour
 
             Debug.Log("Ring's transform has been set relative to its parent.");
             // play audio
-            ringAudioSource.clip = jarlRingOn;
-            ringAudioSource.Play();
+            tutorialLevelManager.PlayJarlVoiceLine(18);
         }
         else
         {

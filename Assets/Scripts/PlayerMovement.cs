@@ -108,6 +108,29 @@ public class PlayerMovement : MonoBehaviour
                 playerSFX.Stop(); // stop playing footstep sound if player is not moving
             }
 
+            // if player presses in left stick slow down time scale by 0.1 unless already 0.1 , same with right stick to increase time scale
+            if (leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool primary2DAxisClickValue))
+            {
+                if (primary2DAxisClickValue)
+                {
+                    if (Time.timeScale > 0.1f)
+                    {
+                        Time.timeScale -= 0.1f;
+                    }
+                }
+            }
+
+            if (rightHandController.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool primary2DAxisClickValueR))
+            {
+                if (primary2DAxisClickValueR)
+                {
+                    if (Time.timeScale < 1.0f)
+                    {
+                        Time.timeScale += 0.1f;
+                    }
+                }
+            }
+
             else
             {
                 //Debug.Log("Footstep sound is already playing");

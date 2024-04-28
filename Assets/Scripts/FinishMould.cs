@@ -16,9 +16,11 @@ public class FinishMould : MonoBehaviour
     private bool hasMadeDoorKey = false;
     public AudioClip sizzleAudio;
     public AudioSource splashSource;
+    private TutorialLevelManager levelManager;
 
     void Start()
     {
+        levelManager = GameObject.Find("TutorialLevelManager").GetComponent<TutorialLevelManager>();
         jarlVoice = GameObject.Find("JarlVoice").GetComponent<AudioSource>();
     }
     void OnTriggerEnter(Collider other)
@@ -97,35 +99,21 @@ public class FinishMould : MonoBehaviour
     void PlayJarlVoice()
     {
         // if key made is "Key1" and hasMadeBoxKey is false , play box key audio, if audio is already playing then wait then play door key audio
-        if (key.name == "Key1" && !hasMadeBoxKey)
+        if (key.name == "KeyMould1" && !hasMadeBoxKey)
         {
-            WaitForJarlVoice();
-            jarlVoice.clip = boxKeyAudio;
-            jarlVoice.Play();
+            levelManager.PlayJarlVoiceLine(0);
             hasMadeBoxKey = true;
         }
-        else if (key.name == "Key2" && !hasMadeDoorKey && !hasMadeMediumKey)
+        else if (key.name == "KeyMould2" && !hasMadeDoorKey && !hasMadeMediumKey)
         {
-            WaitForJarlVoice();
-            jarlVoice.clip = mediumKeyAudio;
-            jarlVoice.Play();
+            levelManager.PlayJarlVoiceLine(11);
             hasMadeMediumKey = true;
         }
-        else if (key.name == "Key3" && !hasMadeDoorKey)
+        else if (key.name == "KeyMould3" && !hasMadeDoorKey)
         {
-            WaitForJarlVoice();
-            jarlVoice.clip = doorKeyAudio;
-            jarlVoice.Play();
+            levelManager.PlayJarlVoiceLine(3);
             hasMadeDoorKey = true;
         }
     }
-    IEnumerator WaitForJarlVoice()
-    {
-        while (jarlVoice.isPlaying)
-        {
-            yield return null;
-        }
-        Debug.Log("Jarl has finished speaking, waiting 1 seconds");
-        yield return new WaitForSeconds(1);
-    }
 }
+

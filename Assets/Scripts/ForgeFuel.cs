@@ -54,7 +54,8 @@ public class ForgeFuel : MonoBehaviour
             // wait .5 seconds
             StartCoroutine(FuelWait());
             fuelAmount++;
-            other.transform.position = startPosition;
+            //destroy metal
+            Destroy(other.gameObject);
             isBurning = false;
             Debug.Log("Forge is now burning.");
             //check if forgeAudio is playing, if playing wait for it to finish
@@ -64,9 +65,10 @@ public class ForgeFuel : MonoBehaviour
             }
             else
             {
+                forgeAudio.loop = true;
                 forgeAudio.clip = forgeBurning;
                 // set audio to loop
-                forgeAudio.loop = true;
+                
                 forgeAudio.Play();
             }
 

@@ -15,6 +15,7 @@ TagManager:
   - PlayerHand
   - Door
   - Axe
+  - Hammer
   layers:
   - Default
   - TransparentFX

@@ -11,7 +11,7 @@ public class ExitDoorScript : MonoBehaviour
     public AudioSource doorAudio;
     public AudioClip doorHit;
     private TutorialLevelManager levelManager;
-
+    public GameObject doorPadlock;
     private void Awake()
     {
         hammer = GameObject.Find("Hammer");
@@ -20,8 +20,10 @@ public class ExitDoorScript : MonoBehaviour
     private void Start()
     {
         levelManager = GameObject.Find("TutorialLevelManager").GetComponent<TutorialLevelManager>();
-        isUnlocked = false;
+        isUnlocked = true;
+        Destroy(doorPadlock);
     }
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -31,12 +33,16 @@ public class ExitDoorScript : MonoBehaviour
             bool hammerIsMovingFast = hammerRigidbody.velocity.magnitude > 2;
 
 
-            if (isUnlocked && hammerIsMovingFast)
+            if (isUnlocked)
             {
                 Debug.Log("Hammer has touched the door and it is unlocked.");
+                //unfreeze rigidbody constraints
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 doorAudio.clip = doorHit;
                 doorAudio.Play();
                 HingeJoint hinge = GetComponent<HingeJoint>();
+                // add force
+                GetComponent<Rigidbody>().AddForce(Vector3.forward * doorForce * -1);
                 if (hinge != null)
                 {
                     doorAudio.Play();
