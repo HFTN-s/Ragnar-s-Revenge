@@ -17,6 +17,7 @@ public class TutorialLevelManager : MonoBehaviour
     public bool puzzle2Complete = false;
     public bool puzzle3Complete = false;
     public bool roomComplete = false;
+    public bool canLeaveLevel = false;
 
     [SerializeField] private GameObject puzzle1Trigger;
     [SerializeField] private GameObject puzzle2Trigger;
@@ -99,6 +100,11 @@ public class TutorialLevelManager : MonoBehaviour
             puzzle2Trigger.SetActive(true);
 
         }
+
+        if (canLeaveLevel)
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     void Puzzle1Completed()
@@ -124,57 +130,57 @@ public class TutorialLevelManager : MonoBehaviour
     }
 
     void Puzzle2Completed()
-{
-    if (hasRing && puzzle2Check && !puzzle2Complete)
     {
-        Debug.Log("Puzzle 2 Complete");
-        StartCoroutine(HandlePuzzle2Sequence());
-    }
-}
-
-IEnumerator HandlePuzzle2Sequence()
-{
-    // Ensure we don't run this again
-    puzzle2Complete = true;
-    puzzle2Check = false;
-
-    // Play Jarl's voice line 13 and wait for it to finish
-    yield return StartCoroutine(PlayVoiceLineAndWait(13));
-
-    Debug.Log("Jarl has finished speaking, waiting 3 seconds");
-    yield return new WaitForSeconds(3); // Wait additional time before next steps
-
-    // Activate the skeleton after the voice line and the wait
-    GameObject.Find("SKELETON").SendMessage("ActivateSkeleton");
-
-    // Play Jarl's voice line 15, ensure no other conditions will interrupt
-    yield return StartCoroutine(PlayVoiceLineAndWait(15));
-
-    // Wait additional time before next steps
-    yield return new WaitForSeconds(3);
-
-    //play voice line 8
-    StartCoroutine(PlayVoiceLineAndWait(8));
-}
-
-IEnumerator PlayVoiceLineAndWait(int lineIndex)
-{
-    // Wait if there's already a voice line playing
-    while (jarlAudioSource.isPlaying)
-    {
-        yield return null; // Wait until the current audio is finished
+        if (hasRing && puzzle2Check && !puzzle2Complete)
+        {
+            Debug.Log("Puzzle 2 Complete");
+            StartCoroutine(HandlePuzzle2Sequence());
+        }
     }
 
-    // Set the clip and play it
-    jarlAudioSource.clip = jarlVoiceLines[lineIndex];
-    jarlAudioSource.Play();
-
-    // Wait until this voice line is finished before proceeding
-    while (jarlAudioSource.isPlaying)
+    IEnumerator HandlePuzzle2Sequence()
     {
-        yield return null;
+        // Ensure we don't run this again
+        puzzle2Complete = true;
+        puzzle2Check = false;
+
+        // Play Jarl's voice line 13 and wait for it to finish
+        yield return StartCoroutine(PlayVoiceLineAndWait(13));
+
+        Debug.Log("Jarl has finished speaking, waiting 3 seconds");
+        yield return new WaitForSeconds(3); // Wait additional time before next steps
+
+        // Activate the skeleton after the voice line and the wait
+        GameObject.Find("SKELETON").SendMessage("ActivateSkeleton");
+
+        // Play Jarl's voice line 15, ensure no other conditions will interrupt
+        yield return StartCoroutine(PlayVoiceLineAndWait(15));
+
+        // Wait additional time before next steps
+        yield return new WaitForSeconds(3);
+
+        //play voice line 8
+        StartCoroutine(PlayVoiceLineAndWait(8));
     }
-}
+
+    IEnumerator PlayVoiceLineAndWait(int lineIndex)
+    {
+        // Wait if there's already a voice line playing
+        while (jarlAudioSource.isPlaying)
+        {
+            yield return null; // Wait until the current audio is finished
+        }
+
+        // Set the clip and play it
+        jarlAudioSource.clip = jarlVoiceLines[lineIndex];
+        jarlAudioSource.Play();
+
+        // Wait until this voice line is finished before proceeding
+        while (jarlAudioSource.isPlaying)
+        {
+            yield return null;
+        }
+    }
 
 
 
@@ -195,7 +201,12 @@ IEnumerator PlayVoiceLineAndWait(int lineIndex)
 
     void RoomCompleted()
     {
-        int timeTaken = timer.GetTime();
+        void RoomCompleted()
+{
+    if (!canLeaveLevel)
+    {
+        int timeTaken = timer.GetSeconds();
+        DataPersistenceManager.instance.SaveHighScore(timeTaken);
         // What to do when Room is complete
         IncrementProgress(1);
         playerMovement.canMove = false;
@@ -207,12 +218,9 @@ IEnumerator PlayVoiceLineAndWait(int lineIndex)
         }
         //Display end of level text
         endOfLevelText.SetActive(true);
-        //if player presses primary button using new input system, load MainMenu
-        rightHandController = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-        if (rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
-        {
-            SceneManager.LoadScene("MainMenu");
-        }
+        canLeaveLevel = true;
+    }
+}
     }
 
     private void IncrementProgress(int puzzlesCompleted)
