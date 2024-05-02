@@ -16,6 +16,7 @@ TagManager:
   - Door
   - Axe
   - Hammer
+  - Reflective
   layers:
   - Default
   - TransparentFX
