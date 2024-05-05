@@ -17,6 +17,7 @@ TagManager:
   - Axe
   - Hammer
   - Reflective
+  - JigsawPiece
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - IgnorePlayer
   - Player
   - Boundaries
-  - 
+  - PuzzlePieces
   - 
   - 
   - 
