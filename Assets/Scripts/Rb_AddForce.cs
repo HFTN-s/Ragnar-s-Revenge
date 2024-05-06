@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Rb_AddForce : MonoBehaviour
 {
     private Rigidbody rb;
     public int force = 1000;
+    public int pieceID;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         //add random force in forward direction
         //wait a second then add force forward and up
+        if (rb.isKinematic)
+        {
+            //set xr grab interactable active to false
+            GetComponent<XRGrabInteractable>().enabled = false;
+        }
         StartCoroutine(AddForce());
+
 
         
     }
@@ -21,7 +29,6 @@ public class Rb_AddForce : MonoBehaviour
     {
         // wait random time
         // set kinematic to false
-        rb.isKinematic = false;
         rb.AddForce(transform.forward * Random.Range(-force, -force));
         rb.AddForce(transform.up * Random.Range(-force, force));
         rb.AddForce(transform.right * Random.Range(-force, force));
