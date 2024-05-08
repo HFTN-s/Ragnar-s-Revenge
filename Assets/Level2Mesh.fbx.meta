@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 6740aac3344b8e24da76434bd18eb5aa
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -795291189933377020
+    second: root|Pillar.001Action
+  - first:
+      74: 5684500872515799990
+    second: root|PillarAction
+  - first:
+      74: -9168341800970731994
+    second: root|root|mixamo.com|Layer0
+  - first:
+      74: -5130829995831124881
+    second: root|WallAction
+  - first:
+      74: 134341913020760133
+    second: Wall|Pillar.001Action
+  - first:
+      74: 6717207865765223652
+    second: Wall|PillarAction
+  - first:
+      74: 5302530677022670891
+    second: Wall|WallAction
+  - first:
+      74: -3701742512200853911
+    second: Pillar|Pillar.001Action
+  - first:
+      74: -2064317826442390023
+    second: Pillar|PillarAction
+  - first:
+      74: -3689008659097197348
+    second: Pillar|WallAction
+  - first:
+      74: -6129572106483112837
+    second: Pillar.001|Pillar.001Action
+  - first:
+      74: -3197383143819204759
+    second: Pillar.001|PillarAction
+  - first:
+      74: 5845496236638976041
+    second: Pillar.001|WallAction
+  - first:
+      74: -8164406923176008164
+    second: Wall|Pillar.001Action.001
+  - first:
+      74: 2710676825956779319
+    second: Pillar.001|Pillar.001Action.001
+  - first:
+      74: -2128336081079428220
+    second: Pillar.002|Pillar.001Action
+  - first:
+      74: -6646617193570955247
+    second: Pillar.002|Pillar.001Action.001
+  - first:
+      74: -6174463598889145449
+    second: Pillar.002|PillarAction
+  - first:
+      74: -1409400879683141886
+    second: Pillar.002|WallAction
+  - first:
+      74: -3203254760406753364
+    second: Wall|Pillar.001Action.002
+  - first:
+      74: -2369778751007982258
+    second: Pillar.002|Pillar.001Action.002
+  - first:
+      74: -1450463321356376203
+    second: Pillar.001|Pillar.001Action.002
+  - first:
+      74: -1446330897720153193
+    second: InsideWall|Pillar.001Action
+  - first:
+      74: -9029897353640486950
+    second: InsideWall|Pillar.001Action.001
+  - first:
+      74: 5962945215367364689
+    second: InsideWall|Pillar.001Action.002
+  - first:
+      74: 4654287935673358863
+    second: InsideWall|PillarAction
+  - first:
+      74: 134229335998502295
+    second: InsideWall|WallAction
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
