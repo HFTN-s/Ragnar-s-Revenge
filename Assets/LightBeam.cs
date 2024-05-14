@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class LightBeam : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public int maxReflectionCount = 5;
     public float maxStepDistance = 200;
+    public string targetObjectName;
+    public UnityEvent OnHitByLaserCorrect;
 
     void Start()
     {
@@ -47,6 +50,18 @@ public class LightBeam : MonoBehaviour
                 else
                 {
                     // Stop the laser if it hits a non-reflective surface
+                    //Get other objects name
+                    Debug.Log(hit.collider.name);
+                    //if other object is equal to a variable name then send message to parent that correct object has been hit
+                    if (hit.collider.name == targetObjectName)
+                    {
+                        Debug.Log("Correct object hit");
+                        hit.collider.transform.parent.SendMessage("HitByLaserCorrect");
+                        OnHitByLaserCorrect.Invoke();
+                    }
+                    //Send message to parent of other object that it has been hit
+                    hit.collider.transform.parent.SendMessage("HitByLaser", hit.collider.name);
+                    Debug.Log("Hit: " + hit.collider.name);
                     break;
                 }
             }
