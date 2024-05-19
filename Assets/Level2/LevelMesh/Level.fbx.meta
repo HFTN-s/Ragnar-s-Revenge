@@ -2,7 +2,16 @@ fileFormatVersion: 2
 guid: ecc969a4af0d40a4da36e14f3d112acb
 ModelImporter:
   serializedVersion: 19301
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 2710676825956779319
+    second: Pillar.001|Pillar.001Action.001
+  - first:
+      74: -1450463321356376203
+    second: Pillar.001|Pillar.001Action.002
+  - first:
+      74: 5845496236638976041
+    second: Pillar.001|WallAction
   externalObjects: {}
   materials:
     materialImportMode: 1

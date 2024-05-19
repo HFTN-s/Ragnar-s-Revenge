@@ -7,6 +7,15 @@ public class FloorDetection : MonoBehaviour
     public GameObject[] interactableObjects;
     [SerializeField] private AudioSource audioSource;
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        //mute audio source
+        audioSource.mute = true;
+        //wait 3 seconds before allowing audio to play
+        StartCoroutine(EnableAudio());
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         foreach (GameObject item in interactableObjects)
@@ -23,5 +32,12 @@ public class FloorDetection : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator EnableAudio()
+    {
+        yield return new WaitForSeconds(3f);
+        audioSource.mute = false;
+        Debug.Log("Audio source is now enabled.");
     }
 }

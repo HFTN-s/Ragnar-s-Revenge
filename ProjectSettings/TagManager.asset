@@ -18,6 +18,9 @@ TagManager:
   - Hammer
   - Reflective
   - JigsawPiece
+  - Boundaries
+  - PuzzleSlot
+  - Ground
   layers:
   - Default
   - TransparentFX
