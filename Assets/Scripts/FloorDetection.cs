@@ -23,11 +23,11 @@ public class FloorDetection : MonoBehaviour
             if (collision.gameObject == item)
             {
                 audioSource.Play();
-                Debug.Log("Object has been detected from the list");
-                Debug.Log("Adding" + item.name + " to the list of interactable objects");
+                //Debug.Log("Object has been detected from the list");
+                //Debug.Log("Adding" + item.name + " to the list of interactable objects");
                 if (item.GetComponent<InteractableObject>() == null)
                 {
-                    Debug.Log("Adding InteractableObject script to " + item.name);
+                    //Debug.Log("Adding InteractableObject script to " + item.name);
                     item.AddComponent<InteractableObject>();
                 }
             }

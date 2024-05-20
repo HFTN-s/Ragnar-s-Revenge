@@ -15,7 +15,7 @@ public class PuzzlePiece : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>();
         colliders = GetComponents<Collider>();
-        Debug.Log($"PuzzlePiece {pieceID} initialized.");
+        //Debug.Log($"PuzzlePiece {pieceID} initialized.");
     }
 
     public void PlacePiece(Transform slotTransform)
@@ -41,7 +41,7 @@ public class PuzzlePiece : MonoBehaviour
         
 
 
-        Debug.Log($"PuzzlePiece {pieceID} placed in slot {slotTransform.name} with position set to {slotTransform.position} and rotation set to {slotTransform.rotation.eulerAngles}.");
+        //Debug.Log($"PuzzlePiece {pieceID} placed in slot {slotTransform.name} with position set to {slotTransform.position} and rotation set to {slotTransform.rotation.eulerAngles}.");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -52,7 +52,7 @@ public class PuzzlePiece : MonoBehaviour
             Vector3 forceDirection = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
             rb.AddForce(forceDirection * 10f, ForceMode.Impulse);
 
-            Debug.Log($"PuzzlePiece {pieceID} hit the ground and was given a small force.");
+            //Debug.Log($"PuzzlePiece {pieceID} hit the ground and was given a small force.");
             //wait 2 seconds before allowing force again
             StartCoroutine(EnableForce());
         }
@@ -61,7 +61,7 @@ public class PuzzlePiece : MonoBehaviour
     private IEnumerator EnableForce()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log($"PuzzlePiece {pieceID} can now be given force again.");
+        //Debug.Log($"PuzzlePiece {pieceID} can now be given force again.");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,11 +73,11 @@ public class PuzzlePiece : MonoBehaviour
             {
                 PlacePiece(other.transform);
                 FindObjectOfType<PuzzleController>().PiecePlaced();
-                Debug.Log($"PuzzlePiece {pieceID} correctly placed in slot {slot.slotID}.");
+                //Debug.Log($"PuzzlePiece {pieceID} correctly placed in slot {slot.slotID}.");
             }
             else if (slot != null && !IsPlaced && slot.slotID != pieceID)
             {
-                Debug.Log($"PuzzlePiece {pieceID} entered incorrect slot {slot.slotID}. Disabling interactable temporarily.");
+                //Debug.Log($"PuzzlePiece {pieceID} entered incorrect slot {slot.slotID}. Disabling interactable temporarily.");
                 StartCoroutine(TemporarilyDisableInteractable());
             }
         }
@@ -88,6 +88,6 @@ public class PuzzlePiece : MonoBehaviour
         grabInteractable.enabled = false;
         yield return new WaitForSeconds(1f);
         grabInteractable.enabled = true;
-        Debug.Log($"PuzzlePiece {pieceID} interactable re-enabled.");
+        //Debug.Log($"PuzzlePiece {pieceID} interactable re-enabled.");
     }
 }
