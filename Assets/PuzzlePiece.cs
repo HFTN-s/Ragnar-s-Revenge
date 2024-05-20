@@ -86,12 +86,6 @@ public class PuzzlePiece : MonoBehaviour
     private IEnumerator TemporarilyDisableInteractable()
     {
         grabInteractable.enabled = false;
-        // if object has a InteractableObject script, remove it
-        InteractableObject interactable = GetComponent<InteractableObject>();
-        if (interactable != null)
-        {
-            Destroy(interactable);
-        }
         yield return new WaitForSeconds(1f);
         grabInteractable.enabled = true;
         //Debug.Log($"PuzzlePiece {pieceID} interactable re-enabled.");

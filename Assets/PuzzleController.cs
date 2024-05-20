@@ -9,7 +9,7 @@ public class PuzzleController : MonoBehaviour
     private GameObject[] rune = new GameObject[26];
     public GameObject leftClosetDoor;
     public GameObject rightClosetDoor;
-    public int[] correctOrder = { 24, 4, 16, 9 }; // Sequence of rune IDs to be checked
+    public int[] correctOrder = { 24, 4, 17, 9 }; // Sequence of rune IDs to be checked
     private int currentOrderIndex = 0;
     private GameObject[] runeLetters = new GameObject[26];
     private GameObject[] gemstones = new GameObject[26];
@@ -22,7 +22,7 @@ public class PuzzleController : MonoBehaviour
     void Start()
     {
         //initialize correct order
-        correctOrder = new int[] { 24, 4, 16, 9 };
+        correctOrder = new int[] { 24, 4, 17, 9 };
         Debug.Log("PuzzleController initialized.");
 
         isHit = new bool[gemstoneParent.transform.childCount];
@@ -115,26 +115,10 @@ private void EnableAllRuneColliders()
 }
 
     private IEnumerator MoveDoors(GameObject leftDoor, GameObject rightDoor, float leftX, float rightX, float duration)
-<<<<<<< Updated upstream
-{
-    float timeElapsed = 0;
-    Vector3 leftStartPos = leftDoor.transform.localPosition;
-    Vector3 rightStartPos = rightDoor.transform.localPosition;
-
-    while (timeElapsed < duration)
-    {
-        timeElapsed += Time.deltaTime;
-        float t = timeElapsed / duration;
-        Vector3 leftNewPos = Vector3.Lerp(leftStartPos, new Vector3(leftX, leftStartPos.y, leftStartPos.z), t);
-        Vector3 rightNewPos = Vector3.Lerp(rightStartPos, new Vector3(rightX, rightStartPos.y, rightStartPos.z), t);
-        leftDoor.transform.localPosition = leftNewPos;
-        rightDoor.transform.localPosition = rightNewPos;
-        yield return null;
-=======
     {
         float timeElapsed = 0;
-        Vector3 leftStartPos = leftDoor.transform.localPosition;
-        Vector3 rightStartPos = rightDoor.transform.localPosition;
+        Vector3 leftStartPos = leftDoor.transform.position;
+        Vector3 rightStartPos = rightDoor.transform.position;
 
         while (timeElapsed < duration)
         {
@@ -142,14 +126,11 @@ private void EnableAllRuneColliders()
             float t = timeElapsed / duration;
             Vector3 leftNewPos = Vector3.Lerp(leftStartPos, new Vector3(leftX, leftStartPos.y, leftStartPos.z), t);
             Vector3 rightNewPos = Vector3.Lerp(rightStartPos, new Vector3(rightX, rightStartPos.y, rightStartPos.z), t);
-            leftDoor.transform.localPosition = leftNewPos;
-            rightDoor.transform.localPosition = rightNewPos;
+            leftDoor.transform.position = leftNewPos;
+            rightDoor.transform.position = rightNewPos;
             yield return null;
         }
->>>>>>> Stashed changes
     }
-}
-
 
     public void DisableColliders()
     {
