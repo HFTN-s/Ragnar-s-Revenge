@@ -21,6 +21,7 @@ TagManager:
   - Boundaries
   - PuzzleSlot
   - Ground
+  - Gemstone
   layers:
   - Default
   - TransparentFX

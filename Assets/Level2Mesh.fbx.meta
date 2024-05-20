@@ -84,6 +84,15 @@ ModelImporter:
   - first:
       74: 134229335998502295
     second: InsideWall|WallAction
+  - first:
+      74: -1561065648800543719
+    second: Pillar.001|Pillar.001|Pillar.001|Pillar.001Action.001
+  - first:
+      74: 1310055451150822824
+    second: Pillar.001|Pillar.001|Pillar.001|Pillar.001Action.002
+  - first:
+      74: -6485818182559815656
+    second: Pillar.001|Pillar.001|Pillar.001|WallAction
   externalObjects: {}
   materials:
     materialImportMode: 1

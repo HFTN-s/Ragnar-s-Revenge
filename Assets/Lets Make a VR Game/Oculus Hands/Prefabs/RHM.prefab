@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 5686134208192617028}
   - component: {fileID: -2368749419795825841}
   m_Layer: 0
-  m_Name: Right Hand Model
+  m_Name: RHM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

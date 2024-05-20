@@ -51,21 +51,31 @@ public class LightBeam : MonoBehaviour
                 {
                     break;
                 }
-                
+
                 // if gemstone hit by laser
                 else if (hit.collider.CompareTag("Gemstone"))
                 {
                     // Send message to the parent of the other object that it has been hit
-                    hit.collider.transform.parent.SendMessage("HitByLaser", hit.collider.name);
                     Debug.Log("Hit: " + hit.collider.name);
+                    if (hit.collider.name == targetObjectName)
+                    {
+                        OnHitByLaserCorrect.Invoke();
+                        // Make all gems emit light
+                        //Send message to the parent of the other object that the correct gem has been hit
+                        SendMessage("CorrectGemstoneHit", hit.transform.parent.gameObject.name);
+                    }
+                    else
+                    {
+                        // only gem hit by laser is lit up , before fading out
+                        hit.collider.transform.parent.SendMessage("HitByLaserIncorrect", hit.collider.name);
+                    }
                     break;
                 }
 
                 else
                 {
                     // Send message to the parent of the other object that it has been hit
-                    hit.collider.transform.parent.SendMessage("HitByLaser", hit.collider.name);
-                    Debug.Log("Hit: " + hit.collider.name);
+                    //Debug.Log("Hit: " + hit.collider.name);
                     break;
                 }
             }
