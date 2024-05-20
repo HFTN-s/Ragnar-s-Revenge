@@ -9,9 +9,9 @@ public class twinkle : MonoBehaviour
     private Renderer fireRenderer;
     private Material fireMaterial;
     
-    private float baseIntensity = 1.0f;
-    private float flickerVariation = 0.5f;
-    private float emissionStrength = 2.3f;
+    public float baseIntensity = 1.0f;
+    public float flickerVariation = 0.5f;
+    public float emissionStrength = 2.3f;
     private float noiseSeed; // Unique seed for Perlin noise
 
     void Start()
@@ -31,10 +31,7 @@ public class twinkle : MonoBehaviour
             }
         }
 
-        if (torchLight != null)
-        {
-            baseIntensity = torchLight.intensity;
-        }
+            torchLight.intensity = baseIntensity;
 
         // Initialize a unique seed for the Perlin noise based on the torch's position
         noiseSeed = Random.Range(0f, 100f); // Alternatively, use gameObject.transform.position or any unique identifier

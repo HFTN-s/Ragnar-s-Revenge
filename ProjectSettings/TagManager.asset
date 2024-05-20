@@ -11,6 +11,17 @@ TagManager:
   - Fire
   - Metal
   - Mould
+  - Key
+  - PlayerHand
+  - Door
+  - Axe
+  - Hammer
+  - Reflective
+  - JigsawPiece
+  - Boundaries
+  - PuzzleSlot
+  - Ground
+  - Gemstone
   layers:
   - Default
   - TransparentFX
@@ -29,10 +40,10 @@ TagManager:
   - sky
   - InteractionObjects
   - InteractionColliders
-  - 
-  - 
-  - 
-  - 
+  - IgnorePlayer
+  - Player
+  - Boundaries
+  - PuzzlePieces
   - 
   - 
   - 

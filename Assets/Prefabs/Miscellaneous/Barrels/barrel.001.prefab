@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 437016}
   - component: {fileID: 3315344}
   - component: {fileID: 2310874}
-  - component: {fileID: 6483048}
+  - component: {fileID: 573835997}
   m_Layer: 0
   m_Name: barrel.001
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: f50fd987009300249ad223e750bb4396, type: 2}
   - {fileID: 2100000, guid: 2536f1f630d08f441b76cba76e8cf597, type: 2}
-  - {fileID: 2100000, guid: 92c80c0d26945b34a9d0c7d295afeb60, type: 2}
+  - {fileID: 2100000, guid: a1506f0ffb287364bb45f080570e6685, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6483048
-MeshCollider:
+--- !u!65 &573835997
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +92,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 7a0ce5ef7b0280c4b9d3cd0aefe01b1c, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.1430827, y: 1.3757161, z: 1.1430827}
+  m_Center: {x: 0.00000047683716, y: 0.68785805, z: -0.00000047683716}
