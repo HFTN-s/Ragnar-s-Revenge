@@ -22,6 +22,9 @@ TagManager:
   - PuzzleSlot
   - Ground
   - Gemstone
+  - Whetstone
+  - Blade
+  - Sunstone
   layers:
   - Default
   - TransparentFX
