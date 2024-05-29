@@ -25,6 +25,7 @@ TagManager:
   - Whetstone
   - Blade
   - Sunstone
+  - Receptacle
   layers:
   - Default
   - TransparentFX
