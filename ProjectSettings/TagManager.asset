@@ -26,6 +26,7 @@ TagManager:
   - Blade
   - Sunstone
   - Receptacle
+  - Chest
   layers:
   - Default
   - TransparentFX
