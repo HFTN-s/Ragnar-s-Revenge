@@ -31,5 +31,13 @@ public class OpenDoor : MonoBehaviour
     public void OnHitByLaserCorrect()
     {
         OpenDoorReceiver();
+
+        // play door open sound
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 }

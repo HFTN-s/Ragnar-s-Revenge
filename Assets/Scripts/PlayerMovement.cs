@@ -6,8 +6,8 @@ using UnityEngine.Audio;
 public class PlayerMovement : MonoBehaviour
 {
     private InputDevice Head;
-    private InputDevice leftHandController;
-    private InputDevice rightHandController;
+    public InputDevice leftHandController;
+    public InputDevice rightHandController;
     [SerializeField] private Camera camera;
 
     [SerializeField] private float speed = 2.0f;
