@@ -18,6 +18,10 @@ public class PuzzleController : MonoBehaviour
     private bool[] isHit; // Array to track if each gemstone is being hit
     private Coroutine[] fadeCoroutines; // Array to store active fade coroutines
     private Coroutine[] runeFadeCoroutines; // Array to store rune fade coroutines
+    public AudioSource doorAudioSource;
+    public AudioClip doorOpenSound;
+    public AudioSource cabinetAudioSource;
+    public AudioClip cabinetOpenSound;
 
     void Start()
     {

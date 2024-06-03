@@ -9,13 +9,20 @@ public class PuzzlePiece : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     private Rigidbody rb;
     private Collider[] colliders;
+    private AudioSource audioSource;
+    public AudioClip pickupSound;
+    public AudioClip placeSound;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>();
         colliders = GetComponents<Collider>();
         //Debug.Log($"PuzzlePiece {pieceID} initialized.");
+
+        // add listener to the on select enter event
+        grabInteractable.onSelectEnter.AddListener(OnSelectEnter);
     }
 
     public void PlacePiece(Transform slotTransform)
@@ -74,6 +81,7 @@ public class PuzzlePiece : MonoBehaviour
                 PlacePiece(other.transform);
                 FindObjectOfType<PuzzleController>().PiecePlaced();
                 //Debug.Log($"PuzzlePiece {pieceID} correctly placed in slot {slot.slotID}.");
+                audioSource.PlayOneShot(placeSound);
             }
             else if (slot != null && !IsPlaced && slot.slotID != pieceID)
             {
@@ -89,5 +97,11 @@ public class PuzzlePiece : MonoBehaviour
         yield return new WaitForSeconds(1f);
         grabInteractable.enabled = true;
         //Debug.Log($"PuzzlePiece {pieceID} interactable re-enabled.");
+    }
+
+
+    private void OnSelectEnter(XRBaseInteractor interactor)
+    {
+        audioSource.PlayOneShot(pickupSound);
     }
 }

@@ -12,6 +12,9 @@ public class LightBeam : MonoBehaviour
     public string targetObjectName;
     public UnityEvent OnHitByLaserCorrect;
     public HitEvent OnHitByLaserIncorrect; // Use custom event type
+    public AudioSource gemstoneSource;
+    public AudioClip gemstoneCorrect;
+    public AudioClip gemstoneIncorrect;
 
     void Start()
     {
@@ -59,10 +62,15 @@ public class LightBeam : MonoBehaviour
                     if (hit.collider.name == targetObjectName)
                     {
                         OnHitByLaserCorrect.Invoke();
+                        // Play correct gemstone sound
+                        PlayGemstoneSound();
                     }
                     else
                     {
                         OnHitByLaserIncorrect.Invoke(hit);
+                        // Play incorrect gemstone sound
+                        PlayGemstoneIncorrectSound();
+
                     }
                     break;
                 }
@@ -78,5 +86,23 @@ public class LightBeam : MonoBehaviour
                 break;
             }
         }
+    }
+
+    // Play correct gemstone sound
+    public void PlayGemstoneSound()
+    {
+        //Stop the sound if it is already playing
+        gemstoneSource.Stop();
+        gemstoneSource.clip = gemstoneCorrect;
+        gemstoneSource.Play();
+    }
+
+    // Play incorrect gemstone sound
+    public void PlayGemstoneIncorrectSound()
+    {
+        //Stop the sound if it is already playing
+        gemstoneSource.Stop();
+        gemstoneSource.clip = gemstoneIncorrect;
+        gemstoneSource.Play();
     }
 }

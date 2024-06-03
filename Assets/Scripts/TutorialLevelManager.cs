@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.XR;
+using TMPro;
+using UnityEngine.SceneManagement;
 public class TutorialLevelManager : MonoBehaviour
 {
     public GameObject fire;
@@ -27,7 +29,6 @@ public class TutorialLevelManager : MonoBehaviour
 
     public GameObject VikingStatue;
     public GameObject VikingGhostStatue;
-    public GameObject endOfLevelText;
 
     public float waitTime = 5.0f; // time to wait between events in seconds
 
@@ -43,7 +44,10 @@ public class TutorialLevelManager : MonoBehaviour
     public bool defeatedSkeleton;
     public bool unlockedDoor;
     public bool openedDoor;
-    private InputDevice rightHandController;
+    [SerializeField]public InputDevice leftHandController;
+    //TMP text component for displaying text
+    [SerializeField]private TextMeshPro text;
+    public GameObject endOfLevelText;
 
     private void Start()
     {
@@ -52,7 +56,7 @@ public class TutorialLevelManager : MonoBehaviour
         // set the puzzle check to true (Done in puzzle scripts)
 
         //Add listener to speech trigger for when an object enters the trigger
-
+    
         //set ghost to inactive
         VikingGhostStatue.SetActive(false);
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
@@ -201,27 +205,58 @@ public class TutorialLevelManager : MonoBehaviour
 
     void RoomCompleted()
     {
-        void RoomCompleted()
-{
-    if (!canLeaveLevel)
-    {
-        int timeTaken = timer.GetSeconds();
-        DataPersistenceManager.instance.SaveHighScore(timeTaken);
-        // What to do when Room is complete
-        IncrementProgress(1);
-        playerMovement.canMove = false;
-        //play jarl voice line 2 unless already playing then wait
-        PlayJarlVoiceLine(5);
-        if (jarlAudioSource.isPlaying)
+        if (!canLeaveLevel)
         {
-            StartCoroutine(WaitForJarlSpeech());
+            int timeTaken = timer.GetSeconds();
+            DataPersistenceManager.instance.SaveHighScore(timeTaken);
+            
+            // Set time taken text to display time taken in a time format minutes:seconds
+            text.text = $"{timeTaken / 60:D2}:{timeTaken % 60:D2}";
+            
+            // What to do when Room is complete
+            IncrementProgress(1);
+            playerMovement.canMove = false;
+
+            // Play Jarl voice line unless already playing then wait
+            PlayJarlVoiceLine(5);
+            if (jarlAudioSource.isPlaying)
+            {
+                StartCoroutine(WaitForJarlSpeech());
+            }
+
+            // After Jarl speech, make end of level text object active
+            endOfLevelText.SetActive(true);
+
+            // Wait until player moves left stick
+            StartCoroutine(WaitForPlayerInput());
         }
-        //Display end of level text
-        endOfLevelText.SetActive(true);
-        canLeaveLevel = true;
     }
-}
+
+    private IEnumerator WaitForPlayerInput()
+    {
+        // Wait until player moves left stick
+        while (true)
+        {
+            if (playerMovement.leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
+            {
+                if (primary2DAxisValue.y > 0.5)
+                {
+                    // Load next scene in index using SceneManager
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    yield break;
+                }
+                else if (primary2DAxisValue.y < -0.5)
+                {
+                    // Load previous scene in index using SceneManager
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+                    yield break;
+                }
+            }
+            yield return null;
+        }
     }
+
+    
 
     private void IncrementProgress(int puzzlesCompleted)
     {
@@ -236,7 +271,7 @@ public class TutorialLevelManager : MonoBehaviour
         else
         {
             if (DataPersistenceManager.instance.GameData.playerProgress < puzzlesCompleted)
-            // if player has completed more puzzles than the current progress , save progress
+            // if player has completed more puzzles(levels) than the current progress , save progress
             {
                 DataPersistenceManager.instance.GameData.playerProgress++;
                 DataPersistenceManager.instance.SaveGame();
