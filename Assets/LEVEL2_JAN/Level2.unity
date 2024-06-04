@@ -382,19 +382,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: NaN
+      value: 1.421e-41
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 2.2369308
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3.15e-43
+      value: 7.44e-43
       objectReference: {fileID: 0}
     - target: {fileID: 19847294, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -1057,7 +1057,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.0854582e-30, y: 0, z: 0, w: 2.62e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1163,7 +1163,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.8e-44, y: 0, z: 1.4428e-41, w: 1.6114865e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1624,7 +1624,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.3563156e-19, y: 9.596085e+11, z: 6.9767185e+22,
+    w: 2.0373752e+34}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1831,7 +1832,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 2.929866e+32, y: 1.5788036e-19, z: 0.000000053643102,
+    w: 0.0000006608052}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2400,7 +2402,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 8.528301e-33, y: 1.3563156e-19, z: 1.533308e+13, w: 4.2303094e+21}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4222,7 +4224,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: NaN, y: 0, z: 7.55e-43, w: 1.3e-44}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5282,7 +5284,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 2.4e-43, y: NaN, z: 0, w: 1.799e-42}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5488,7 +5490,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 223.42578, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5955,7 +5957,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 1.0463e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -6103,11 +6105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 6.3250305e+28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.44e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
@@ -6344,6 +6346,105 @@ MonoBehaviour:
   Tricircle_Glow: {fileID: 1211010076}
   level3Manager: {fileID: 745883301}
   activateBifrost: {fileID: 264080040}
+  receptacleAudioSource: {fileID: 834708910}
+  receptacleAudioClip: {fileID: 8300000, guid: 6bfffb4dbe944c749be75374a17fc2b6, type: 3}
+--- !u!82 &834708910
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834708907}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -77843099560097061, guid: 44babafee013c2b4491918af1ee76b55,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &834708912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb7e5ea863a024e438d4097cf8d8ad0d,
@@ -7121,7 +7222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 2.73e-43
+      value: 2.6420265e+10
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -7129,11 +7230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -8.2087403e-16
+      value: 2.3510647e-38
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 7.44e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19847294, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -7232,19 +7333,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0.000000045056087
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 9.1835e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.8187149
+      value: 2.3510647e-38
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: -0.29561284
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19823046, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -7458,7 +7559,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.2203e-41, y: 6e-44, z: 0, w: 3e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -7681,7 +7782,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.2203e-41, y: 1.02e-43, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -7892,7 +7993,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.106
+  m_Volume: 0.254
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8064,7 +8165,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1e-44, y: 1.1754945e-38, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -8329,7 +8430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1
+      value: -4.9568504e-15
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -8337,11 +8438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 9.184e-41
+      value: 5.083e-42
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0.002631579
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 19847294, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -9099,7 +9200,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: -3.59e-43, y: 0, z: 0, w: 9.404242e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -10454,6 +10555,109 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   pushForce: 1000
+--- !u!1 &1528371681 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 054c7791fdd75e843acee351547ac43d,
+    type: 3}
+  m_PrefabInstance: {fileID: 400861641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1528371682
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528371681}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -77843099560097061, guid: 44babafee013c2b4491918af1ee76b55,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1535032225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1791790065563418, guid: d7e0e3051694820429ee013f39c0fb2d,
@@ -11675,7 +11879,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.44e-43, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -11781,7 +11985,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -11873,7 +12077,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 1.6038e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -12068,7 +12272,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.671431e-38, y: 1.6622481e-38, z: 1.6806154e-38,
+    w: 1.6897986e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -12432,7 +12637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -12440,11 +12645,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 2.535e-42
+      value: 2.3510647e-38
       objectReference: {fileID: 0}
     - target: {fileID: 10897730, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19847294, guid: f632ee341faffa64ebfa4e2c74d6e422, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -12914,7 +13119,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.6777087e-38, y: 7.7144406e-38, z: 7.677709e-38,
+    w: 7.751178e-38}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -13266,7 +13472,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 3.2915496e-37, y: 3.3503244e-37, z: 3.3356305e-37,
+    w: 3.3209377e-37}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -14199,7 +14406,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -14278,6 +14485,12 @@ MonoBehaviour:
   level3Manager: {fileID: 745883301}
   activateBifrost: {fileID: 264080040}
   axeCheck: {fileID: 1955849510}
+  treeAudioSource: {fileID: 1528371682}
+  axeOnceClip: {fileID: 8300000, guid: a53d5a9e7cf52d2459e5405e99bfb4e4, type: 3}
+  axeTwiceClip: {fileID: 8300000, guid: d7def3d2adfab214e85e91bd90a878bb, type: 3}
+  axeDoneClip: {fileID: 8300000, guid: a487c1b94c55e1a44b8ebffaf6837806, type: 3}
+  axeFailClip: {fileID: 8300000, guid: cb446d1b6a9c84447b9f0d462e9f60d6, type: 3}
+  axeDullClip: {fileID: 8300000, guid: da3c10350dcba22499f5247d9a6470aa, type: 3}
 --- !u!1001 &2032716165
 PrefabInstance:
   m_ObjectHideFlags: 0

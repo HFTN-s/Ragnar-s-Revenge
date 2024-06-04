@@ -7,6 +7,12 @@ public class TreeCollider : MonoBehaviour
     public Level3Manager level3Manager;
     public ActivateBifrost activateBifrost;
     public AxeCheck axeCheck;
+    public AudioSource treeAudioSource;
+    public AudioClip axeOnceClip;
+    public AudioClip axeTwiceClip;
+    public AudioClip axeDoneClip;
+    public AudioClip axeFailClip;
+    public AudioClip axeDullClip;
 
 
     // Function to call when the puzzle is finished
@@ -74,6 +80,35 @@ public class TreeCollider : MonoBehaviour
             Debug.Log("You need the right axe...");
             // Play Jarl Audio Clip
             StartCoroutine(level3Manager.WaitForJarlAudioClip(2));
+        }
+    }
+
+    // play axe noise if one is playing then stop it and play the new one corresponding to the sharpness
+    public void PlayAxeNoise()
+    {
+        if (treeAudioSource.isPlaying)
+        {
+            treeAudioSource.Stop();
+        }
+        if (axeCheck.sharp == 1)
+        {
+            treeAudioSource.PlayOneShot(axeOnceClip);
+        }
+        else if (axeCheck.sharp == 2)
+        {
+            treeAudioSource.PlayOneShot(axeTwiceClip);
+        }
+        else if (axeCheck.sharp == 3)
+        {
+            treeAudioSource.PlayOneShot(axeDoneClip);
+        }
+        else if (axeCheck.sharp == 0)
+        {
+            treeAudioSource.PlayOneShot(axeDullClip);
+        }
+        else
+        {
+            treeAudioSource.PlayOneShot(axeFailClip);
         }
     }
 }

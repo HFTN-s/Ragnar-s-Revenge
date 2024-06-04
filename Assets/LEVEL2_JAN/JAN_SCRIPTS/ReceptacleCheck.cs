@@ -8,6 +8,8 @@ public class ReceptacleCheck : MonoBehaviour
     public GameObject Tricircle_Glow;
     public Level3Manager level3Manager;
     public ActivateBifrost activateBifrost;
+    public AudioSource receptacleAudioSource;
+    public AudioClip receptacleAudioClip;
 
     private int tries = 0;
 
@@ -46,6 +48,9 @@ public class ReceptacleCheck : MonoBehaviour
             {
                 xRGrabInteractable.enabled = false;
             }
+
+            // Play the audio clip
+            receptacleAudioSource.PlayOneShot(receptacleAudioClip);
 
             // Call the PuzzleFinished function
             PuzzleFinished();
