@@ -2171,7 +2171,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh674296
+  m_Name: pb_Mesh751702
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14189,7 +14189,7 @@ MonoBehaviour:
   - {fileID: 159049659}
   - {fileID: 375687984}
   ragnarSpeech:
-  - {fileID: 8300000, guid: 6d21dea240c0e2e489da745cd52a9f91, type: 3}
+  - {fileID: 8300000, guid: 56ed424cdde6a494aa4226738c45a474, type: 3}
   ragnarAudioSource: {fileID: 678729582}
   ragnarSpeechObject: {fileID: 1429783990}
   puzzle1Check: 0
@@ -14208,27 +14208,27 @@ MonoBehaviour:
   VikingStatue: {fileID: 919132147748604422}
   VikingGhostStatue: {fileID: 919132149313524802}
   waitTime: 5
-  jarlSpeech: {fileID: 8300000, guid: 340948d46bb46a142a45250ab473efc1, type: 3}
+  jarlSpeech: {fileID: 8300000, guid: 320196ef85bc30042964f3dfa54298f3, type: 3}
   jarlVoiceLines:
-  - {fileID: 8300000, guid: 34c431300e0c22d40b7232c206c5118b, type: 3}
-  - {fileID: 8300000, guid: 94b8f80620b9b234ca86533f749b1d7b, type: 3}
-  - {fileID: 8300000, guid: 9b86caed7fe14f34ea30de4ea0c66087, type: 3}
-  - {fileID: 8300000, guid: 9cbb70cabf6bb49449e9325427ae91c0, type: 3}
-  - {fileID: 8300000, guid: 7be5ed4f7f840a140aad7eed2e4eccee, type: 3}
-  - {fileID: 8300000, guid: 16b5c9da5f0a5e046bbb3ee625ca735b, type: 3}
-  - {fileID: 8300000, guid: 903bebf199c32ba479bba5440bf4332e, type: 3}
+  - {fileID: 8300000, guid: 7bd55714bdbb67247aed16d2c59cf7dd, type: 3}
+  - {fileID: 8300000, guid: e9a420b28ec2c5d46b3986727bc06433, type: 3}
+  - {fileID: 8300000, guid: 49aeb67bf78ae6e42b3714b467088b8c, type: 3}
+  - {fileID: 8300000, guid: e0c590d3d074f7041b0c0e61fc51c7b6, type: 3}
+  - {fileID: 8300000, guid: b121c482756a0384783c09fa91ca91d0, type: 3}
+  - {fileID: 8300000, guid: 11a411c3a5d8f13489352333274c0d92, type: 3}
+  - {fileID: 8300000, guid: c21b313f5d048284399aed5bcf852ec8, type: 3}
   - {fileID: 8300000, guid: f3932ad0aec665941b9a4d953ccd489c, type: 3}
-  - {fileID: 8300000, guid: b7bcb73ea631f30458ae1040ccc7aee7, type: 3}
-  - {fileID: 8300000, guid: d8a37ace9082c4a498b0fb5cde3ba415, type: 3}
-  - {fileID: 8300000, guid: c0b1d716352506249bba47516c623f8a, type: 3}
-  - {fileID: 8300000, guid: 07b12bef11fbf91438338f6da2006812, type: 3}
-  - {fileID: 8300000, guid: 5cc27d50c81bbc74d9684981d7e6f8bf, type: 3}
-  - {fileID: 8300000, guid: 2b77a719650f5004c90cec9705173779, type: 3}
+  - {fileID: 8300000, guid: 43aadcc142a1c1344af182b14032abb1, type: 3}
+  - {fileID: 8300000, guid: 48153e1f636c81144a7e224afa818f95, type: 3}
+  - {fileID: 8300000, guid: d90b696ecb6466f4f8d4d306378f9d3e, type: 3}
+  - {fileID: 8300000, guid: c040373571fe1a943adeaa54387a84a3, type: 3}
+  - {fileID: 8300000, guid: a5dceb8c7086ccc46938f8f8386b9bf3, type: 3}
+  - {fileID: 8300000, guid: 8e8722b0528bd8a42ab490a75d8d0328, type: 3}
   - {fileID: 8300000, guid: 66428f6f4948bbc48a95e224841d291c, type: 3}
-  - {fileID: 8300000, guid: 54b679ec15cf5de47a905f4d0a706c60, type: 3}
-  - {fileID: 8300000, guid: de37160a19355424aa7d0cf6be4f465c, type: 3}
+  - {fileID: 8300000, guid: 068e452dcde049c4f8cfbe1cdc5ce864, type: 3}
+  - {fileID: 8300000, guid: 4bab4b7b379dad9449f993895bb13692, type: 3}
   - {fileID: 8300000, guid: d3756de0bfadcf940990d5a89b0cdf6a, type: 3}
-  - {fileID: 8300000, guid: 177ab78f947b09148b215cc2aa8048e0, type: 3}
+  - {fileID: 8300000, guid: 76650d1a16a4216459ab715bc0572a82, type: 3}
   jarlAudioSource: {fileID: 626674945}
   musicAudioSource: {fileID: 1463626698}
   playerMovement: {fileID: 0}
