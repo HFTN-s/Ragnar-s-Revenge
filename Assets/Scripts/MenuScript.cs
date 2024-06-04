@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
+
 
 public class MenuScript : MonoBehaviour
 {
@@ -30,9 +32,16 @@ public class MenuScript : MonoBehaviour
     private PlayerMovement playerMovement;
     private int playerProgress;
     [SerializeField] private GameObject player;
+    public GameObject fadeToBlackobject;
+    public LineRenderer[] lineRenderers;
+    public VideoPlayer videoPlayer;
+    public VideoClip startClip;
     // Start is called before the first frame update
     void Start()
     {
+        videoPlayer = fadeToBlackobject.GetComponent<VideoPlayer>();
+        // find fade2BlackObject and set to inactive
+        fadeToBlackobject.SetActive(false);
         // Find all GameObjects for Menu
         button1 = GameObject.Find("Button1");
         button2 = GameObject.Find("Button2");
@@ -102,6 +111,41 @@ public class MenuScript : MonoBehaviour
         text.color = colour;
     }
 
+    private IEnumerator PlayVideo()
+    {
+        Debug.Log("PlayVideo coroutine started");
+
+        // Ensure the video clip is assigned
+        if (startClip == null)
+        {
+            Debug.LogError("No video clip assigned to startClip");
+            yield break;
+        }
+
+        // Set the video clip
+        videoPlayer.clip = startClip;
+        Debug.Log("Video clip set: " + startClip.name);
+
+        // Prepare and play the video
+        videoPlayer.Play();
+        Debug.Log("Video is playing");
+
+        // Wait for 5 seconds
+        yield return new WaitForSeconds(5);
+        Debug.Log("Waited for 5 seconds");
+
+        // Stop the video player
+        videoPlayer.Stop();
+        Debug.Log("Video player stopped");
+    }
+
+
+
+
+
+
+
+
     public void OnActivated(ActivateEventArgs args)
     {
         {
@@ -112,9 +156,38 @@ public class MenuScript : MonoBehaviour
             switch (buttonPressed)
             {
                 case "New Game":
-                    Debug.Log("New Game");
-                    playerMovement.canMove = true;
+                    Debug.Log("New Game button pressed");
+                    if (fadeToBlackobject != null)
+                    {
+                        fadeToBlackobject.SetActive(true);
+                        Debug.Log("fadeToBlackobject activated");
+                    }
+                    else
+                    {
+                        Debug.LogError("fadeToBlackobject is null");
+                    }
+
+                    // Disable line renderers
+                    foreach (LineRenderer lineRenderer in lineRenderers)
+                    {
+                        Debug.Log("Line Renderers Disabled");
+                        lineRenderer.enabled = false;
+                    }
+
+                    // Start playing the video
+                    Debug.Log("Starting PlayVideo coroutine");
+                    StartCoroutine(PlayVideo());
+                    // wait 5 seconds
+                    Invoke("DelayedAction", 5);
+
+                    // Deactivate the fade to black object
+                    // Deactivate the menu
                     menu.SetActive(false);
+                    Debug.Log("Menu deactivated");
+
+                    // Enable player movement
+                    playerMovement.canMove = true;
+                    Debug.Log("Player movement enabled");
                     break;
 
                 case "Load Level":
@@ -205,7 +278,7 @@ public class MenuScript : MonoBehaviour
                         highScoresButton.GetComponent<TextMeshProUGUI>().color = Color.grey;
                         highScoresButton.GetComponent<BoxCollider>().enabled = false;
                     }
-                    
+
                     break;
 
                 case "Tutorial":
@@ -252,17 +325,6 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
-                case "Credits":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Can be found in a readme file in the games folder";
-                    button2.GetComponent<TextMeshProUGUI>().text = "";
-                    button3.GetComponent<TextMeshProUGUI>().text = "";
-                    button4.GetComponent<TextMeshProUGUI>().text = "";
-                    button1.GetComponent<BoxCollider>().enabled = false;
-                    button2.GetComponent<BoxCollider>().enabled = false;
-                    button3.GetComponent<BoxCollider>().enabled = false;
-                    button4.GetComponent<BoxCollider>().enabled = false;
-                    break;
-
                 case "How to Play":
                     button1.GetComponent<TextMeshProUGUI>().text = "Use the left stick to move";
                     button2.GetComponent<TextMeshProUGUI>().text = "Use the right stick to look around";
@@ -279,5 +341,11 @@ public class MenuScript : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void DelayedAction()
+    {
+                fadeToBlackobject.SetActive(false);
+                 Debug.Log("fadeToBlackobject deactivated");
     }
 }

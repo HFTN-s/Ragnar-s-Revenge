@@ -22,7 +22,7 @@ public class PuzzlePiece : MonoBehaviour
         //Debug.Log($"PuzzlePiece {pieceID} initialized.");
 
         // add listener to the on select enter event
-        grabInteractable.onSelectEnter.AddListener(OnSelectEnter);
+        grabInteractable.onSelectEntered.AddListener(OnSelectEnter);
     }
 
     public void PlacePiece(Transform slotTransform)

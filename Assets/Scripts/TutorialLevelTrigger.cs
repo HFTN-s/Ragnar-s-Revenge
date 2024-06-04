@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
-using UnityEngine.Events;
 using UnityEngine.Video;
+
 public class TutorialLevelTrigger : MonoBehaviour
 {
     private AudioSource audioSource;
@@ -12,41 +11,40 @@ public class TutorialLevelTrigger : MonoBehaviour
     public AudioSource mainMenuMusic;
     public PlayerMovement playerMovement;
     private VideoPlayer videoPlayer;
+    public VideoClip endClip;
 
     private void Start()
     {
         playerMovement = GameObject.Find("MainMenuPlayer").GetComponent<PlayerMovement>();
-        //fadeToBlackobject.SetActive(false);
         audioSource = GetComponent<AudioSource>();
-        // video player is a child of fadeToBlackobject
         videoPlayer = fadeToBlackobject.GetComponentInChildren<VideoPlayer>();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Triggered");
-        //disable trigger collider
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
+            fadeToBlackobject.SetActive(true);  
             mainMenuMusic.Stop();
-            audioSource.Play();
-            fadeToBlackobject.SetActive(true);
             playerMovement.canMove = false;
 
             // when video is done playing
             StartCoroutine(PlayVideo());
-            // fade to black
         }
     }
 
-    IEnumerator PlayVideo()
+    private IEnumerator PlayVideo()
     {
+        videoPlayer.clip = endClip;
         videoPlayer.Play();
+        yield return new WaitUntil(() => videoPlayer.isPrepared);
         yield return new WaitForSeconds((float)videoPlayer.length);
-
+        videoPlayer.Stop();
+        DelayedAction();
     }
 
-    void DelayedAction()
+    private void DelayedAction()
     {
         audioSource.Stop();
         SceneManager.LoadScene("TutorialLevel");
