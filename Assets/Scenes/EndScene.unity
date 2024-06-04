@@ -38,19 +38,19 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 774582912}
-  m_IndirectSpecularColor: {r: 0.45647487, g: 0.57960385, b: 0.5685913, a: 1}
+  m_IndirectSpecularColor: {r: 0.45716318, g: 0.5802883, b: 0.56894004, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
-    m_EnvironmentLightingMode: 0
+    m_EnvironmentLightingMode: 1
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
@@ -10220,7 +10220,6 @@ MonoBehaviour:
   videoPlayer: {fileID: 808101131}
   TreasureChest: {fileID: 1706535809153776144}
   playerMovement: {fileID: 504981567}
-  mainCamera: {fileID: 808101130}
 --- !u!1001 &1832709918
 PrefabInstance:
   m_ObjectHideFlags: 0

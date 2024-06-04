@@ -13,11 +13,11 @@ public class EndOfLevel : MonoBehaviour
     public Timer timer;
     public bool roomComplete = false;
     public bool canLeaveLevel = false;
-    
+
     public AudioClip jarlSpeech;
     public AudioClip[] jarlVoiceLines;
     public AudioSource jarlAudioSource;
-    [SerializeField]private TextMeshPro text;
+    [SerializeField] private TextMeshPro text;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -31,8 +31,8 @@ public class EndOfLevel : MonoBehaviour
             //wait 2 seconds
             StartCoroutine(WaitTwoSeconds());
             //wait for player input
-            StartCoroutine(WaitForPlayerInput());        
-            }
+            StartCoroutine(WaitForPlayerInput());
+        }
     }
 
     //wait 3 seconds
@@ -41,60 +41,59 @@ public class EndOfLevel : MonoBehaviour
         yield return new WaitForSeconds(2);
     }
 
-    private IEnumerator WaitForPlayerInput()
-    {
-        // Wait until player moves left stick
-        while (true)
-        {
-            if (playerMovement.leftHandController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue))
-            {
-                if (primary2DAxisValue.y > 0.5)
-                {
-                    // Load next scene in index using SceneManager
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                    yield break;
-                }
-                else if (primary2DAxisValue.y < -0.5)
-                {
-                    // Load previous scene in index using SceneManager 
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-                    yield break;
-                }
-            }
-            yield return null;
-        }
-    }
-
     void RoomCompleted()
     {
         if (!canLeaveLevel)
         {
             int timeTaken = timer.GetSeconds();
             DataPersistenceManager.instance.SaveHighScore(timeTaken);
-            
-            // Set time taken text to display time taken in a time format minutes:seconds
+
             text.text = $"{timeTaken / 60:D2}:{timeTaken % 60:D2}";
-            
-            // What to do when Room is complete
             IncrementProgress(2);
             playerMovement.canMove = false;
-
-            // Play Jarl voice line unless already playing then wait
-            PlayJarlVoiceLine(5);
+            endOfLevelText.SetActive(true);
+            Debug.Log("Playing End Jarl Voice Line");
             if (jarlAudioSource.isPlaying)
             {
                 StartCoroutine(WaitForJarlSpeech());
             }
+            else
+            {
+                jarlAudioSource.clip = jarlVoiceLines[5];
+                jarlAudioSource.Play();
 
-            // After Jarl speech, make end of level text object active
-            endOfLevelText.SetActive(true);
-
-            // Wait until player moves left stick
+            }
+            Debug.Log("End Jarl Voice Line Played");
             StartCoroutine(WaitForPlayerInput());
         }
     }
 
-    
+
+    private IEnumerator WaitForPlayerInput()
+    {
+        // Wait until player presses primary or secondary button
+        while (true)
+        {
+            bool primaryButtonPressed = false;
+            bool secondaryButtonPressed = false;
+
+            if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonPressed) && primaryButtonPressed)
+            {
+                // Load next scene in index using SceneManager if A pressed
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                yield break;
+            }
+            else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
+            {
+                // Load previous scene in index using SceneManager if B pressed
+                SceneManager.LoadScene(0);
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+
 
     private void IncrementProgress(int puzzlesCompleted)
     {
