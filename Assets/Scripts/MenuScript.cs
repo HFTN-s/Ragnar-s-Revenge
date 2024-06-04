@@ -219,10 +219,10 @@ public class MenuScript : MonoBehaviour
 
                 case "High\nScores":
                     button2.GetComponent<BoxCollider>().enabled = true;
-                    button1.GetComponent<TextMeshProUGUI>().text = "Tutorial";
-                    button2.GetComponent<TextMeshProUGUI>().text = "Level 1";
-                    button3.GetComponent<TextMeshProUGUI>().text = "Level 2";
-                    button4.GetComponent<TextMeshProUGUI>().text = "Level 3";
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 1";
+                    button2.GetComponent<TextMeshProUGUI>().text = "Level 2";
+                    button3.GetComponent<TextMeshProUGUI>().text = "Level 3";
+                    button4.GetComponent<TextMeshProUGUI>().text = "Coming Soon";
                     masterSlider.SetActive(false);
                     musicSlider.SetActive(false);
                     speechSlider.SetActive(false);
@@ -281,8 +281,8 @@ public class MenuScript : MonoBehaviour
 
                     break;
 
-                case "Tutorial":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Tutorial Top 3 Times:";
+                case "Level 1":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 1 Top 3 Times:";
                     button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level1Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score1Seconds.ToString("D2");
                     button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level1Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score2Seconds.ToString("D2");
                     button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level1Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level1Score3Seconds.ToString("D2");
@@ -292,8 +292,8 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
-                case "Level 1":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Level 1 Top 3 Times:";
+                case "Level 2":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 2 Top 3 Times:";
                     button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level2Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score1Seconds.ToString("D2");
                     button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level2Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score2Seconds.ToString("D2");
                     button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level2Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level2Score3Seconds.ToString("D2");
@@ -303,22 +303,11 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
-                case "Level 2":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Level 2 Top 3 Times:";
+                case "Level 3":
+                    button1.GetComponent<TextMeshProUGUI>().text = "Level 3 Top 3 Times:";
                     button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level3Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score1Seconds.ToString("D2");
                     button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level3Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score2Seconds.ToString("D2");
                     button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level3Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level3Score3Seconds.ToString("D2");
-                    button1.GetComponent<BoxCollider>().enabled = false;
-                    button2.GetComponent<BoxCollider>().enabled = false;
-                    button3.GetComponent<BoxCollider>().enabled = false;
-                    button4.GetComponent<BoxCollider>().enabled = false;
-                    break;
-
-                case "Level 3":
-                    button1.GetComponent<TextMeshProUGUI>().text = "Level 3 Top 3 Times:";
-                    button2.GetComponent<TextMeshProUGUI>().text = "1. " + DataPersistenceManager.instance.GameData.level4Score1Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score1Seconds.ToString("D2");
-                    button3.GetComponent<TextMeshProUGUI>().text = "2. " + DataPersistenceManager.instance.GameData.level4Score2Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score2Seconds.ToString("D2");
-                    button4.GetComponent<TextMeshProUGUI>().text = "3. " + DataPersistenceManager.instance.GameData.level4Score3Minutes.ToString("D2") + ":" + DataPersistenceManager.instance.GameData.level4Score3Seconds.ToString("D2");
                     button1.GetComponent<BoxCollider>().enabled = false;
                     button2.GetComponent<BoxCollider>().enabled = false;
                     button3.GetComponent<BoxCollider>().enabled = false;

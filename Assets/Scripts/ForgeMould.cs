@@ -19,6 +19,8 @@ public class ForgeMould : MonoBehaviour
     private bool outOfMetalPlayed = false;
     private AudioClip noMouldAudio;
     private bool noMouldPlayed = false;
+    public AudioSource moltenAudioSource;
+    public AudioClip moltenAudio;
 
 
     void Start()
@@ -45,6 +47,8 @@ public class ForgeMould : MonoBehaviour
                 if (currentMould != null)
                 {
                     moltenMetal.Play();
+                    moltenAudioSource.clip = moltenAudio;
+                    moltenAudioSource.Play();
                     forgeFuelScript.fuelAmount -= 1;
                     Debug.Log("Forge started. Fuel reduced, new fuel amount: " + forgeFuelScript.fuelAmount);
                     mouldObject = currentMould.transform.GetChild(0).gameObject;
@@ -75,6 +79,7 @@ public class ForgeMould : MonoBehaviour
         if (forgeRunning)
         {
             moltenMetal.Stop();
+            moltenAudioSource.Stop();
             StopCoroutine(IncreaseScale());
             forgeRunning = false;
             Debug.Log("Forge stopped.");
@@ -107,6 +112,7 @@ public class ForgeMould : MonoBehaviour
 
         // Stop the particle effect after scaling is complete
         moltenMetal.Stop();
+        moltenAudioSource.Stop();
 
         // Decrement the fuel
         forgeFuelScript.fuelAmount -= 1;

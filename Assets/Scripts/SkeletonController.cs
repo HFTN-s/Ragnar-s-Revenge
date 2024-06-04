@@ -9,11 +9,17 @@ public class SkeletonController : MonoBehaviour
     private Animator animator;
     public BoxCollider headCollider;
     private TutorialLevelManager levelManager;
+    public AudioSource skeletonAudioSource;
+    public AudioClip skeletonDeathClip;
+    public AudioClip skeletonShuffleClip;
+    public AudioClip skeletonGroanClip;
+    public AudioClip skeletonHitClip;
     // Start is called before the first frame update
     void Start()
     {
         levelManager = GameObject.Find("TutorialLevelManager").GetComponent<TutorialLevelManager>();
         animator = GetComponent<Animator>();
+        skeletonAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +33,9 @@ public class SkeletonController : MonoBehaviour
 
     public void ActivateSkeleton()
     {
+        // play groan clip one shot
+        skeletonAudioSource.clip = skeletonGroanClip;
+        skeletonAudioSource.PlayOneShot(skeletonGroanClip);
         headCollider.enabled = true;
         animator.SetBool("crawling", true);
         animator.SetBool("sleeping", false);
@@ -39,6 +48,11 @@ public class SkeletonController : MonoBehaviour
 
     void FollowTarget()
     {
+        skeletonAudioSource.clip = skeletonShuffleClip;
+        if (!skeletonAudioSource.isPlaying)
+        {
+            skeletonAudioSource.Play();
+        }
         // Calculate the direction towards the target
         Vector3 direction = (target.position - transform.position).normalized;
 
@@ -58,6 +72,9 @@ public class SkeletonController : MonoBehaviour
         animator.SetBool("sleeping", true);
         //disable animator
         animator.enabled = false;
+        // play collapse sound
+        skeletonAudioSource.clip = skeletonDeathClip;
+        skeletonAudioSource.Play();
         //freeze rigidbody
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         // play jarl voice line 16

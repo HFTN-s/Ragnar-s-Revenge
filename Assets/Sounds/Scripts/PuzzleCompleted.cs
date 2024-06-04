@@ -14,6 +14,15 @@ public class PuzzleCompleted : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component not found on this object.");
+        }
+
+        if (tutorialManager == null)
+        {
+            Debug.LogError("TutorialLevelManager not assigned in the inspector.");
+        }
     }
 
     // Update is called once per frame
@@ -34,6 +43,10 @@ public class PuzzleCompleted : MonoBehaviour
         {
             audioSource.Play();
             hasPlayedPuzzle3Sound = true;
+        }
+        else if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 }
