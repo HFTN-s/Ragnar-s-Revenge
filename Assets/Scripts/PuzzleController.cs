@@ -22,6 +22,13 @@ public class PuzzleController : MonoBehaviour
     public AudioClip doorOpenSound;
     public AudioSource cabinetAudioSource;
     public AudioClip cabinetOpenSound;
+    public AudioSource vikingHornAudioSource;
+    public AudioSource runeAudioSource;
+    public AudioClip runeCorrectSound;
+    public AudioClip runeIncorrectSound;
+    public AudioSource gemstoneAudioSource;
+    public AudioClip gemstoneCorrectSound;
+    public AudioClip gemstoneIncorrectSound;
 
     void Start()
     {
@@ -73,6 +80,7 @@ public class PuzzleController : MonoBehaviour
     {
         Debug.Log("Puzzle completed! Activating rune, and waiting for correct order of runes pressed.");
         rune[1].SetActive(true);
+        vikingHornAudioSource.Play();
     }
 
     public void RunePressed(int runeID)
@@ -83,12 +91,14 @@ public class PuzzleController : MonoBehaviour
 
     if (correctOrder[currentOrderIndex] == runeID)
     {
+        runeAudioSource.PlayOneShot(runeCorrectSound);
         Debug.Log($"Correct rune pressed: {runeID}");
         SetRuneGlow(runeID, Color.green);
         currentOrderIndex++;
 
         if (currentOrderIndex == correctOrder.Length)
         {
+            cabinetAudioSource.PlayOneShot(cabinetOpenSound);
             Debug.Log("Correct order entered. Opening closet.");
             StartCoroutine(MoveDoors(leftClosetDoor, rightClosetDoor, 3.4f, -3.5f, 2f));
             DisableAllRuneColliders();
@@ -96,6 +106,7 @@ public class PuzzleController : MonoBehaviour
     }
     else
     {
+        runeAudioSource.PlayOneShot(runeIncorrectSound);
         Debug.Log($"Incorrect rune pressed: {runeID}. Resetting sequence.");
         GlowAllRunes(Color.red);
         ResetAllRunes();
@@ -194,6 +205,7 @@ private void EnableAllRuneColliders()
         {
             if (gemstones[i] != null)
             {
+                gemstoneAudioSource.PlayOneShot(gemstoneCorrectSound);
                 SetGlow(gemstones[i], true);
                 isHit[i] = true;
                 if (fadeCoroutines[i] != null)
@@ -206,6 +218,7 @@ private void EnableAllRuneColliders()
                 {
                     collider.enabled = false;
                 }
+                doorAudioSource.PlayOneShot(doorOpenSound);
             }
         }
     }
@@ -217,6 +230,7 @@ private void EnableAllRuneColliders()
 
         if (renderer != null)
         {
+            gemstoneAudioSource.PlayOneShot(gemstoneIncorrectSound);
             int index = System.Array.IndexOf(gemstones, hitObject);
             isHit[index] = false;
             if (fadeCoroutines[index] != null)

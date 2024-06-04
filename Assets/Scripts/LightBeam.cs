@@ -12,9 +12,7 @@ public class LightBeam : MonoBehaviour
     public string targetObjectName;
     public UnityEvent OnHitByLaserCorrect;
     public HitEvent OnHitByLaserIncorrect; // Use custom event type
-    public AudioSource gemstoneSource;
-    public AudioClip gemstoneCorrect;
-    public AudioClip gemstoneIncorrect;
+    public AudioSource shieldHitSound;
 
     void Start()
     {
@@ -51,58 +49,42 @@ public class LightBeam : MonoBehaviour
                     currentStartPoint = hit.point + currentDirection * 0.01f;
                     currentDirection = Vector3.Reflect(currentDirection, hit.normal);
                     reflectionsRemaining--;
+                    shieldHitSound.Play();
                 }
                 else if (hit.collider.CompareTag("Boundaries"))
                 {
+                    shieldHitSound.Stop();
                     break;
                 }
                 else if (hit.collider.CompareTag("Gemstone"))
                 {
+                    shieldHitSound.Stop();
                     Debug.Log("Hit: " + hit.collider.name);
                     if (hit.collider.name == targetObjectName)
                     {
                         OnHitByLaserCorrect.Invoke();
                         // Play correct gemstone sound
-                        PlayGemstoneSound();
                     }
                     else
                     {
                         OnHitByLaserIncorrect.Invoke(hit);
-                        // Play incorrect gemstone sound
-                        PlayGemstoneIncorrectSound();
-
+                        // Play incorrect gemstone soun
                     }
                     break;
                 }
                 else
                 {
+                    shieldHitSound.Stop();
                     break;
                 }
             }
             else
             {
+                shieldHitSound.Stop();
                 lineRenderer.positionCount++;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.GetPoint(maxStepDistance));
                 break;
             }
         }
-    }
-
-    // Play correct gemstone sound
-    public void PlayGemstoneSound()
-    {
-        //Stop the sound if it is already playing
-        gemstoneSource.Stop();
-        gemstoneSource.clip = gemstoneCorrect;
-        gemstoneSource.Play();
-    }
-
-    // Play incorrect gemstone sound
-    public void PlayGemstoneIncorrectSound()
-    {
-        //Stop the sound if it is already playing
-        gemstoneSource.Stop();
-        gemstoneSource.clip = gemstoneIncorrect;
-        gemstoneSource.Play();
     }
 }
