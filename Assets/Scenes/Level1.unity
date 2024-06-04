@@ -2605,7 +2605,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -77843099560097061, guid: 44babafee013c2b4491918af1ee76b55,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -7440,6 +7440,11 @@ PrefabInstance:
       objectReference: {fileID: 407386464}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
+      propertyPath: shieldHitSound
+      value: 
+      objectReference: {fileID: 883532427}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
       propertyPath: gemstoneCorrect
       value: 
       objectReference: {fileID: 8300000, guid: 10c4de0cf154c134eb0bcb19e6e3e819, type: 3}
@@ -10595,9 +10600,11 @@ MonoBehaviour:
   runeAudioSource: {fileID: 1400840236}
   runeCorrectSound: {fileID: 8300000, guid: e3922de2be42c8f46a656e06085ba9e9, type: 3}
   runeIncorrectSound: {fileID: 8300000, guid: b635fbe6d1ad8744ba383e03448762b5, type: 3}
-  gemstoneAudioSource: {fileID: 0}
-  gemstoneCorrectSound: {fileID: 0}
-  gemstoneIncorrectSound: {fileID: 0}
+  gemstoneAudioSource: {fileID: 407386464}
+  gemstoneCorrectSound: {fileID: 8300000, guid: 10c4de0cf154c134eb0bcb19e6e3e819,
+    type: 3}
+  gemstoneIncorrectSound: {fileID: 8300000, guid: 10c4de0cf154c134eb0bcb19e6e3e819,
+    type: 3}
 --- !u!82 &1400840236
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15335,8 +15342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 12
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!4 &2004342791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6625997557194401537, guid: 1eed1643a65fbba4fb33aa071b71e1c2,
@@ -15524,8 +15531,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 10
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!4 &2004342799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8616562853047217044, guid: 1eed1643a65fbba4fb33aa071b71e1c2,
@@ -15804,8 +15811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 8
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!65 &2004342807
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15969,8 +15976,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 7
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!65 &2004342811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16134,8 +16141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 6
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!65 &2004342815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16299,8 +16306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 5
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!82 &2004342819
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16852,8 +16859,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 3
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!65 &2004342827
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17017,8 +17024,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 2
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!65 &2004342831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17182,8 +17189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieceID: 1
-  pickupSound: {fileID: 8300000, guid: 079f55f9b52a9db498a95246c5bc9eb3, type: 3}
-  placeSound: {fileID: 8300000, guid: 9f8755cacd073644fb93e0e15ea548b2, type: 3}
+  pickupSound: {fileID: 8300000, guid: 10661ef1ba1fad54d89c06c6c639002c, type: 3}
+  placeSound: {fileID: 8300000, guid: c7ea05f6a445c3249a826f0fcc454552, type: 3}
 --- !u!82 &2004342835
 AudioSource:
   m_ObjectHideFlags: 0
