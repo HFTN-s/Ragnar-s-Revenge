@@ -30,6 +30,17 @@ public class PuzzleController : MonoBehaviour
     public AudioClip gemstoneCorrectSound;
     public AudioClip gemstoneIncorrectSound;
 
+    public AudioSource jarlVoiceAudioSource;
+    public AudioClip jarlIlluminationVoiceLine;
+    public AudioClip jarlBigPictureVoiceLine;
+    public AudioClip jarlEndOfStageVoiceLine;
+    public AudioClip jarlExcellentVoiceLine;
+    public AudioClip jarlReflectVoiceLine;
+    public AudioClip jarlRunesVoiceLine;
+    public AudioClip jarlWellDoneVoiceLine;
+
+    private bool hasPlayerTouchedRune = false;
+
     void Start()
     {
         //initialize correct order
@@ -85,6 +96,13 @@ public class PuzzleController : MonoBehaviour
 
     public void RunePressed(int runeID)
 {
+    // if the player has not touched a rune yet, play the first voice line
+    if (!hasPlayerTouchedRune)
+    {
+        //Play jarl voice line one shot
+        PlayJarlVoiceLine(jarlRunesVoiceLine);
+        hasPlayerTouchedRune = true;
+    }
     // Turn off all rune colliders for 2 seconds
     DisableAllRuneColliders();
     Invoke(nameof(EnableAllRuneColliders), 2f);
@@ -98,14 +116,20 @@ public class PuzzleController : MonoBehaviour
 
         if (currentOrderIndex == correctOrder.Length)
         {
+            // play well done voice line
+            PlayJarlVoiceLine(jarlWellDoneVoiceLine);
             cabinetAudioSource.PlayOneShot(cabinetOpenSound);
             Debug.Log("Correct order entered. Opening closet.");
             StartCoroutine(MoveDoors(leftClosetDoor, rightClosetDoor, 3.4f, -3.5f, 2f));
             DisableAllRuneColliders();
+            // Play Reflection voice line
+            PlayJarlVoiceLine(jarlReflectVoiceLine);
         }
     }
     else
     {
+        // PLay big picture voice line
+        PlayJarlVoiceLine(jarlBigPictureVoiceLine);
         runeAudioSource.PlayOneShot(runeIncorrectSound);
         Debug.Log($"Incorrect rune pressed: {runeID}. Resetting sequence.");
         GlowAllRunes(Color.red);
@@ -205,6 +229,8 @@ private void EnableAllRuneColliders()
         {
             if (gemstones[i] != null)
             {
+                // PLay excellent voice line
+                PlayJarlVoiceLine(jarlExcellentVoiceLine);
                 gemstoneAudioSource.PlayOneShot(gemstoneCorrectSound);
                 SetGlow(gemstones[i], true);
                 isHit[i] = true;
@@ -376,5 +402,26 @@ private void EnableAllRuneColliders()
             }
             fadeCoroutines[index] = StartCoroutine(FadeOutEmission(gemstone.GetComponent<Renderer>(), 3f));
         }
+    }
+
+    // PLay Jarl voice line if not already playing, if so wait then play once voice line is done
+    public void PlayJarlVoiceLine(AudioClip clip)
+    {
+        if (!jarlVoiceAudioSource.isPlaying)
+        {
+            jarlVoiceAudioSource.clip = clip;
+            jarlVoiceAudioSource.Play();
+        }
+        else
+        {
+            StartCoroutine(WaitForJarlVoiceLine(clip));
+        }
+    }
+
+    private IEnumerator WaitForJarlVoiceLine(AudioClip clip)
+    {
+        yield return new WaitUntil(() => !jarlVoiceAudioSource.isPlaying);
+        jarlVoiceAudioSource.clip = clip;
+        jarlVoiceAudioSource.Play();
     }
 }

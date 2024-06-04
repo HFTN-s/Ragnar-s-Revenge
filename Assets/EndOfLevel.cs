@@ -15,7 +15,7 @@ public class EndOfLevel : MonoBehaviour
     public bool canLeaveLevel = false;
 
     public AudioClip jarlSpeech;
-    public AudioClip[] jarlVoiceLines;
+    public AudioClip endOfLevelVoiceLine;
     public AudioSource jarlAudioSource;
     [SerializeField] private TextMeshPro text;
 
@@ -52,21 +52,22 @@ public class EndOfLevel : MonoBehaviour
             IncrementProgress(2);
             playerMovement.canMove = false;
             endOfLevelText.SetActive(true);
-            Debug.Log("Playing End Jarl Voice Line");
-            if (jarlAudioSource.isPlaying)
-            {
-                StartCoroutine(WaitForJarlSpeech());
-            }
-            else
-            {
-                jarlAudioSource.clip = jarlVoiceLines[5];
-                jarlAudioSource.Play();
-
-            }
-            Debug.Log("End Jarl Voice Line Played");
+            // play ending voice line, then wait for player input once it is done
+            jarlAudioSource.clip = jarlSpeech;
+            jarlAudioSource.Play();
+            StartCoroutine(WaitForJarlSpeech());
             StartCoroutine(WaitForPlayerInput());
         }
     }
+
+    private IEnumerator WaitForJarlSpeech()
+    {
+        yield return new WaitForSeconds(jarlSpeech.length);
+        jarlAudioSource.clip = endOfLevelVoiceLine;
+        jarlAudioSource.Play();
+    }
+
+
 
 
     private IEnumerator WaitForPlayerInput()
@@ -116,33 +117,5 @@ public class EndOfLevel : MonoBehaviour
             }
         }
 
-    }
-
-    private void PlayJarlSpeech()
-    {
-        // Assuming jarlAudioSource and jarlSpeech are already assigned
-        jarlAudioSource.clip = jarlSpeech;
-        jarlAudioSource.Play();
-    }
-
-    public void PlayJarlVoiceLine(int lineIndex)
-    {
-        if (jarlAudioSource.isPlaying)
-        {
-            StartCoroutine(WaitForJarlSpeech());
-        }
-        jarlAudioSource.clip = jarlVoiceLines[lineIndex];
-        jarlAudioSource.Play();
-    }
-
-    private IEnumerator WaitForJarlSpeech()
-    {
-        //stall until jarl speech is done, once finished , wait 3 seconds
-        while (jarlAudioSource.isPlaying)
-        {
-            yield return null;
-        }
-        Debug.Log("Jarl has finished speaking, waiting 3 seconds");
-        yield return new WaitForSeconds(1);
     }
 }
