@@ -39,9 +39,6 @@ public class Level3Manager : MonoBehaviour
         }
     }
 
-
-
-    //wait for jarl audio to finish
     public IEnumerator WaitForJarlAudioClip(int index)
     {
         PlayJarlAudioClip(index);
