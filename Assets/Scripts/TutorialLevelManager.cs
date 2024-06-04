@@ -143,16 +143,21 @@ public class TutorialLevelManager : MonoBehaviour
 
 IEnumerator HandlePuzzle2Sequence()
 {
+    Debug.Log("Starting Puzzle 2 Sequence");
     musicAudioSource.Pause();
     puzzle2Complete = true;
     puzzle2Check = false;
 
+    Debug.Log("Playing voice line 13");
     yield return StartCoroutine(PlayVoiceLineAndWait(13));
     yield return new WaitForSeconds(3);
     GameObject.Find("SKELETON").SendMessage("ActivateSkeleton");
+    Debug.Log("Playing voice line 15");
     yield return StartCoroutine(PlayVoiceLineAndWait(15));
     yield return new WaitForSeconds(3);
+    Debug.Log("Playing voice line 8");
     yield return StartCoroutine(PlayVoiceLineAndWait(8));
+    Debug.Log("About to play music");
     musicAudioSource.Play();
 }
 
