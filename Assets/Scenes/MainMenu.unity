@@ -6815,8 +6815,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeToBlackobject: {fileID: 1593928569}
   mainMenuMusic: {fileID: 2133936532}
-  playerMovement: {fileID: 0}
+  playerMovement: {fileID: 838124037}
   endClip: {fileID: 32900000, guid: 366c2080284046a4eb3333ad6f2ce9a3, type: 3}
+  menu: {fileID: 1059866296}
 --- !u!65 &718480010
 BoxCollider:
   m_ObjectHideFlags: 0
