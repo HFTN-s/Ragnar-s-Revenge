@@ -5232,7 +5232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &716388548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7461,7 +7461,7 @@ PrefabInstance:
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
@@ -7480,6 +7480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
+      propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1501181979}
@@ -7488,6 +7493,11 @@ PrefabInstance:
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1400840235}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
+      propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1575173899}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
       propertyPath: OnHitByLaserIncorrect.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -7510,6 +7520,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
+      propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnHitByLaserCorrect
       objectReference: {fileID: 0}
@@ -7517,6 +7532,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: OnHitByLaserCorrect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
+      propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: set_enabled
       objectReference: {fileID: 0}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
@@ -7551,6 +7571,11 @@ PrefabInstance:
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
         type: 3}
       propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
+        type: 3}
+      propertyPath: OnHitByLaserCorrect.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4711735722858521958, guid: 83ac48468908b944681939cc20cf237f,
@@ -10532,14 +10557,20 @@ MonoBehaviour:
     type: 3}
   gemstoneIncorrectSound: {fileID: 8300000, guid: 10c4de0cf154c134eb0bcb19e6e3e819,
     type: 3}
-  jarlVoiceAudioSource: {fileID: 0}
-  jarlIlluminationVoiceLine: {fileID: 0}
-  jarlBigPictureVoiceLine: {fileID: 0}
-  jarlEndOfStageVoiceLine: {fileID: 0}
-  jarlExcellentVoiceLine: {fileID: 0}
-  jarlReflectVoiceLine: {fileID: 0}
-  jarlRunesVoiceLine: {fileID: 0}
-  jarlWellDoneVoiceLine: {fileID: 0}
+  jarlVoiceAudioSource: {fileID: 63124006}
+  jarlIlluminationVoiceLine: {fileID: 8300000, guid: 50590d68a33200a4e9cd1a3922cf512d,
+    type: 3}
+  jarlBigPictureVoiceLine: {fileID: 8300000, guid: 38f7f08ac8d7b984794b96b9226fe938,
+    type: 3}
+  jarlEndOfStageVoiceLine: {fileID: 8300000, guid: 1dddc41e060d97d42b655820aef7d3d4,
+    type: 3}
+  jarlExcellentVoiceLine: {fileID: 8300000, guid: e187c1a8ac2fcae4c8fcc0d48200f988,
+    type: 3}
+  jarlReflectVoiceLine: {fileID: 8300000, guid: 09e042eb2e0784f42848e4c62e2056c9,
+    type: 3}
+  jarlRunesVoiceLine: {fileID: 8300000, guid: 7c26175807fc4ed48996463ed4b4a3a3, type: 3}
+  jarlWellDoneVoiceLine: {fileID: 8300000, guid: ad1ef14075dd2b243af5045360ce8919,
+    type: 3}
 --- !u!82 &1400840236
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11357,6 +11388,25 @@ Transform:
   m_Father: {fileID: 2051170184}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1575173898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cf312ef61cff37e48943d4d295d893b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1663092874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1575173899
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575173898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0206398, y: 0.023333333, z: 0.16}
+  m_Center: {x: -0.0003199, y: 0.0016666637, z: 0.06999999}
 --- !u!4 &1575321680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b1865cb80f7e8a6449fd797d3b277a99,
