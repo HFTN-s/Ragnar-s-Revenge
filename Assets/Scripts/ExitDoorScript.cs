@@ -38,7 +38,7 @@ public class ExitDoorScript : MonoBehaviour
                 Debug.Log("Hammer has touched the door and it is unlocked.");
                 //unfreeze rigidbody constraints
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                doorAudio.clip = doorHit;
+                //doorAudio.clip = doorHit;
                 doorAudio.Play();
                 HingeJoint hinge = GetComponent<HingeJoint>();
                 // add force

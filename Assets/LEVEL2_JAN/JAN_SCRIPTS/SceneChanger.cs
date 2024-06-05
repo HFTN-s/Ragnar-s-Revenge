@@ -16,11 +16,11 @@ public class SceneChanger : MonoBehaviour
     {
         if (DataPersistenceManager.instance == null)
         {
-            Debug.LogError("DataPersistenceManager instance is null!");
+            Debug.Log("DataPersistenceManager instance is null!");
         }
         else if (DataPersistenceManager.instance.GameData == null)
         {
-            Debug.LogError("GameData on DataPersistenceManager instance is null!");
+            Debug.Log("GameData on DataPersistenceManager instance is null!");
         }
         else
         {
@@ -28,7 +28,7 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -52,7 +52,7 @@ public class SceneChanger : MonoBehaviour
         {
             int timeTaken = timer.GetSeconds();
             DataPersistenceManager.instance.SaveHighScore(timeTaken);
-
+            DataPersistenceManager.instance.SaveGame();
             text.text = $"{timeTaken / 60:D2}:{timeTaken % 60:D2}";
             IncrementProgress(3);
             playerMovement.canMove = false;

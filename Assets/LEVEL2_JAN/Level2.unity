@@ -2181,7 +2181,7 @@ MonoBehaviour:
   doorController: {fileID: 642579808}
   bifrostAudioSource: {fileID: 264080041}
   puzzleCompletedAudioSource: {fileID: 1110379787}
-  sceneChanger: {fileID: 0}
+  sceneChanger: {fileID: 1086293797}
 --- !u!82 &264080041
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2195,7 +2195,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 76274d71a480a1348adae9809af16934, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.498
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3698,7 +3698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &530606208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8404,7 +8404,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.254
+  m_Volume: 0.108
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -8495,12 +8495,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072638678}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.073352, y: -2.1025362, z: 13.247861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 271676476}
-  m_RootOrder: 5
+  m_Father: {fileID: 1355641585}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1072906492
 GameObject:
@@ -9030,12 +9030,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110379785}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.073352, y: -2.1025362, z: 13.247861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 271676476}
-  m_RootOrder: 11
+  m_Father: {fileID: 1355641585}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1110379787
 AudioSource:
@@ -9050,7 +9050,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 52a71373f0a936246b14a3564ed7cfff, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.594
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10474,6 +10474,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.85}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1355641585 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8037271159428580271, guid: 393b8f744d19c5d4f907981bbaa92432,
+    type: 3}
+  m_PrefabInstance: {fileID: 1081168406}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1357527507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2550463727306718371, guid: 491327b74e6bb7947a7298d41bdc8328,
