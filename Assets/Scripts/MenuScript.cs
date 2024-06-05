@@ -192,10 +192,27 @@ public class MenuScript : MonoBehaviour
 
                 case "Load Level":
                     button2.GetComponent<BoxCollider>().enabled = true;
-                    button1.GetComponent<TextMeshProUGUI>().text = "Load Tutorial";
+                    button1.GetComponent<BoxCollider>().enabled = true;
+                    button1.GetComponent<TextMeshProUGUI>().text = "Choose From Level Below";
                     button2.GetComponent<TextMeshProUGUI>().text = "Load Level 1";
                     button3.GetComponent<TextMeshProUGUI>().text = "Load Level 2";
                     button4.GetComponent<TextMeshProUGUI>().text = "Load Level 3";
+                     //grey out and disable the colliders of levels the player has not completed
+                    if (playerProgress < 1)
+                    {
+                        button2.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button2.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    if (playerProgress < 2)
+                    {
+                        button3.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button3.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    if (playerProgress < 3)
+                    {
+                        button4.GetComponent<TextMeshProUGUI>().color = Color.grey;
+                        button4.GetComponent<BoxCollider>().enabled = false;
+                    }
                     break;
 
                 case "Settings":
@@ -219,6 +236,8 @@ public class MenuScript : MonoBehaviour
 
                 case "High\nScores":
                     button2.GetComponent<BoxCollider>().enabled = true;
+                    button1.GetComponent<BoxCollider>().enabled = true;
+                    button4.GetComponent<BoxCollider>().enabled = false;
                     button1.GetComponent<TextMeshProUGUI>().text = "Level 1";
                     button2.GetComponent<TextMeshProUGUI>().text = "Level 2";
                     button3.GetComponent<TextMeshProUGUI>().text = "Level 3";
@@ -326,15 +345,15 @@ public class MenuScript : MonoBehaviour
                     break;
 
                 case "Load Level 1":
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(1, LoadSceneMode.Single);
                     break;
 
                 case "Load Level 2":
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(2, LoadSceneMode.Single);
                     break;
 
                 case "Load Level 3":
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene(3, LoadSceneMode.Single);
                     break;
 
                 default:

@@ -12,9 +12,12 @@ public class TutorialLevelTrigger : MonoBehaviour
     public PlayerMovement playerMovement;
     private VideoPlayer videoPlayer;
     public VideoClip endClip;
+    public GameObject menu;
 
     private void Start()
     {
+        // set menu active
+        menu.SetActive(true);
         playerMovement = GameObject.Find("MainMenuPlayer").GetComponent<PlayerMovement>();
         audioSource = GetComponent<AudioSource>();
         videoPlayer = fadeToBlackobject.GetComponentInChildren<VideoPlayer>();
