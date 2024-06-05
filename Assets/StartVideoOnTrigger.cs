@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;  
+using System.Collections;
 
 public class StartVideoOnTrigger : MonoBehaviour
 {
@@ -18,9 +20,8 @@ public class StartVideoOnTrigger : MonoBehaviour
         }
 
         // Enable the VideoPlayer component
-        videoPlayer.enabled = true;
+        videoPlayer.enabled = false;
 
-        videoPlayer.playOnAwake = false; // Change this to true if you want the video to play automatically on scene load
     }
 
     void OnTriggerEnter(Collider other)
@@ -30,6 +31,7 @@ public class StartVideoOnTrigger : MonoBehaviour
         // For example, if the object has the tag "Chest"
         if (other.gameObject.CompareTag("Chest") && !isPlaying)
         {
+            videoPlayer.enabled = true;
             // Prevent multiple triggers while the video is already playing
             isPlaying = true;
             Debug.Log("Playing video.");
@@ -37,6 +39,19 @@ public class StartVideoOnTrigger : MonoBehaviour
 
             // Start playing the video
             videoPlayer.Play();
+
+            // once video has finished , load index 1 scene
+            StartCoroutine(WaitForVideoEnd());
+            
         }
+    }
+
+    private IEnumerator WaitForVideoEnd()
+    {
+        // Wait for the video to finish playing
+        yield return new WaitForSeconds((float)videoPlayer.length);
+        // Load the next scene
+        Debug.Log("Video has finished playing.");
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }
