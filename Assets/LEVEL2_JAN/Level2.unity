@@ -2181,7 +2181,7 @@ MonoBehaviour:
   doorController: {fileID: 642579808}
   bifrostAudioSource: {fileID: 264080041}
   puzzleCompletedAudioSource: {fileID: 1110379787}
-  sceneChanger: {fileID: 1086293797}
+  endOfLevel: {fileID: 530606207}
 --- !u!82 &264080041
 AudioSource:
   m_ObjectHideFlags: 0

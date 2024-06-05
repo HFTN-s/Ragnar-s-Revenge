@@ -64,7 +64,6 @@ public class ActivateBifrost : MonoBehaviour
         if (YarlRingPlaced && StoneInReceptical && TreeChopped)
         {
             Debug.Log("All puzzles completed!");
-            endOfLevel.SetActive(true);
             bifrostAudioSource.Play();
             // Add any actions you want to perform here after the puzzle is completed.
             // Check if the target GameObject has been assigned in the Inspector
