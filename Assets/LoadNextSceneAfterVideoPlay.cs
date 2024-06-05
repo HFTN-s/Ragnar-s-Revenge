@@ -20,6 +20,6 @@ public class LoadNextSceneAfterVideoPlay : MonoBehaviour
     void OnVideoEnd(VideoPlayer vp)
     {
         // Load the next scene
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

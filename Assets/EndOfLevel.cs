@@ -87,7 +87,7 @@ public class EndOfLevel : MonoBehaviour
             }
             else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
             {
-                // Load previous scene in index using SceneManager if B pressed
+                // Load menu scene
                 SceneManager.LoadScene(1, LoadSceneMode.Single);
                 yield break;
             }

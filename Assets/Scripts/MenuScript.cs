@@ -39,6 +39,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("MenuScript started");
         videoPlayer = fadeToBlackobject.GetComponent<VideoPlayer>();
         // find fade2BlackObject and set to inactive
         fadeToBlackobject.SetActive(false);
@@ -83,6 +84,7 @@ public class MenuScript : MonoBehaviour
         }
 
         backButton.SetActive(false);
+        Debug.Log("Back Button set to inactive");
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args)
