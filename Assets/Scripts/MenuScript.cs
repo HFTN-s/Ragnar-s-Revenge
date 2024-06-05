@@ -85,6 +85,7 @@ public class MenuScript : MonoBehaviour
 
         backButton.SetActive(false);
         Debug.Log("Back Button set to inactive");
+        DataPersistenceManager.instance.LoadGame();
     }
 
     public void OnHoverEntered(HoverEnterEventArgs args)
@@ -200,17 +201,17 @@ public class MenuScript : MonoBehaviour
                     button3.GetComponent<TextMeshProUGUI>().text = "Load Level 2";
                     button4.GetComponent<TextMeshProUGUI>().text = "Load Level 3";
                      //grey out and disable the colliders of levels the player has not completed
-                    if (playerProgress < 1)
+                    if (playerProgress < 0) // if player has not completed level 
                     {
                         button2.GetComponent<TextMeshProUGUI>().color = Color.grey;
                         button2.GetComponent<BoxCollider>().enabled = false;
                     }
-                    if (playerProgress < 2)
+                    if (playerProgress < 1)  
                     {
                         button3.GetComponent<TextMeshProUGUI>().color = Color.grey;
                         button3.GetComponent<BoxCollider>().enabled = false;
                     }
-                    if (playerProgress < 3)
+                    if (playerProgress < 2)
                     {
                         button4.GetComponent<TextMeshProUGUI>().color = Color.grey;
                         button4.GetComponent<BoxCollider>().enabled = false;
@@ -347,15 +348,15 @@ public class MenuScript : MonoBehaviour
                     break;
 
                 case "Load Level 1":
-                    SceneManager.LoadScene(1, LoadSceneMode.Single);
-                    break;
-
-                case "Load Level 2":
                     SceneManager.LoadScene(2, LoadSceneMode.Single);
                     break;
 
-                case "Load Level 3":
+                case "Load Level 2":
                     SceneManager.LoadScene(3, LoadSceneMode.Single);
+                    break;
+
+                case "Load Level 3":
+                    SceneManager.LoadScene(4, LoadSceneMode.Single);
                     break;
 
                 default:

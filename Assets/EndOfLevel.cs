@@ -28,10 +28,7 @@ public class EndOfLevel : MonoBehaviour
             endOfLevelText.SetActive(true);
             //stop player movement
             playerMovement.canMove = false;
-            //wait 2 seconds
-            StartCoroutine(WaitTwoSeconds());
-            //wait for player input
-            StartCoroutine(WaitForPlayerInput());
+            RoomCompleted();
         }
     }
 
@@ -53,7 +50,7 @@ public class EndOfLevel : MonoBehaviour
             playerMovement.canMove = false;
             endOfLevelText.SetActive(true);
             // play ending voice line, then wait for player input once it is done
-            jarlAudioSource.clip = jarlSpeech;
+            jarlAudioSource.clip = endOfLevelVoiceLine;
             jarlAudioSource.Play();
             StartCoroutine(WaitForJarlSpeech());
             StartCoroutine(WaitForPlayerInput());

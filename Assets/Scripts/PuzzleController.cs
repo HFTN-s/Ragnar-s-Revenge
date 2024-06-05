@@ -40,6 +40,7 @@ public class PuzzleController : MonoBehaviour
     public AudioClip jarlWellDoneVoiceLine;
 
     private bool hasPlayerTouchedRune = false;
+    private bool jarlExcellentVoiceLinebool = false;
 
     void Start()
     {
@@ -229,8 +230,13 @@ private void EnableAllRuneColliders()
         {
             if (gemstones[i] != null)
             {
+                if (jarlExcellentVoiceLinebool == false)
+                {
+                    // PLay excellent voice line
+                    PlayJarlVoiceLine(jarlExcellentVoiceLine);
+                    jarlExcellentVoiceLinebool = true;
+                }
                 // PLay excellent voice line
-                PlayJarlVoiceLine(jarlExcellentVoiceLine);
                 gemstoneAudioSource.PlayOneShot(gemstoneCorrectSound);
                 SetGlow(gemstones[i], true);
                 isHit[i] = true;

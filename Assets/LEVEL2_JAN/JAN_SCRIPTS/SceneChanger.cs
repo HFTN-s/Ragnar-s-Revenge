@@ -8,9 +8,7 @@ public class SceneChanger : MonoBehaviour
 {
     public PlayerMovement playerMovement;
     public GameObject endOfLevelText;
-
     public Timer timer;
-
     [SerializeField] private TextMeshPro text;
     private bool canLeaveLevel = false;
 
@@ -35,18 +33,14 @@ public class SceneChanger : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("End of Level collision detected");
-            //display end of level text
+            // Display end of level text
             endOfLevelText.SetActive(true);
-            //stop player movement
+            // Stop player movement
             playerMovement.canMove = false;
-            //wait 2 seconds
-            StartCoroutine(WaitTwoSeconds());
-            //wait for player input
-            StartCoroutine(WaitForPlayerInput());
+            RoomCompleted();
         }
     }
 
-    //wait 3 seconds
     private IEnumerator WaitTwoSeconds()
     {
         yield return new WaitForSeconds(2);
@@ -69,7 +63,6 @@ public class SceneChanger : MonoBehaviour
         }
     }
 
-
     private IEnumerator WaitForPlayerInput()
     {
         // Wait until player presses primary or secondary button
@@ -84,11 +77,15 @@ public class SceneChanger : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
                 yield break;
             }
+            else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
+            {
+                // Load menu scene
+                SceneManager.LoadScene(1, LoadSceneMode.Single);
+                yield break;
+            }
             yield return null;
         }
     }
-
-
 
     private void IncrementProgress(int puzzlesCompleted)
     {
@@ -103,13 +100,12 @@ public class SceneChanger : MonoBehaviour
         else
         {
             if (DataPersistenceManager.instance.GameData.playerProgress < puzzlesCompleted)
-            // if player has completed more puzzles(levels) than the current progress , save progress
             {
+                // If player has completed more puzzles (levels) than the current progress, save progress
                 DataPersistenceManager.instance.GameData.playerProgress++;
                 DataPersistenceManager.instance.SaveGame();
                 Debug.Log("Progress incremented to: " + DataPersistenceManager.instance.GameData.playerProgress);
             }
         }
-
     }
 }
