@@ -51,7 +51,7 @@ public class SceneChanger : MonoBehaviour
         if (!canLeaveLevel)
         {
             int timeTaken = timer.GetSeconds();
-            DataPersistenceManager.instance.SaveHighScore(timeTaken);
+            DataPersistenceManager.instance.SaveHighScore(3, timeTaken);
             DataPersistenceManager.instance.SaveGame();
             text.text = $"{timeTaken / 60:D2}:{timeTaken % 60:D2}";
             IncrementProgress(3);

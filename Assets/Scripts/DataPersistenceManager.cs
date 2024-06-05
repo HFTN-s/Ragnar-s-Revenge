@@ -93,71 +93,59 @@ public class DataPersistenceManager : MonoBehaviour
         SaveGame();
     }
 
-    public void SaveHighScore(int seconds)
+    public void SaveHighScore(int level, int seconds)
     {
         // Convert seconds to minutes and seconds
         int newScoreMinutes = seconds / 60;
         int newScoreSeconds = seconds % 60;
 
-        // Check and update high scores based on current level
-        switch (DataPersistenceManager.instance.GameData.playerProgress)
+        // Check and update high scores based on the current level
+        switch (level)
         {
             case 1:
-                UpdateHighScores(ref DataPersistenceManager.instance.GameData.level1Score1Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level1Score1Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level1Score2Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level1Score2Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level1Score3Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level1Score3Seconds,
+                UpdateHighScores(ref GameData.level1Score1Minutes, ref GameData.level1Score1Seconds,
+                                 ref GameData.level1Score2Minutes, ref GameData.level1Score2Seconds,
+                                 ref GameData.level1Score3Minutes, ref GameData.level1Score3Seconds,
                                  newScoreMinutes, newScoreSeconds);
                 break;
 
             case 2:
-                UpdateHighScores(ref DataPersistenceManager.instance.GameData.level2Score1Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level2Score1Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level2Score2Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level2Score2Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level2Score3Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level2Score3Seconds,
+                UpdateHighScores(ref GameData.level2Score1Minutes, ref GameData.level2Score1Seconds,
+                                 ref GameData.level2Score2Minutes, ref GameData.level2Score2Seconds,
+                                 ref GameData.level2Score3Minutes, ref GameData.level2Score3Seconds,
                                  newScoreMinutes, newScoreSeconds);
                 break;
 
             case 3:
-                UpdateHighScores(ref DataPersistenceManager.instance.GameData.level3Score1Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level3Score1Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level3Score2Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level3Score2Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level3Score3Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level3Score3Seconds,
+                UpdateHighScores(ref GameData.level3Score1Minutes, ref GameData.level3Score1Seconds,
+                                 ref GameData.level3Score2Minutes, ref GameData.level3Score2Seconds,
+                                 ref GameData.level3Score3Minutes, ref GameData.level3Score3Seconds,
                                  newScoreMinutes, newScoreSeconds);
                 break;
 
             case 4:
-                UpdateHighScores(ref DataPersistenceManager.instance.GameData.level4Score1Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level4Score1Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level4Score2Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level4Score2Seconds,
-                                 ref DataPersistenceManager.instance.GameData.level4Score3Minutes,
-                                 ref DataPersistenceManager.instance.GameData.level4Score3Seconds,
+                UpdateHighScores(ref GameData.level4Score1Minutes, ref GameData.level4Score1Seconds,
+                                 ref GameData.level4Score2Minutes, ref GameData.level4Score2Seconds,
+                                 ref GameData.level4Score3Minutes, ref GameData.level4Score3Seconds,
                                  newScoreMinutes, newScoreSeconds);
                 break;
 
             default:
-                Debug.LogError("Player progress level not supported for high scores");
+                Debug.LogError("Level not supported for high scores");
                 break;
         }
 
         // Log and save
         Debug.Log("High score saved");
-        Debug.Log($"High score for level {DataPersistenceManager.instance.GameData.playerProgress}: {newScoreMinutes} minutes and {newScoreSeconds} seconds");
+        Debug.Log($"High score for level {level}: {newScoreMinutes} minutes and {newScoreSeconds} seconds");
         SaveGame();
     }
 
     // Refactor the repeated logic into this method
     private void UpdateHighScores(ref int score1Minutes, ref int score1Seconds,
-                                 ref int score2Minutes, ref int score2Seconds,
-                                 ref int score3Minutes, ref int score3Seconds,
-                                 int newScoreMinutes, int newScoreSeconds)
+                                  ref int score2Minutes, ref int score2Seconds,
+                                  ref int score3Minutes, ref int score3Seconds,
+                                  int newScoreMinutes, int newScoreSeconds)
     {
         // Convert all times to seconds for comparison
         int newScoreTotalSeconds = newScoreMinutes * 60 + newScoreSeconds;
@@ -165,7 +153,13 @@ public class DataPersistenceManager : MonoBehaviour
         int score2TotalSeconds = score2Minutes * 60 + score2Seconds;
         int score3TotalSeconds = score3Minutes * 60 + score3Seconds;
 
-        if (newScoreTotalSeconds < score1TotalSeconds)
+        // Automatically replace scores of 0
+        if (score1TotalSeconds == 0)
+        {
+            score1Minutes = newScoreMinutes;
+            score1Seconds = newScoreSeconds;
+        }
+        else if (newScoreTotalSeconds < score1TotalSeconds)
         {
             // Shift down previous high scores
             score3Minutes = score2Minutes;
@@ -176,6 +170,11 @@ public class DataPersistenceManager : MonoBehaviour
             score1Minutes = newScoreMinutes;
             score1Seconds = newScoreSeconds;
         }
+        else if (score2TotalSeconds == 0)
+        {
+            score2Minutes = newScoreMinutes;
+            score2Seconds = newScoreSeconds;
+        }
         else if (newScoreTotalSeconds < score2TotalSeconds)
         {
             // Shift down previous high scores
@@ -184,6 +183,11 @@ public class DataPersistenceManager : MonoBehaviour
             // Insert new high score
             score2Minutes = newScoreMinutes;
             score2Seconds = newScoreSeconds;
+        }
+        else if (score3TotalSeconds == 0)
+        {
+            score3Minutes = newScoreMinutes;
+            score3Seconds = newScoreSeconds;
         }
         else if (newScoreTotalSeconds < score3TotalSeconds)
         {
@@ -196,20 +200,20 @@ public class DataPersistenceManager : MonoBehaviour
     public void SaveAudioSettings(Slider masterSlider, Slider sfxSlider, Slider speechSlider, Slider musicSlider)
     {
         // Save the current audio settings to the game data
-        DataPersistenceManager.instance.GameData.masterVolume = masterSlider.value;
-        DataPersistenceManager.instance.GameData.sfxVolume = sfxSlider.value;
-        DataPersistenceManager.instance.GameData.speechVolume = speechSlider.value;
-        DataPersistenceManager.instance.GameData.musicVolume = musicSlider.value;
-        DataPersistenceManager.instance.SaveGame();
+        GameData.masterVolume = masterSlider.value;
+        GameData.sfxVolume = sfxSlider.value;
+        GameData.speechVolume = speechSlider.value;
+        GameData.musicVolume = musicSlider.value;
+        SaveGame();
     }
 
     public void LoadAudioSettings(Slider masterSlider, Slider sfxSlider, Slider speechSlider, Slider musicSlider)
     {
         // Load the audio settings from the game data
-        masterSlider.value = DataPersistenceManager.instance.GameData.masterVolume;
-        sfxSlider.value = DataPersistenceManager.instance.GameData.sfxVolume;
-        speechSlider.value = DataPersistenceManager.instance.GameData.speechVolume;
-        musicSlider.value = DataPersistenceManager.instance.GameData.musicVolume;
+        masterSlider.value = GameData.masterVolume;
+        sfxSlider.value = GameData.sfxVolume;
+        speechSlider.value = GameData.speechVolume;
+        musicSlider.value = GameData.musicVolume;
         Debug.Log("Loaded audio settings");
         Debug.Log("Master Volume: " + masterSlider.value);
         Debug.Log("SFX Volume: " + sfxSlider.value);
