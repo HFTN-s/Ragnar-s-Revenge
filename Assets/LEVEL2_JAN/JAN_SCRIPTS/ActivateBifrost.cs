@@ -16,6 +16,7 @@ public class ActivateBifrost : MonoBehaviour
     public DoorController doorController;
     public AudioSource bifrostAudioSource;
     [SerializeField] private AudioSource puzzleCompletedAudioSource;
+    public SceneChanger sceneChanger;
 
     public Boolean getYarlRingPlaced()
     {
@@ -56,6 +57,7 @@ public class ActivateBifrost : MonoBehaviour
     {
         if (YarlRingPlaced && StoneInReceptical && TreeChopped)
         {
+            
             bifrostAudioSource.Play();
             // Add any actions you want to perform here after the puzzle is completed.
             // Check if the target GameObject has been assigned in the Inspector

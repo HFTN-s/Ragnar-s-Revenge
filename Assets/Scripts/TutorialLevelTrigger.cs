@@ -47,6 +47,6 @@ public class TutorialLevelTrigger : MonoBehaviour
     private void DelayedAction()
     {
         audioSource.Stop();
-        SceneManager.LoadScene("TutorialLevel");
+        SceneManager.LoadScene("TutorialLevel", LoadSceneMode.Single);
     }
 }

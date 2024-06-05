@@ -217,7 +217,6 @@ private IEnumerator ResumeMusicAfterVoiceLine(AudioSource audioSource)
     {
         int timeTaken = timer.GetSeconds();
         DataPersistenceManager.instance.SaveHighScore(timeTaken);
-        
         text.text = $"{timeTaken / 60:D2}:{timeTaken % 60:D2}";
         IncrementProgress(1);
         playerMovement.canMove = false;
@@ -235,6 +234,7 @@ private IEnumerator ResumeMusicAfterVoiceLine(AudioSource audioSource)
         }
         Debug.Log("End Jarl Voice Line Played");
         StartCoroutine(WaitForPlayerInput());
+        canLeaveLevel = true;
     }
 }
 
@@ -250,13 +250,13 @@ private IEnumerator ResumeMusicAfterVoiceLine(AudioSource audioSource)
         if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonPressed) && primaryButtonPressed)
         {
             // Load next scene in index using SceneManager if A pressed
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
             yield break;
         }
         else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
         {
             // Load previous scene in index using SceneManager if B pressed
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
             yield break;
         }
         yield return null;

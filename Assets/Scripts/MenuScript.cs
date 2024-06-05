@@ -325,6 +325,18 @@ public class MenuScript : MonoBehaviour
                     button4.GetComponent<BoxCollider>().enabled = false;
                     break;
 
+                case "Load Level 1":
+                    SceneManager.LoadScene(1);
+                    break;
+
+                case "Load Level 2":
+                    SceneManager.LoadScene(2);
+                    break;
+
+                case "Load Level 3":
+                    SceneManager.LoadScene(3);
+                    break;
+
                 default:
                     Debug.LogError("Button pressed action not recognized.");
                     break;

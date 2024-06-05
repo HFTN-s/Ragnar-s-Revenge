@@ -7951,7 +7951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 29116941}
-  speed: 5
+  speed: 3
   rotationAmount: 5
   canMove: 0
   playerSFX: {fileID: 838124040}

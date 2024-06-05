@@ -2970,7 +2970,7 @@ MonoBehaviour:
   roomComplete: 0
   canLeaveLevel: 0
   jarlSpeech: {fileID: 0}
-  jarlVoiceLines: []
+  endOfLevelVoiceLine: {fileID: 0}
   jarlAudioSource: {fileID: 63124006}
   text: {fileID: 1586529289}
 --- !u!1 &425417210 stripped
@@ -3548,7 +3548,7 @@ PrefabInstance:
     - target: {fileID: 8037271159428580268, guid: 5e89b90636190b349a566d1ce68af804,
         type: 3}
       propertyPath: speed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8037271159428580270, guid: 5e89b90636190b349a566d1ce68af804,
         type: 3}
@@ -10605,6 +10605,14 @@ MonoBehaviour:
     type: 3}
   gemstoneIncorrectSound: {fileID: 8300000, guid: 10c4de0cf154c134eb0bcb19e6e3e819,
     type: 3}
+  jarlVoiceAudioSource: {fileID: 0}
+  jarlIlluminationVoiceLine: {fileID: 0}
+  jarlBigPictureVoiceLine: {fileID: 0}
+  jarlEndOfStageVoiceLine: {fileID: 0}
+  jarlExcellentVoiceLine: {fileID: 0}
+  jarlReflectVoiceLine: {fileID: 0}
+  jarlRunesVoiceLine: {fileID: 0}
+  jarlWellDoneVoiceLine: {fileID: 0}
 --- !u!82 &1400840236
 AudioSource:
   m_ObjectHideFlags: 0

@@ -57,6 +57,7 @@ public class EndOfLevel : MonoBehaviour
             jarlAudioSource.Play();
             StartCoroutine(WaitForJarlSpeech());
             StartCoroutine(WaitForPlayerInput());
+            canLeaveLevel = true;
         }
     }
 
@@ -81,13 +82,13 @@ public class EndOfLevel : MonoBehaviour
             if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonPressed) && primaryButtonPressed)
             {
                 // Load next scene in index using SceneManager if A pressed
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
                 yield break;
             }
             else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
             {
                 // Load previous scene in index using SceneManager if B pressed
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(0, LoadSceneMode.Single);
                 yield break;
             }
             yield return null;

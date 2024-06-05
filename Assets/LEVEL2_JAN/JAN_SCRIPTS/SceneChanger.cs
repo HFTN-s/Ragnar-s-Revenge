@@ -12,6 +12,7 @@ public class SceneChanger : MonoBehaviour
     public Timer timer;
 
     [SerializeField] private TextMeshPro text;
+    private bool canLeaveLevel = false;
 
     void Start()
     {
@@ -53,6 +54,8 @@ public class SceneChanger : MonoBehaviour
 
     void RoomCompleted()
     {
+        if (!canLeaveLevel)
+        {
             int timeTaken = timer.GetSeconds();
             DataPersistenceManager.instance.SaveHighScore(timeTaken);
 
@@ -62,6 +65,8 @@ public class SceneChanger : MonoBehaviour
             endOfLevelText.SetActive(true);
             Debug.Log("End Jarl Voice Line Played");
             StartCoroutine(WaitForPlayerInput());
+            canLeaveLevel = true;
+        }
     }
 
 
@@ -76,13 +81,7 @@ public class SceneChanger : MonoBehaviour
             if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.primaryButton, out primaryButtonPressed) && primaryButtonPressed)
             {
                 // Load next scene in index using SceneManager if A pressed
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                yield break;
-            }
-            else if (playerMovement.rightHandController.TryGetFeatureValue(CommonUsages.secondaryButton, out secondaryButtonPressed) && secondaryButtonPressed)
-            {
-                // Load previous scene in index using SceneManager if B pressed
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
                 yield break;
             }
             yield return null;
