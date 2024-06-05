@@ -1790,79 +1790,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bb6a7e89b5d1bdb49af11b3c1ff31d4d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51d5bd1ea00a0a54fa377c2fe5110130, type: 3}
---- !u!1 &226716746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 226716748}
-  - component: {fileID: 226716750}
-  m_Layer: 0
-  m_Name: SavingAndLoading
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &226716748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226716746}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.99765205, y: 1.6788644, z: -1.9377297}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &226716750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226716746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 763d2aabf17c5c34d955e3f0e94247c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameData:
-    playerProgress: 1
-    level1Score1Minutes: 0
-    level1Score2Minutes: 0
-    level1Score3Minutes: 0
-    level2Score1Minutes: 0
-    level2Score2Minutes: 0
-    level2Score3Minutes: 0
-    level3Score1Minutes: 0
-    level3Score2Minutes: 0
-    level3Score3Minutes: 0
-    level4Score1Minutes: 0
-    level4Score2Minutes: 0
-    level4Score3Minutes: 0
-    level1Score1Seconds: 0
-    level1Score2Seconds: 0
-    level1Score3Seconds: 0
-    level2Score1Seconds: 0
-    level2Score2Seconds: 0
-    level2Score3Seconds: 0
-    level3Score1Seconds: 0
-    level3Score2Seconds: 0
-    level3Score3Seconds: 0
-    level4Score1Seconds: 0
-    level4Score2Seconds: 0
-    level4Score3Seconds: 0
-    masterVolume: 1
-    sfxVolume: 1
-    speechVolume: 1
-    musicVolume: 1
 --- !u!1 &243758739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,7 +2085,7 @@ RectTransform:
   - {fileID: 2027720713}
   - {fileID: 1165086725}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5329,7 +5256,7 @@ Transform:
   - {fileID: 1407772670}
   - {fileID: 988995645}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &592838802 stripped
 GameObject:
@@ -13768,7 +13695,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -13811,7 +13738,7 @@ Transform:
   - {fileID: 904354619}
   - {fileID: 320666538}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828845004
 GameObject:
@@ -14632,7 +14559,7 @@ Transform:
   m_Children:
   - {fileID: 1580697194}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &1876545529 stripped
 ParticleSystem:
@@ -14764,7 +14691,7 @@ Transform:
   - {fileID: 1463626697}
   - {fileID: 1482623464}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1925935513 stripped
 GameObject:

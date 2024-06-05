@@ -16907,6 +16907,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d855296cdd38f1d43a9018c918395080, type: 3}
+--- !u!1 &1852665264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852665266}
+  - component: {fileID: 1852665265}
+  m_Layer: 0
+  m_Name: SavingAndLoading
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1852665265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852665264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763d2aabf17c5c34d955e3f0e94247c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameData:
+    playerProgress: 1
+    level1Score1Minutes: 0
+    level1Score2Minutes: 0
+    level1Score3Minutes: 0
+    level2Score1Minutes: 0
+    level2Score2Minutes: 0
+    level2Score3Minutes: 0
+    level3Score1Minutes: 0
+    level3Score2Minutes: 0
+    level3Score3Minutes: 0
+    level4Score1Minutes: 0
+    level4Score2Minutes: 0
+    level4Score3Minutes: 0
+    level1Score1Seconds: 0
+    level1Score2Seconds: 0
+    level1Score3Seconds: 0
+    level2Score1Seconds: 0
+    level2Score2Seconds: 0
+    level2Score3Seconds: 0
+    level3Score1Seconds: 0
+    level3Score2Seconds: 0
+    level3Score3Seconds: 0
+    level4Score1Seconds: 0
+    level4Score2Seconds: 0
+    level4Score3Seconds: 0
+    masterVolume: 1
+    sfxVolume: 1
+    speechVolume: 1
+    musicVolume: 1
+--- !u!4 &1852665266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852665264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.99765205, y: 1.6788644, z: -1.9377297}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 54
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1857139286
 PrefabInstance:
   m_ObjectHideFlags: 0
